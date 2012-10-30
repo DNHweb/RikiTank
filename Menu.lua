@@ -1,6 +1,6 @@
 require "Sound"
 EtatJeu = "Menu"	-- on initialise EtatJeu à Menu
-
+checkMusic = 0         -- variable de verification, si 1 la music est deja en lecture.
 
 function ChoixTankLoad()
    JouerOn = love.graphics.newImage("Images/Menu/JouerOn.png")
@@ -15,7 +15,7 @@ function ChoixTankLoad()
    Tank2Off = love.graphics.newImage("Images/Menu/Tank2Off.png")
    Tank3On = love.graphics.newImage("Images/Menu/Tank3On.png")
    Tank3Off = love.graphics.newImage("Images/Menu/Tank3Off.png")
-   
+
    Bouton = {
       Main = 	{
 	 Jouer = {On = JouerOn, Off = JouerOff, x = 100, y = (Reso.Height/3)-35, Width = 260, Height = 70, Id = "GoChoixTank"},
@@ -23,7 +23,7 @@ function ChoixTankLoad()
       },
       Pause = {
 	 Reprendre = {On = JouerOn, Off = JouerOff, x = 100, y =(Reso.Height/4)-35, Width = 260, Height = 70, Id = "Reprendre"},
-	 Menu = {On = MenuOn, Off = MenuOff, x = 100, y = (Reso.Height/2)-35, Width = 400, Height = 70, Id = "Menu"},
+	 Menu = {On = MenuOn, Off = MenuOff, x = 100, y = (Reso.Height/2)-35, Width = 260, Height = 70, Id = "Menu"},
 	 Quitter2 = {On = QuitterOn, Off = QuitterOff, x = 100, y = (3*Reso.Height/4)-35, Width = 260, Height = 70, Id = "Quitter2"}
       },
       Choix = {
@@ -49,7 +49,12 @@ end
 function EtatJeuDraw()
    local x = love.mouse.getX( )
    local y = love.mouse.getY( )
-   
+
+   if checkMusic == 0 then
+      love.audio.play(music)
+      checkMusic = 1
+   end
+
    if EtatJeu == "Menu" then
       love.mouse.setVisible(true)
       for k, v in pairs(Bouton.Main) do
@@ -57,7 +62,7 @@ function EtatJeuDraw()
 	 drawButton( v.Off, v.On, v.x, v.y, v.Width, v.Height, x, y )
       end
    end
-   
+
    if EtatJeu == "Choix" then
       love.mouse.setVisible(true)
       for k, v in pairs(Bouton.Choix) do
@@ -65,7 +70,7 @@ function EtatJeuDraw()
 	 drawButton( v.Off, v.On, v.x, v.y, v.Width, v.Height, x, y )
       end
    end
-   
+
    if EtatJeu == "Pause" then
       love.mouse.setVisible(true)
       for k, v in pairs(Bouton.Pause) do
@@ -73,12 +78,14 @@ function EtatJeuDraw()
 	 drawButton( v.Off, v.On, v.x, v.y, v.Width, v.Height, x, y )
       end
    end
-   
+
    --> Si on est en jeu <--
    if EtatJeu == "EnJeu" then
       love.mouse.setVisible(false)
       GroundDraw()						-- on affiche le sol du jeu
-      TankDraw()							-- Et le tank
+      TankDraw()						-- Et le tank
+      love.audio.stop(music)                                   -- Et on arrete la musique epique !
+      checkMusic = 0
       love.graphics.print("vie :", 10,10)
       love.graphics.print(Tank.Health, 100,10)
       love.graphics.print("vitesse :", 10,30)
@@ -88,7 +95,7 @@ function EtatJeuDraw()
       love.graphics.print("Degats :", 10,70)
       love.graphics.print(Tank.Dammage, 100,70)
    end
-   
+
 end
 
 function love.mousepressed( x, y, button )
@@ -104,7 +111,7 @@ function love.mousepressed( x, y, button )
 	       end
 	    end
 	 end
-	 
+
       elseif EtatJeu == "Choix" then
 	 for k, v in pairs(Bouton.Choix) do
 	    if x > v.x and x < v.x + v.Width and y > v.y and  y < v.y + v.Height then
@@ -128,7 +135,7 @@ function love.mousepressed( x, y, button )
 	       end
 	    end
 	 end
-	 
+
       elseif EtatJeu == "Pause" then
 	 for k, v in pairs(Bouton.Pause) do
 	    if x > v.x and x < v.x + v.Width and y > v.y and  y < v.y + v.Height then

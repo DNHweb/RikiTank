@@ -1,9 +1,8 @@
-
+--
+-- Ici on dessine le terrain
+--
 function GroundLoad()
    Ground1 = love.graphics.newImage("Images/Ground1.png")
-   --Ground2 = love.graphics.newImage("Images/Ground2.png")
-   --Ground3 = love.graphics.newImage("Images/Ground3.png")
-   --Ground4 = love.graphics.newImage("Images/Ground4.png")
 end
 
 function GroundDraw()

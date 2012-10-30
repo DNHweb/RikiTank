@@ -5,8 +5,8 @@ require "Menu"
 --require "Shoot"
 
 Reso = {
-   Width, 
-   Height, 
+   Width,
+   Height,
    Scale
 }
 resolution()
@@ -22,6 +22,8 @@ Tank = {
    CadenceTir = 0
 }
 
+-- Cette fonction est appelee une seule fois, on charge un max de truc ici au debut du jeu
+-- pour economiser les ressources systemes au maximum.
 function love.load()
    ChoixTankLoad()
    SoundMenu()
@@ -31,8 +33,10 @@ end
 
 function love.draw()
    EtatJeuDraw()
-   --love.graphics.print(Tank.Choix, 700,150)
 end
+
+--Cette fonction est appelée en permanence
+--'dt' = "delta temps", nombre de secondes depuis la dernière fois que cette fonction a été appelée
 
 function love.update(dt)
    if EtatJeu == "EnJeu" then		-- si l'état du jeu est Play
