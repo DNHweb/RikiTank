@@ -58,7 +58,6 @@ function EtatJeuDraw()
    if EtatJeu == "Menu" then
       love.mouse.setVisible(true)
       for k, v in pairs(Bouton.Main) do
-	 --> Si on est dans le menu principal <--
 	 drawButton( v.Off, v.On, v.x, v.y, v.Width, v.Height, x, y )
       end
    end
@@ -66,7 +65,6 @@ function EtatJeuDraw()
    if EtatJeu == "Choix" then
       love.mouse.setVisible(true)
       for k, v in pairs(Bouton.Choix) do
-	 --> Si on est dans le menu du choix du tank <--
 	 drawButton( v.Off, v.On, v.x, v.y, v.Width, v.Height, x, y )
       end
    end
@@ -74,7 +72,6 @@ function EtatJeuDraw()
    if EtatJeu == "Pause" then
       love.mouse.setVisible(true)
       for k, v in pairs(Bouton.Pause) do
-	 --> Si on est dans le menu du choix du tank <--
 	 drawButton( v.Off, v.On, v.x, v.y, v.Width, v.Height, x, y )
       end
    end
@@ -98,7 +95,7 @@ function EtatJeuDraw()
 
 end
 
-function love.mousepressed( x, y, button )
+function love.mousepressed(x, y, button )
    if button == "l" then
       if EtatJeu == "Menu" then
 	 for k, v in pairs(Bouton.Main) do

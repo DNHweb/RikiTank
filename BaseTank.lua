@@ -30,7 +30,7 @@ function Pivoter(Angle, dt)
       end
       if (love.keyboard.isDown("a") or love.keyboard.isDown("left")) then
 	 Angle2 = TourneGauche(Angle, dt)
-      end	
+      end
    end
    --> Tourner en reculant <--
    if (love.keyboard.isDown("s") or love.keyboard.isDown("down")) then
@@ -39,7 +39,7 @@ function Pivoter(Angle, dt)
       end
       if (love.keyboard.isDown("a") or love.keyboard.isDown("left")) then
 	 Angle2 = TourneDroite(Angle, dt)
-      end	
+      end
    end
    --> Tourner sur place <--
    if (not love.keyboard.isDown("w") and not love.keyboard.isDown("up") and not love.keyboard.isDown("s") and not love.keyboard.isDown("down")) then
@@ -65,10 +65,6 @@ function TourneGauche(Angle, dt)
    Angle = Angle - dt * math.pi/2
    Angle = Angle % (2*math.pi)
    return Angle
-end
-
---> Charge l'image de la base du tank <--
-function BaseTankLoad()
 end
 
 --> MAJ des carac de l'image en fonction des actions de l'utilisateur <--

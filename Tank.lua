@@ -23,7 +23,6 @@ end
 
 function TankLoad()
    TourelleLoad()
-   BaseTankLoad()
 end
 
 function TankDraw()
