@@ -31,26 +31,19 @@ function TankDraw()
 end
 
 function TankUpdate(dt)
+   -- Calcul position du tank
    Tank.Position.x, Tank.Position.y, Tank.Angle.Base = BaseTankUpdate(Tank.Position.x, Tank.Position.y, Tank.Angle.Base, Tank.Vitesse, dt)
-   Tank.Angle.Tourelle = TourelleUpdate(Tank.Position.x, Tank.Position.y, Tank.Angle.Tourelle, dt)
-   -- ******************** --
-   -- CHECK SORTIE D'ECRAN --
-   -- ******************** --
-   -- Pour alleger le code, peut etre rajouter des 'if' pour verifier que le tank soit proche de la bordure de l'ecran
-   -- SI tank proche de la bordure THEN on verifie chaque pixel pour verifier que ca sorte pas END
-   -- Comme cela se sera moins lourd !
-   -- EN X
+   --verif de sortie ecran en x et y
    if Tank.Position.x - 0.5 * Tank.BaseImage:getWidth() < 0 then
       Tank.Position.x = 0.5 * Tank.BaseImage:getWidth()
-   end
-   if Tank.Position.x + 0.5 * Tank.BaseImage:getWidth() > Reso.Width then
+   elseif Tank.Position.x + 0.5 * Tank.BaseImage:getWidth() > Reso.Width then
       Tank.Position.x = Reso.Width - 0.5 * Tank.BaseImage:getWidth()
    end
-   -- EN Y
-   if Tank.Position.y - Tank.BaseImage:getHeight() < 0 then
-      Tank.Position.y = Tank.BaseImage:getHeight()
+   if Tank.Position.y - 0.7 * Tank.BaseImage:getHeight() < 0 then
+      Tank.Position.y = 0.7 * Tank.BaseImage:getHeight()
+   elseif Tank.Position.y + 0.7 * Tank.BaseImage:getHeight() > Reso.Height then
+      Tank.Position.y = Reso.Height - 0.7 * Tank.BaseImage:getHeight()
    end
-   if Tank.Position.y + Tank.BaseImage:getHeight() > Reso.Height then
-      Tank.Position.y = Reso.Height - Tank.BaseImage:getHeight()
-   end
+
+   Tank.Angle.Tourelle = TourelleUpdate(Tank.Position.x, Tank.Position.y, Tank.Angle.Tourelle, dt)
 end
