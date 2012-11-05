@@ -5,5 +5,3 @@ function love.keypressed(key)
       love.event.push("quit")
    end
 end
---love.mousepressed(key)
---if key=="R" then

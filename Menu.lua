@@ -1,6 +1,6 @@
 require "Sound"
 EtatJeu = "Menu"	-- on initialise EtatJeu à Menu
-checkMusic = 0         -- variable de verification, si 1 la music est deja en lecture.
+checkMusic = 0		-- variable de verification, si 1 la music est deja en lecture.
 
 function ChoixTankLoad()
    JouerOn = love.graphics.newImage("Images/Menu/JouerOn.png")
@@ -15,7 +15,7 @@ function ChoixTankLoad()
    Tank2Off = love.graphics.newImage("Images/Menu/Tank2Off.png")
    Tank3On = love.graphics.newImage("Images/Menu/Tank3On.png")
    Tank3Off = love.graphics.newImage("Images/Menu/Tank3Off.png")
-
+   
    Bouton = {
       Main = 	{
 	 Jouer = {On = JouerOn, Off = JouerOff, x = 100, y = (Reso.Height/3)-35, Width = 260, Height = 70, Id = "GoChoixTank"},
@@ -49,38 +49,38 @@ end
 function EtatJeuDraw()
    local x = love.mouse.getX( )
    local y = love.mouse.getY( )
-
+   
    if checkMusic == 0 then
       love.audio.play(music)
       checkMusic = 1
    end
-
+   
    if EtatJeu == "Menu" then
       love.mouse.setVisible(true)
       for k, v in pairs(Bouton.Main) do
 	 drawButton( v.Off, v.On, v.x, v.y, v.Width, v.Height, x, y )
       end
    end
-
+   
    if EtatJeu == "Choix" then
       love.mouse.setVisible(true)
       for k, v in pairs(Bouton.Choix) do
 	 drawButton( v.Off, v.On, v.x, v.y, v.Width, v.Height, x, y )
       end
    end
-
+   
    if EtatJeu == "Pause" then
       love.mouse.setVisible(true)
       for k, v in pairs(Bouton.Pause) do
 	 drawButton( v.Off, v.On, v.x, v.y, v.Width, v.Height, x, y )
       end
    end
-
+   
    --> Si on est en jeu <--
    if EtatJeu == "EnJeu" then
       love.mouse.setVisible(false)
       GroundDraw()						-- on affiche le sol du jeu
-	  ents:draw()
+      ents:draw()
       TankDraw()						-- Et le tank
       love.audio.stop(music)                                   -- Et on arrete la musique epique !
       checkMusic = 0
@@ -92,7 +92,6 @@ function EtatJeuDraw()
       love.graphics.print(Tank.CadenceTir, 100,50)
       love.graphics.print("Degats :", 10,70)
       love.graphics.print(Tank.Dammage, 100,70)
-	  
    end
 end
 
@@ -109,7 +108,7 @@ function love.mousepressed(x, y, button )
 	       end
 	    end
 	 end
-
+	 
       elseif EtatJeu == "Choix" then
 	 for k, v in pairs(Bouton.Choix) do
 	    if x > v.x and x < v.x + v.Width and y > v.y and  y < v.y + v.Height then
@@ -133,7 +132,7 @@ function love.mousepressed(x, y, button )
 	       end
 	    end
 	 end
-
+	 
       elseif EtatJeu == "Pause" then
 	 for k, v in pairs(Bouton.Pause) do
 	    if x > v.x and x < v.x + v.Width and y > v.y and  y < v.y + v.Height then

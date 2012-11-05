@@ -4,12 +4,12 @@ base.y = 50
 base.health = 100
 
 function	base:setPos(x, y)
-	base.x = x
-	base.y = y
+   base.x = x
+   base.y = y
 end
 
 function	base:getPos()
-	return base.x, base.y
+   return base.x, base.y
 end
 
 function	base:load()

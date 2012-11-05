@@ -1,7 +1,6 @@
 require "BaseTank"
 require "Tourelle"
 
-
 function resolution()
    --> Met l'écran dans la résolution optimale <--
    modes = love.graphics.getModes()
@@ -18,8 +17,6 @@ function resolution()
    --> calcule de la taille des images en fonction de la résolution <--
    Reso.Scale = (diag * 0.77) / defaut
 end
-
-
 
 function TankLoad()
    TourelleLoad()
@@ -44,6 +41,5 @@ function TankUpdate(dt)
    elseif Tank.Position.y + 0.7 * Tank.BaseImage:getHeight() > Reso.Height then
       Tank.Position.y = Reso.Height - 0.7 * Tank.BaseImage:getHeight()
    end
-
    Tank.Angle.Tourelle = TourelleUpdate(Tank.Position.x, Tank.Position.y, Tank.Angle.Tourelle, dt)
 end
