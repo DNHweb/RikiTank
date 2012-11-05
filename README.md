@@ -9,8 +9,8 @@ For the moment, the website is under construction, and lot of works still need t
 
 The team is composed of :
 * Al3xis : developer, graphist  
-* debuss : developer  
-* thazelart : web designer, developer  
+* debuss : developer, webmaster  
+* thazelart : webmaster, developer  
 * eramat : profesor, project manager, Guru
 
 You can follow us on :  
