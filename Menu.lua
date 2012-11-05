@@ -80,6 +80,7 @@ function EtatJeuDraw()
    if EtatJeu == "EnJeu" then
       love.mouse.setVisible(false)
       GroundDraw()						-- on affiche le sol du jeu
+	  ents:draw()
       TankDraw()						-- Et le tank
       love.audio.stop(music)                                   -- Et on arrete la musique epique !
       checkMusic = 0
@@ -91,8 +92,8 @@ function EtatJeuDraw()
       love.graphics.print(Tank.CadenceTir, 100,50)
       love.graphics.print("Degats :", 10,70)
       love.graphics.print(Tank.Dammage, 100,70)
+	  
    end
-
 end
 
 function love.mousepressed(x, y, button )
