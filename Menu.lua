@@ -1,3 +1,22 @@
+-- 
+-- @file Menu.lua
+-- This file is a part of RikiTank project, an amazing tank game !
+-- Copyright (C) 2012  Riki-Team
+-- 
+-- This program is free software: you can redistribute it and/or modify
+-- it under the terms of the GNU General Public License as published by
+-- the Free Software Foundation, either version 3 of the License, or
+-- (at your option) any later version.
+-- 
+-- This program is distributed in the hope that it will be useful,
+-- but WITHOUT ANY WARRANTY; without even the implied warranty of
+-- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+-- GNU General Public License for more details.
+-- 
+-- You should have received a copy of the GNU General Public License
+-- along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-- 
+
 require "Sound"
 EtatJeu = "Menu"	-- on initialise EtatJeu à Menu
 checkMusic = 0		-- variable de verification, si 1 la music est deja en lecture.
@@ -84,14 +103,11 @@ function EtatJeuDraw()
       TankDraw()						-- Et le tank
       love.audio.stop(music)                                   -- Et on arrete la musique epique !
       checkMusic = 0
-      love.graphics.print("vie :", 10,10)
-      love.graphics.print(Tank.Health, 100,10)
-      love.graphics.print("vitesse :", 10,30)
-      love.graphics.print(Tank.Vitesse, 100,30)
-      love.graphics.print("Cadence :", 10,50)
-      love.graphics.print(Tank.CadenceTir, 100,50)
-      love.graphics.print("Degats :", 10,70)
-      love.graphics.print(Tank.Dammage, 100,70)
+      love.graphics.print("vie :            " .. Tank.Health, 10,10)
+      love.graphics.print("vitesse :        " .. Tank.Vitesse, 10,30)
+      love.graphics.print("Cadence :        " .. Tank.CadenceTir, 10,50)
+      love.graphics.print("Degats :         " .. Tank.Dammage, 10,70)
+      love.graphics.print("Delta Time dt :  " .. tostring(love.timer.getDelta()), 10, 90)
    end
 end
 
