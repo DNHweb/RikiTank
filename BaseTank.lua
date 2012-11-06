@@ -1,27 +1,27 @@
--- 
+--
 -- @file baseTank.lua
 -- This file is a part of RikiTank project, an amazing tank game !
 -- Copyright (C) 2012  Riki-Team
--- 
+--
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
 -- the Free Software Foundation, either version 3 of the License, or
 -- (at your option) any later version.
--- 
+--
 -- This program is distributed in the hope that it will be useful,
 -- but WITHOUT ANY WARRANTY; without even the implied warranty of
 -- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 -- GNU General Public License for more details.
--- 
+--
 -- You should have received a copy of the GNU General Public License
 -- along with this program.  If not, see <http://www.gnu.org/licenses/>.
--- 
+--
 
 --> marche avant <--
-function Avancer(x, y, Angle, Vitesse)
+function Avancer(x, y, Angle, Vitesse, dt)
    if (love.keyboard.isDown("w") or love.keyboard.isDown("up")) then
-      avX = math.cos(Angle) * Vitesse 		-- calcule de l'avancement en X selon la vitesse choisie et l'angle du tank
-      avY = math.sin(Angle) * Vitesse 		-- calcule de l'avancement en Y selon la vitesse choisie et l'angle du tank
+      avX = math.cos(Angle) * Vitesse * dt / 0.002		-- calcule de l'avancement en X selon la vitesse choisie et l'angle du tank
+      avY = math.sin(Angle) * Vitesse * dt / 0.002		-- calcule de l'avancement en Y selon la vitesse choisie et l'angle du tank
       x = x + avX
       y = y + avY
    end
@@ -29,10 +29,10 @@ function Avancer(x, y, Angle, Vitesse)
 end
 
 --> marche arrière <--
-function Reculer(x, y, Angle, Vitesse)
+function Reculer(x, y, Angle, Vitesse, dt)
    if (love.keyboard.isDown("s") or love.keyboard.isDown("down")) then
-      avX = math.cos(Angle) * Vitesse
-      avY = math.sin(Angle)* Vitesse
+      avX = math.cos(Angle) * Vitesse * dt / 0.002
+      avY = math.sin(Angle)* Vitesse * dt / 0.002
       x = x - avX
       y = y - avY
    end
@@ -89,8 +89,8 @@ end
 --> MAJ des carac de l'image en fonction des actions de l'utilisateur <--
 function BaseTankUpdate(x, y, Angle, Vitesse, dt)
    Angle = Pivoter(Angle, dt)
-   x, y = Avancer(x, y, Angle, Vitesse)
-   x, y = Reculer(x, y, Angle, Vitesse)
+   x, y = Avancer(x, y, Angle, Vitesse, dt)
+   x, y = Reculer(x, y, Angle, Vitesse, dt)
    return x, y, Angle
 end
 
