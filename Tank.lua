@@ -31,7 +31,7 @@ function resolution()
    diag = math.sqrt(Reso.Height*Reso.Height + Reso.Width*Reso.Width)
    defaut = math.sqrt(1366*1366 + 768*768)
    --> Calcule la vitesse en fonction de la résolution <--
-   Speed = (diag * 0.35)/defaut
+   Speed = (diag * 0.30)/defaut
 
    --> calcule de la taille des images en fonction de la résolution <--
    Reso.Scale = (diag * 0.77) / defaut
