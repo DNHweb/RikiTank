@@ -185,8 +185,8 @@ function ChargerTank1()
    Tank.Dammage = 40
    Tank.health = 225
    Tank.CadenceTir = 1.7
-   Tank.Position.x = 200
-   Tank.Position.y = 200
+   Tank.Position.x = 1024
+   Tank.Position.y = 768
    Tank.Angle.Base = 0
 end
 

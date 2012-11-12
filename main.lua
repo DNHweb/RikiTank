@@ -32,7 +32,7 @@ resolution()
 
 Tank = {
    Choix = 1,
-   Position = {x = 200, y = 200},
+   Position = {x = 1024, y = 768},
    Vitesse = Speed,
    Angle = {Base = 0, Tourelle = 0},
    RotTourelleWidth = 0,
@@ -48,12 +48,15 @@ function love.load()
    ChoixTankLoad()
    SoundMenu()
    GroundLoad()
-   
+
+   ---------------------------------------
+   -- Chargement des differents ennemies -
+   ---------------------------------------
    tankEnnemiePic = love.graphics.newImage("Images/BaseTank4.png")
    local tankEnnemie1 = ents.Create("tankEnnemie", 128, 128)
-   local tankEnnemie2 = ents.Create("tankEnnemie", 128, 300)
-   local tankEnnemie3 = ents.Create("tankEnnemie", 128, 400)
-   
+   walker_z = love.graphics.newImage("Images/walker.png")
+   local walker_1 = ents.Create("walker", 100, 100)
+
    TankLoad()
 end
 

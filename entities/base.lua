@@ -21,6 +21,10 @@ local base = {}
 base.x = 50
 base.y = 50
 base.health = 100
+base.angle = 0
+base.vitesse = 0.30
+base.damage = 0
+base.cadenceTir = 0
 
 function	base:setPos(x, y)
    base.x = x
@@ -29,6 +33,10 @@ end
 
 function	base:getPos()
    return base.x, base.y
+end
+
+function	base:setVitesse(v)
+   base.vitesse = v
 end
 
 function	base:load()

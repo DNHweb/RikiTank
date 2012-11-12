@@ -31,6 +31,7 @@ local id = 0
 -- on remplie le registre avec nos objets
 function	ents.Startup()
    register["tankEnnemie"] = love.filesystem.load(ents.objectpath .. "tankEnnemie.lua")
+   register["walker"] = love.filesystem.load(ents.objectpath .. "walker.lua")
 end
 
 -- un peu comme une fonction d'heritage
