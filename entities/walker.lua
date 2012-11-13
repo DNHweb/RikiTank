@@ -74,6 +74,9 @@ function	ent:update(dt)
       else
 	 otherX = otherX + Reso.Width
       end
+      -- pour limiter le nombre de walker qui pop
+      -- creer un compteur puis modulo 2 sur compteur
+      -- si = 0 alors on creer un nouveau walker !
       walker_bis = ents.Create("walker", otherX, otherY)
    end
    self:pivoter(dt)

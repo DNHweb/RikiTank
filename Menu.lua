@@ -104,10 +104,10 @@ function EtatJeuDraw()
       TankDraw()						-- Et le tank
       love.audio.stop(music)                                   -- Et on arrete la musique epique !
       checkMusic = 0
-      love.graphics.print("vie :            " .. Tank.Health, 10,10)
-      love.graphics.print("vitesse :        " .. Tank.Vitesse, 10,30)
-      love.graphics.print("Cadence :        " .. Tank.CadenceTir, 10,50)
-      love.graphics.print("Degats :         " .. Tank.Dammage, 10,70)
+      love.graphics.print("vie :                   " .. Tank.Health, 10,10)
+      love.graphics.print("vitesse :            " .. Tank.Vitesse, 10,30)
+      love.graphics.print("Cadence :         " .. Tank.CadenceTir, 10,50)
+      love.graphics.print("Degats :           " .. Tank.Dammage, 10,70)
       love.graphics.print("Delta Time dt :  " .. tostring(love.timer.getDelta()), 10, 90)
    end
 end
