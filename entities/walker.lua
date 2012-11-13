@@ -20,6 +20,8 @@
 local ent = ents.Derive("base")
 
 function	ent:load(x, y)
+   x = -100
+   y = -100
    self:setPos(x, y)
    self.w = 116
    self.h = 59
@@ -36,52 +38,17 @@ function	ent:getSize()
 end
 
 function	ent:pivoter(dt)
-   --
-   -- Counter Clock-Wise methode !
-   -- base sur la routine de Sedgewick p. 350
-   --
-   local dx1, dx2, dy1, dy2
-   local accuracy
-
-   accuracy = 1.e-06
-   dx1 = Tank.Position.x - self.x
-   dy1 = Tank.Position.y - self.y
-   dx2 = 0 - self.x
-   dy2 = Tank.Position.y - self.y
---[[   
-   if (math.abs(dx1) < accuracy) then
-      dx1 = 0
-   end
-   if (math.abs(dx2) < accuracy) then
-      dx2 = 0
-   end
-   if (math.abs(dy1) < accuracy) then
-      dy1 = 0
-   end
-   if (math.abs(dy2) < accuracy) then
-      dy2 = 0
-   end
-]]--
-   if (dx1 * dy2 > dy1*dx2) then
-      self.angle = self.angle + dt * math.pi/2
-      self.angle = self.angle % (2*math.pi)
-   else
-      self.angle = self.angle - dt * math.pi/2
-      self.angle = self.angle % (2*math.pi)
-   end
-   if (dx1 * dx2 < 0 or dy1 * dy2 < 0) then
-      self.angle = self.angle - dt * math.pi/2
-      self.angle = self.angle % (2*math.pi)
-   end
-   if (dx1 * dx1 + dy1 * dy1 < dx2 * dx2 + dy2 * dy2) then
-      self.angle = self.angle + dt * math.pi/2
-      self.angle = self.angle % (2*math.pi)
-   end
+   self.angle = math.atan2(self.x - Tank.Position.x, Tank.Position.y - self.y) + math.pi / 2
 end
 
 function	ent:avancer(dt)
    self.x = self.x + math.cos(self.angle) * self.vitesse * dt / 0.002
    self.y = self.y + math.sin(self.angle) * self.vitesse * dt / 0.002
+end
+
+function	ent:reculer(dt)
+   self.x = self.x - math.cos(self.angle) * self.vitesse * dt / 0.002
+   self.y = self.y - math.sin(self.angle) * self.vitesse * dt / 0.002
 end
 
 function	ent:update(dt)
@@ -92,9 +59,9 @@ end
 
 function	ent:draw()
    local x, y = self:getPos()
-   local w, h = self:getSize() / 2
+   local w, h = self:getSize()
    
-   love.graphics.draw(walker_z, x, y, self.angle, Reso.Scale, Reso.Scale, w, h)
+   love.graphics.draw(walker_z, x, y, self.angle, Reso.Scale, Reso.Scale, w / 2, h / 2)
 end
 
 return ent;
