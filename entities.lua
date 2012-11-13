@@ -42,11 +42,11 @@ end
 
 function	ents.Create(name, x, y)
    if not x then
-      x = 50
+      x = -100
    end
    
    if not y then
-      y = 50
+      y = -100
    end
    
    -- entite existe

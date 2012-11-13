@@ -52,7 +52,30 @@ function	ent:reculer(dt)
 end
 
 function	ent:update(dt)
-   -- coder l'IA ici
+   -- IA
+   distance = ((self.x - Tank.Position.x) ^ 2 + (self.y - Tank.Position.y) ^ 2) ^ 0.5
+   -- si collision
+   if distance < (walker_z:getWidth() / 3 + Tank.BaseImage:getWidth() / 3) then
+      side = math.random(1, 3)
+      newX = math.random(500, 1500)
+      newY = math.random(-800, 1800)
+      otherSide = math.random(1, 3)
+      otherX = math.random(500, 1500)
+      otherY = math.random(-800, 1800)
+      if side <= 2 then
+	 newX = - newX
+      else
+	 newX = newX + Reso.Width
+      end
+      self.x = newX
+      self.y = newY
+      if otherSide <= 2 then
+	 otherX = - otherX
+      else
+	 otherX = otherX + Reso.Width
+      end
+      walker_bis = ents.Create("walker", otherX, otherY)
+   end
    self:pivoter(dt)
    self:avancer(dt)
 end

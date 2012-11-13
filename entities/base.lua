@@ -18,8 +18,8 @@
 -- 
 
 local base = {}
-base.x = 50
-base.y = 50
+base.x = -100
+base.y = -100
 base.health = 100
 base.angle = 0
 base.vitesse = 0.30

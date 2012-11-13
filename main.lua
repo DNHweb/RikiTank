@@ -53,7 +53,7 @@ function love.load()
    -- Chargement des differents ennemies -
    ---------------------------------------
    tankEnnemiePic = love.graphics.newImage("Images/BaseTank4.png")
-   local tankEnnemie1 = ents.Create("tankEnnemie", 128, 128)
+   --local tankEnnemie1 = ents.Create("tankEnnemie", 128, 128)
    walker_z = love.graphics.newImage("Images/walker.png")
    local walker_1 = ents.Create("walker", 100, 100)
 
