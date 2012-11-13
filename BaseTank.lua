@@ -19,7 +19,7 @@
 
 --> marche avant <--
 function Avancer(x, y, Angle, Vitesse, dt)
-   if (love.keyboard.isDown("w") or love.keyboard.isDown("up")) then
+   if (love.keyboard.isDown("w") or love.keyboard.isDown("up") or love.keyboard.isDown("z")) then
       avX = math.cos(Angle) * Vitesse * dt / 0.002		-- calcule de l'avancement en X selon la vitesse choisie et l'angle du tank
       avY = math.sin(Angle) * Vitesse * dt / 0.002		-- calcule de l'avancement en Y selon la vitesse choisie et l'angle du tank
       x = x + avX
@@ -47,7 +47,7 @@ function Pivoter(Angle, dt)
       if (love.keyboard.isDown("d") or love.keyboard.isDown("right")) then
 	 Angle2 = TourneDroite(Angle, dt)
       end
-      if (love.keyboard.isDown("a") or love.keyboard.isDown("left")) then
+      if (love.keyboard.isDown("a") or love.keyboard.isDown("left") or love.keyboard.isDown("q")) then
 	 Angle2 = TourneGauche(Angle, dt)
       end
    end
@@ -56,7 +56,7 @@ function Pivoter(Angle, dt)
       if (love.keyboard.isDown("d") or love.keyboard.isDown("right")) then
 	 Angle2 = TourneGauche(Angle, dt)
       end
-      if (love.keyboard.isDown("a") or love.keyboard.isDown("left")) then
+      if (love.keyboard.isDown("a") or love.keyboard.isDown("left") or love.keyboard.isDown("q")) then
 	 Angle2 = TourneDroite(Angle, dt)
       end
    end
@@ -65,7 +65,7 @@ function Pivoter(Angle, dt)
       if (love.keyboard.isDown("d") or love.keyboard.isDown("right")) then
 	 Angle2 = TourneDroite(Angle, dt)
       end
-      if (love.keyboard.isDown("a") or love.keyboard.isDown("left")) then
+      if (love.keyboard.isDown("a") or love.keyboard.isDown("left") or love.keyboard.isDown("q")) then
 	 Angle2 = TourneGauche(Angle, dt)
       end
    end

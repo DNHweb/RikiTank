@@ -18,6 +18,7 @@
 -- 
 
 require "Sound"
+
 EtatJeu = "Menu"	-- on initialise EtatJeu à Menu
 checkMusic = 0		-- variable de verification, si 1 la music est deja en lecture.
 
@@ -185,8 +186,8 @@ function ChargerTank1()
    Tank.Dammage = 40
    Tank.health = 225
    Tank.CadenceTir = 1.7
-   Tank.Position.x = 1024
-   Tank.Position.y = 768
+   Tank.Position.x = Reso.Width/2
+   Tank.Position.y = Reso.Height/2 
    Tank.Angle.Base = 0
 end
 
@@ -198,8 +199,8 @@ function ChargerTank2()
    Tank.Dammage = 48
    Tank.health = 360
    Tank.CadenceTir = 1.02
-   Tank.Position.x = 200
-   Tank.Position.y = 200
+   Tank.Position.x = Reso.Width/2
+   Tank.Position.y = Reso.Height/2 
    Tank.Angle.Base = 0
 end
 
@@ -211,7 +212,7 @@ function ChargerTank3()
    Tank.Dammage = 24
    Tank.health = 135
    Tank.CadenceTir = 2.38
-   Tank.Position.x = 200
-   Tank.Position.y = 200
+   Tank.Position.x = Reso.Width/2
+   Tank.Position.y = Reso.Height/2 
    Tank.Angle.Base = 0
 end
