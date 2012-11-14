@@ -24,14 +24,14 @@
 
 ents = {}
 ents.objects = {}				-- liste contenant les objects actifs
-ents.objectpath = "entities/"	-- ou sont les objects
+ents.objectpath = "Entities/"	-- ou sont les objects
 local register = {}
 local id = 0
 
 -- on remplie le registre avec nos objets
 function	ents.Startup()
-   register["tankEnnemie"] = love.filesystem.load(ents.objectpath .. "tankEnnemie.lua")
-   register["walker"] = love.filesystem.load(ents.objectpath .. "walker.lua")
+   register["TankEnnemie"] = love.filesystem.load(ents.objectpath .. "TankEnnemie.lua")
+   register["Walker"] = love.filesystem.load(ents.objectpath .. "Walker.lua")
 end
 
 -- un peu comme une fonction d'heritage

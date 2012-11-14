@@ -21,7 +21,8 @@ require "Tank"
 require "Sound"
 require "Ground"
 require "Menu"
-require "entities"
+require "Entities"
+require "Tir"
 
 Reso = {
    Width,
@@ -54,14 +55,15 @@ function love.load()
    ---------------------------------------
    tankEnnemiePic = love.graphics.newImage("Images/BaseTank4.png")
    --local tankEnnemie1 = ents.Create("tankEnnemie", 128, 128)
-   walker_z = love.graphics.newImage("Images/walker.png")
-   local walker_1 = ents.Create("walker", 100, 100)
+   walker_z = love.graphics.newImage("Images/Walker.png")
+   local walker_1 = ents.Create("Walker", 100, 100)
 
    TankLoad()
 end
 
 function love.draw()
    EtatJeuDraw()
+   ShootDraw()
 end
 
 --Cette fonction est appelée en permanence

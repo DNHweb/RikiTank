@@ -17,7 +17,7 @@
 -- along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -- 
 
-local ent = ents.Derive("base")
+local ent = ents.Derive("Base")
 
 function	ent:load(x, y)
    x = -100
@@ -77,7 +77,7 @@ function	ent:update(dt)
       -- pour limiter le nombre de walker qui pop
       -- creer un compteur puis modulo 2 sur compteur
       -- si = 0 alors on creer un nouveau walker !
-      walker_bis = ents.Create("walker", otherX, otherY)
+      walker_bis = ents.Create("Walker", otherX, otherY)
    end
    self:pivoter(dt)
    self:avancer(dt)
