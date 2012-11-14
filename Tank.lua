@@ -50,15 +50,15 @@ function TankUpdate(dt)
    -- Calcul position du tank
    Tank.Position.x, Tank.Position.y, Tank.Angle.Base = BaseTankUpdate(Tank.Position.x, Tank.Position.y, Tank.Angle.Base, Tank.Vitesse, dt)
    --verif de sortie ecran en x et y
-   if Tank.Position.x - 0.5 * Tank.BaseImage:getWidth() < 0 then
-      Tank.Position.x = 0.5 * Tank.BaseImage:getWidth()
-   elseif Tank.Position.x + 0.5 * Tank.BaseImage:getWidth() > Reso.Width then
-      Tank.Position.x = Reso.Width - 0.5 * Tank.BaseImage:getWidth()
+   if Tank.Position.x - (Reso.Scale * Tank.BaseImage:getHeight())/2 < 0 then
+      Tank.Position.x = (Reso.Scale * Tank.BaseImage:getHeight())/2
+   elseif Tank.Position.x + (Reso.Scale * Tank.BaseImage:getHeight()/2) > Reso.Width then
+      Tank.Position.x = Reso.Width - (Reso.Scale * Tank.BaseImage:getHeight())/2
    end
-   if Tank.Position.y - 0.7 * Tank.BaseImage:getHeight() < 0 then
-      Tank.Position.y = 0.7 * Tank.BaseImage:getHeight()
-   elseif Tank.Position.y + 0.7 * Tank.BaseImage:getHeight() > Reso.Height then
-      Tank.Position.y = Reso.Height - 0.7 * Tank.BaseImage:getHeight()
+   if Tank.Position.y - (Reso.Scale * Tank.BaseImage:getHeight())/2 < 0 then
+      Tank.Position.y = (Reso.Scale * Tank.BaseImage:getHeight())/2
+   elseif Tank.Position.y + (Reso.Scale * Tank.BaseImage:getHeight())/2 > Reso.Height then
+      Tank.Position.y = Reso.Height - (Reso.Scale * Tank.BaseImage:getHeight())/2
    end
    Tank.Angle.Tourelle = TourelleUpdate(Tank.Position.x, Tank.Position.y, Tank.Angle.Tourelle, dt)
 end
