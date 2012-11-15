@@ -1,5 +1,5 @@
 -- 
--- @file tankEnnemie.lua
+-- @file TankEnnemie.lua
 -- This file is a part of RikiTank project, an amazing tank game !
 -- Copyright (C) 2012  Riki-Team
 -- 

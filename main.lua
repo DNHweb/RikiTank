@@ -49,6 +49,7 @@ function love.load()
    ChoixTankLoad()
    SoundMenu()
    GroundLoad()
+   ShootLoad()
 
    ---------------------------------------
    -- Chargement des differents ennemies -
