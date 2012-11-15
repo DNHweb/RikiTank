@@ -18,6 +18,7 @@
 -- 
 
 require "Sound"
+require "Entities"
 
 EtatJeu = "Menu"	-- on initialise EtatJeu à Menu
 checkMusic = 0		-- variable de verification, si 1 la music est deja en lecture.
@@ -109,6 +110,11 @@ function EtatJeuDraw()
       love.graphics.print("Cadence :         " .. Tank.CadenceTir, 10,50)
       love.graphics.print("Degats :           " .. Tank.Dammage, 10,70)
       love.graphics.print("Delta Time dt :  " .. tostring(love.timer.getDelta()), 10, 90)
+      if love.mouse.isDown("l") then
+	 xMissile = Tank.Position.x + (Tank.TourelleImage:getWidth() - Tank.RotTourelleWidth) * math.cos(Tank.Angle.Tourelle)
+	 yMissile = Tank.Position.y + (Tank.TourelleImage:getWidth() - Tank.RotTourelleWidth) * math.sin(Tank.Angle.Tourelle)
+	 ents.Create("Missile", xMissile, yMissile)
+      end
    end
 end
 

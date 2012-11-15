@@ -55,16 +55,14 @@ function love.load()
    -- Chargement des differents ennemies -
    ---------------------------------------
    tankEnnemiePic = love.graphics.newImage("Images/BaseTank4.png")
-   --local tankEnnemie1 = ents.Create("tankEnnemie", 128, 128)
    walker_z = love.graphics.newImage("Images/Walker.png")
    local walker_1 = ents.Create("Walker", 100, 100)
-
+   Missile = love.graphics.newImage("Images/Missile.png")
    TankLoad()
 end
 
 function love.draw()
    EtatJeuDraw()
-   ShootDraw()
 end
 
 --Cette fonction est appelée en permanence

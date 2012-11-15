@@ -18,20 +18,20 @@
 -- 
 
 function ShootLoad()
-	Bullet = love.graphics.newImage("Images/Missile.png")
+   Bullet = love.graphics.newImage("Images/Missile.png")
 end
 
-function ShootDraw()
-	if EtatJeu == "EnJeu" then
-		local Missile = {
-		Position = {x = Tank.Position.x + (Tank.TourelleImage:getWidth() - Tank.RotTourelleWidth) * math.cos(Tank.Angle.Tourelle), y = Tank.Position.y + (Tank.TourelleImage:getWidth() - Tank.RotTourelleWidth) * math.sin(Tank.Angle.Tourelle)},
-		Angle = Tank.Angle.Tourelle + math.pi/2
-		}
+function ShootDraw(dt)
+   if EtatJeu == "EnJeu" then
+      local Missile = {
+	 Position = {x = Tank.Position.x + (Tank.TourelleImage:getWidth() - Tank.RotTourelleWidth) * math.cos(Tank.Angle.Tourelle), y = Tank.Position.y + (Tank.TourelleImage:getWidth() - Tank.RotTourelleWidth) * math.sin(Tank.Angle.Tourelle)},
+	 Angle = Tank.Angle.Tourelle + math.pi/2
+      }
 
-		vlargeur = Bullet:getWidth()/2
-		vhauteur = Bullet:getHeight()/2
-		if love.mouse.isDown("l") then
-			love.graphics.draw(Bullet, Missile.Position.x, Missile.Position.y, Missile.Angle, Reso.Scale, Reso.Scale, vlargeur, vhauteur)			
-		end
-	end
+      vlargeur = Bullet:getWidth()/2
+      vhauteur = Bullet:getHeight()/2
+      if love.mouse.isDown("l") then
+	 love.graphics.draw(Bullet, Missile.Position.x, Missile.Position.y, Missile.Angle, Reso.Scale, Reso.Scale, vlargeur, vhauteur)			
+      end
+   end
 end
