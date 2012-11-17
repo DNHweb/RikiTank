@@ -24,6 +24,7 @@ require "Menu"
 require "Entities"
 require "Tir"
 
+ChoixMap = 1
 Reso = {
    Width,
    Height,
@@ -34,6 +35,7 @@ resolution()
 Tank = {
    Choix = 1,
    Position = {x = 1024, y = 768},
+   OldPosition = {x, y},
    Vitesse = Speed,
    Angle = {Base = 0, Tourelle = 0},
    RotTourelleWidth = 0,

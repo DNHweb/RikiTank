@@ -19,6 +19,7 @@
 
 require "BaseTank"
 require "Tourelle"
+require "Collision"
 
 function resolution()
    --> Met l'écran dans la résolution optimale <--
@@ -49,16 +50,9 @@ end
 function TankUpdate(dt)
    -- Calcul position du tank
    Tank.Position.x, Tank.Position.y, Tank.Angle.Base = BaseTankUpdate(Tank.Position.x, Tank.Position.y, Tank.Angle.Base, Tank.Vitesse, dt)
-   --verif de sortie ecran en x et y
-   if Tank.Position.x - (Reso.Scale * Tank.BaseImage:getHeight())/2 < 0 then
-      Tank.Position.x = (Reso.Scale * Tank.BaseImage:getHeight())/2
-   elseif Tank.Position.x + (Reso.Scale * Tank.BaseImage:getHeight()/2) > Reso.Width then
-      Tank.Position.x = Reso.Width - (Reso.Scale * Tank.BaseImage:getHeight())/2
-   end
-   if Tank.Position.y - (Reso.Scale * Tank.BaseImage:getHeight())/2 < 0 then
-      Tank.Position.y = (Reso.Scale * Tank.BaseImage:getHeight())/2
-   elseif Tank.Position.y + (Reso.Scale * Tank.BaseImage:getHeight())/2 > Reso.Height then
-      Tank.Position.y = Reso.Height - (Reso.Scale * Tank.BaseImage:getHeight())/2
-   end
+
+
+   SortieEcran()
+   CollisionMap()
    Tank.Angle.Tourelle = TourelleUpdate(Tank.Position.x, Tank.Position.y, Tank.Angle.Tourelle, dt)
 end

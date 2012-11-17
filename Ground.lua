@@ -22,6 +22,7 @@
 --
 function GroundLoad()
    Ground1 = love.graphics.newImage("Images/Ground1.png")
+   Mur1 = love.graphics.newImage("Images/Murs/Horizontal.png")
 end
 
 function GroundDraw()
@@ -35,5 +36,15 @@ function GroundDraw()
 	 start = start + 128
       end
       start2 = start2 + 128
+   end
+end
+
+function Map()
+   if ChoixMap == 1 then
+      Width = love.graphics.getWidth()/2
+      Height = love.graphics.getHeight()/2
+      ScaleX = Width/500
+      ScaleY = Reso.Scale * 1.50
+      love.graphics.draw(Mur1, Width/2, Height - 25, 0, ScaleX, ScaleY)
    end
 end

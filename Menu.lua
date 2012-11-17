@@ -101,6 +101,7 @@ function EtatJeuDraw()
    if EtatJeu == "EnJeu" then
       love.mouse.setVisible(false)
       GroundDraw()						-- on affiche le sol du jeu
+      Map()
       ents:draw()
       TankDraw()						-- Et le tank
       love.audio.stop(music)                                   -- Et on arrete la musique epique !
@@ -193,7 +194,7 @@ function ChargerTank1()
    Tank.health = 225
    Tank.CadenceTir = 1.7
    Tank.Position.x = Reso.Width/2
-   Tank.Position.y = Reso.Height/2 
+   Tank.Position.y = Reso.Height/4 
    Tank.Angle.Base = 0
 end
 
@@ -206,7 +207,7 @@ function ChargerTank2()
    Tank.health = 360
    Tank.CadenceTir = 1.02
    Tank.Position.x = Reso.Width/2
-   Tank.Position.y = Reso.Height/2 
+   Tank.Position.y = Reso.Height/4 
    Tank.Angle.Base = 0
 end
 
@@ -219,6 +220,6 @@ function ChargerTank3()
    Tank.health = 135
    Tank.CadenceTir = 2.38
    Tank.Position.x = Reso.Width/2
-   Tank.Position.y = Reso.Height/2 
+   Tank.Position.y = Reso.Height/4 
    Tank.Angle.Base = 0
 end

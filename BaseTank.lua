@@ -20,6 +20,8 @@
 --> marche avant <--
 function Avancer(x, y, Angle, Vitesse, dt)
    if (love.keyboard.isDown("w") or love.keyboard.isDown("up") or love.keyboard.isDown("z")) then
+      Tank.OldPosition.x = x
+      Tank.OldPosition.y = y
       avX = math.cos(Angle) * Vitesse * dt / 0.002		-- calcule de l'avancement en X selon la vitesse choisie et l'angle du tank
       avY = math.sin(Angle) * Vitesse * dt / 0.002		-- calcule de l'avancement en Y selon la vitesse choisie et l'angle du tank
       x = x + avX
@@ -31,6 +33,8 @@ end
 --> marche arrière <--
 function Reculer(x, y, Angle, Vitesse, dt)
    if (love.keyboard.isDown("s") or love.keyboard.isDown("down")) then
+      Tank.OldPosition.x = x
+      Tank.OldPosition.y = y
       avX = math.cos(Angle) * Vitesse * dt / 0.002
       avY = math.sin(Angle)* Vitesse * dt / 0.002
       x = x - avX
