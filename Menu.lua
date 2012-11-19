@@ -112,9 +112,15 @@ function EtatJeuDraw()
       love.graphics.print("Degats :           " .. Tank.Dammage, 10,70)
       love.graphics.print("Delta Time dt :  " .. tostring(love.timer.getDelta()), 10, 90)
       if love.mouse.isDown("l") then
-	 xMissile = Tank.Position.x + (Tank.TourelleImage:getWidth() - Tank.RotTourelleWidth) * math.cos(Tank.Angle.Tourelle)
-	 yMissile = Tank.Position.y + (Tank.TourelleImage:getWidth() - Tank.RotTourelleWidth) * math.sin(Tank.Angle.Tourelle)
-	 ents.Create("Missile", xMissile, yMissile)
+	 dt2 = love.timer.getDelta()
+	 love.graphics.print("DT2 = " .. dt2, 500, 500)
+	 Tank.Tir = Tank.Tir + dt2		-- on ajoute dt a chaque tir
+	 if Tank.Tir > 1 / Tank.CadenceTir then	-- si tir = 1(seconde)
+	    xMissile = Tank.Position.x + (Tank.TourelleImage:getWidth() - Tank.RotTourelleWidth) * math.cos(Tank.Angle.Tourelle)
+	    yMissile = Tank.Position.y + (Tank.TourelleImage:getWidth() - Tank.RotTourelleWidth) * math.sin(Tank.Angle.Tourelle)
+	    ents.Create("Missile", xMissile, yMissile)
+	    Tank.Tir = 0
+	 end
       end
    end
 end

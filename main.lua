@@ -41,7 +41,9 @@ Tank = {
    RotTourelleWidth = 0,
    Health = 0,
    Dammage = 0,
-   CadenceTir = 0
+   CadenceTir = 0,
+   Tir = 0,
+   Score = 0
 }
 
 -- Cette fonction est appelee une seule fois, on charge un max de truc ici au debut du jeu
