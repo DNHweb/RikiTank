@@ -42,7 +42,7 @@ Tank = {
    Health = 0,
    Dammage = 0,
    CadenceTir = 0,
-   Tir = 0,
+   Tir = 10,
    Score = 0
 }
 
