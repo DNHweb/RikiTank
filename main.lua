@@ -61,7 +61,6 @@ function love.load()
    tankEnnemiePic = love.graphics.newImage("Images/BaseTank4.png")
    walker_z = love.graphics.newImage("Images/Walker.png")
    local walker_1 = ents.Create("Walker", 100, 100)
-   Missile = love.graphics.newImage("Images/Missile.png")
    TankLoad()
 end
 

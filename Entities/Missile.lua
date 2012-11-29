@@ -24,6 +24,7 @@ function	ent:load()
    self.w = 6
    self.h = 19
    self.angle = Tank.Angle.Tourelle
+   self.image = love.graphics.newImage("Images/Missile.png")
 end
 
 function	ent:setSize(w, h)
@@ -40,17 +41,25 @@ function	ent:avancer(dt)
    self.y = self.y + math.sin(self.angle) * self.vitesse * dt / 0.002
 end
 
+function	ent:Die()
+   print("Missile " .. self.id .. " efface du tableau")
+   ents.Create("Missile")
+end
+
 function	ent:update(dt)
    self:avancer(dt)
+   if self.x > Reso.Width or self.x < Reso.Width or
+      self.y > Reso.Height or self.y < Reso.Height then
+      
+      ents.Destroy(self.id)
+   end
 end
 
 function	ent:draw()
    local x, y = self:getPos()
    local w, h = self:getSize()
    
-   if x < Reso.Width and y < Reso.Height then
-      love.graphics.draw(Missile, x, y, self.angle, Reso.Scale, Reso.Scale, w / 2, h / 5)
-   end
+   love.graphics.draw(self.image, x, y, self.angle, Reso.Scale, Reso.Scale, w / 2, h / 5)
 end
 
 return ent;

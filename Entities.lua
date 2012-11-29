@@ -68,6 +68,16 @@ function	ents.Create(name, x, y)
    end
 end
 
+-- Quand on veut enlever un object du tableau d'objet
+function	ents.Destroy(id)
+   if ents.objects[id] then
+      if ents.objects[id].Die then
+	 ents.objects[id]:Die()
+      end
+      ents.objects[id] = nil
+   end
+end
+
 -- a chaque fois que cette fonction est appelee
 -- elle met a jour les objets du tableau
 function	ents:update(dt)
