@@ -8,7 +8,7 @@ As you can see, having the highest ELO possible is your goal !
 For the moment, the website is under construction, and lot of works still need to be done for the game.
 
 The team is composed of :
-* Al3xis : developer, graphist, web designer, sub-Guru <3  
+* Al3xis : developer, graphist, web designer  
 * debuss : developer, webmaster  
 * thazelart : webmaster, developer  
 * eramat : profesor, project manager, Guru
