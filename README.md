@@ -1,6 +1,6 @@
 #RikiTank
 =========
-##An original project suggested by the SexyTeam of the Université du Littoral Côte d'Opale - Calais.  
+##An original project suggested by the RikiTeam of the Université du Littoral Côte d'Opale - Calais.  
 
 The main purpose of this game is to survive from many opponent's waves. Once you die, your score is updated on the website : www.rikitank.fr.
 As you can see, having the highest ELO possible is your goal !

@@ -19,13 +19,35 @@
 
 local ent = ents.Derive("Base")
 
+local quad = {}
+	
+quad[0] = love.graphics.newQuad(0,0,64,64,256,256)
+quad[1] = love.graphics.newQuad(64,0,64,64,256,256)
+quad[2] = love.graphics.newQuad(128,0,64,64,256,256)
+quad[3] = love.graphics.newQuad(192,0,64,64,256,256)
+
+quad[4] = love.graphics.newQuad(0,64,64,64,256,256)
+quad[5] = love.graphics.newQuad(64,64,64,64,256,256)
+quad[6] = love.graphics.newQuad(128,64,64,64,256,256)
+quad[7] = love.graphics.newQuad(192,64,64,64,256,256)
+
+quad[8] = love.graphics.newQuad(0,128,64,64,256,256)
+quad[9] = love.graphics.newQuad(64,128,64,64,256,256)
+quad[10] = love.graphics.newQuad(128,128,64,64,256,256)
+quad[11] = love.graphics.newQuad(192,128,64,64,256,256)
+
+quad[12] = love.graphics.newQuad(0,192,64,64,256,256)
+quad[13] = love.graphics.newQuad(64,192,64,64,256,256)
+quad[14] = love.graphics.newQuad(128,192,64,64,256,256)
+quad[15] = love.graphics.newQuad(192,192,64,64,256,256)
+
 function	ent:load(x, y)
    x = -100
    y = -100
    self:setPos(x, y)
    self.w = 116
    self.h = 59
-   self:setVitesse(0.40)
+   self:setVitesse(0.40)	
 end
 
 function	ent:setSize(w, h)
@@ -49,6 +71,12 @@ end
 function	ent:reculer(dt)
    self.x = self.x - math.cos(self.angle) * self.vitesse * dt / 0.002
    self.y = self.y - math.sin(self.angle) * self.vitesse * dt / 0.002
+end
+
+function	ent:Die()
+	for x = 0, 15 do
+		love.graphics.drawq(Explosion,quad[x],self.x,self.y)
+	end
 end
 
 function	ent:update(dt)
@@ -78,6 +106,8 @@ function	ent:update(dt)
       -- creer un compteur puis modulo 2 sur compteur
       -- si = 0 alors on creer un nouveau walker !
       walker_bis = ents.Create("Walker", otherX, otherY)
+	  ents.Destroy(self.id)
+	  Tank.Health = Tank.Health - 20
    end
    self:pivoter(dt)
    self:avancer(dt)
@@ -86,7 +116,6 @@ end
 function	ent:draw()
    local x, y = self:getPos()
    local w, h = self:getSize()
-   
    love.graphics.draw(walker_z, x, y, self.angle, Reso.Scale, Reso.Scale, w / 2, h / 2)
 end
 

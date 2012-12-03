@@ -62,10 +62,13 @@ function love.load()
    walker_z = love.graphics.newImage("Images/Walker.png")
    local walker_1 = ents.Create("Walker", 100, 100)
    TankLoad()
+   Explosion = love.graphics.newImage("Images/explosion.png")
+
 end
 
 function love.draw()
    EtatJeuDraw()
+   
 end
 
 --Cette fonction est appelée en permanence

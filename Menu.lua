@@ -36,6 +36,8 @@ function ChoixTankLoad()
    Tank2Off = love.graphics.newImage("Images/Menu/Tank2Off.png")
    Tank3On = love.graphics.newImage("Images/Menu/Tank3On.png")
    Tank3Off = love.graphics.newImage("Images/Menu/Tank3Off.png")
+   Transparent = love.graphics.newImage("Images/Transparent.png")
+   GameOver = love.graphics.newImage("Images/GameOver.png")
    
    Bouton = {
       Main = 	{
@@ -103,14 +105,21 @@ function EtatJeuDraw()
       GroundDraw()						-- on affiche le sol du jeu
       Map()
       ents:draw()
-      TankDraw()						-- Et le tank
-      love.audio.stop(music)                                   -- Et on arrete la musique epique !
-      checkMusic = 0
-      love.graphics.print("vie :                   " .. Tank.Health, 10,10)
+	  if Tank.Health > 0 then
+		TankDraw()						-- Et le tank
+		love.graphics.print("vie :                   " .. Tank.Health, 10,10)
       love.graphics.print("vitesse :            " .. Tank.Vitesse, 10,30)
       love.graphics.print("Cadence :         " .. Tank.CadenceTir, 10,50)
       love.graphics.print("Degats :           " .. Tank.Dammage, 10,70)
       love.graphics.print("Delta Time dt :  " .. tostring(love.timer.getDelta()), 10, 90)
+	  else
+		love.graphics.draw(Transparent, 0, 0, 0, Reso.Width/2, Reso.Height/2)
+		love.graphics.draw(GameOver, Reso.Width/2, Reso.Height/2, 0, 1, 1, GameOver:getWidth()/2, GameOver:getHeight()/2)
+
+		--EtatJeu = "Menu"
+	end
+      love.audio.stop(music)                                   -- Et on arrete la musique epique !
+      checkMusic = 0
       if love.mouse.isDown("l") then
 	 dt2 = love.timer.getDelta()
 	 Tank.Tir = Tank.Tir + dt2		-- on ajoute dt a chaque tir
@@ -196,7 +205,7 @@ function ChargerTank1()
    Tank.RotTourelleWidth = 89
    Tank.Vitesse = (Speed * 5)/7
    Tank.Dammage = 40
-   Tank.health = 225
+   Tank.Health = 225
    Tank.CadenceTir = 1.7
    Tank.Position.x = Reso.Width/2
    Tank.Position.y = Reso.Height/4 
@@ -209,7 +218,7 @@ function ChargerTank2()
    Tank.RotTourelleWidth = 103
    Tank.Vitesse = (Speed * 3)/7
    Tank.Dammage = 48
-   Tank.health = 360
+   Tank.Health = 360
    Tank.CadenceTir = 1.02
    Tank.Position.x = Reso.Width/2
    Tank.Position.y = Reso.Height/4 
@@ -222,7 +231,7 @@ function ChargerTank3()
    Tank.RotTourelleWidth = 50
    Tank.Vitesse = Speed
    Tank.Dammage = 24
-   Tank.health = 135
+   Tank.Health = 135
    Tank.CadenceTir = 2.38
    Tank.Position.x = Reso.Width/2
    Tank.Position.y = Reso.Height/4 
