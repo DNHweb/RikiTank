@@ -26,20 +26,20 @@ base.vitesse = 0.30
 base.damage = 0
 base.cadenceTir = 0
 
-function	base:setPos(x, y)
-   base.x = x
-   base.y = y
+function base:setPos(x, y)
+	base.x = x
+	base.y = y
 end
 
-function	base:getPos()
-   return base.x, base.y
+function base:getPos()
+	return base.x, base.y
 end
 
-function	base:setVitesse(v)
-   base.vitesse = v
+function base:setVitesse(v)
+	base.vitesse = v
 end
 
-function	base:load()
+function base:load()
 
 end
 

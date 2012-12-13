@@ -80,37 +80,37 @@ function	ent:Die()
 end
 
 function	ent:update(dt)
-   -- IA
-   distance = ((self.x - Tank.Position.x) ^ 2 + (self.y - Tank.Position.y) ^ 2) ^ 0.5
-   -- si collision
-   if distance < (walker_z:getWidth() / 3 + Tank.BaseImage:getWidth() / 3) then
-      side = math.random(1, 3)
-      newX = math.random(500, 1500)
-      newY = math.random(-800, 1800)
-      otherSide = math.random(1, 3)
-      otherX = math.random(500, 1500)
-      otherY = math.random(-800, 1800)
-      if side <= 2 then
-	 newX = - newX
-      else
-	 newX = newX + Reso.Width
-      end
-      self.x = newX
-      self.y = newY
-      if otherSide <= 2 then
-	 otherX = - otherX
-      else
-	 otherX = otherX + Reso.Width
-      end
-      -- pour limiter le nombre de walker qui pop
-      -- creer un compteur puis modulo 2 sur compteur
-      -- si = 0 alors on creer un nouveau walker !
-      walker_bis = ents.Create("Walker", otherX, otherY)
-	  ents.Destroy(self.id)
-	  Tank.Health = Tank.Health - 20
-   end
-   self:pivoter(dt)
-   self:avancer(dt)
+	-- IA
+	distance = ((self.x - Tank.Position.x) ^ 2 + (self.y - Tank.Position.y) ^ 2) ^ 0.5
+	-- si collision
+	if distance < (walker_z:getWidth() / 3 + Tank.BaseImage:getWidth() / 3) then
+		side = math.random(1, 3)
+		newX = math.random(500, 1500)
+		newY = math.random(-800, 1800)
+		otherSide = math.random(1, 3)
+		otherX = math.random(500, 1500)
+		otherY = math.random(-800, 1800)
+		if side <= 2 then
+			newX = - newX
+		else
+			newX = newX + Reso.Width
+		end
+		self.x = newX
+		self.y = newY
+		if otherSide <= 2 then
+			otherX = - otherX
+		else
+			otherX = otherX + Reso.Width
+		end
+		-- pour limiter le nombre de walker qui pop
+		-- creer un compteur puis modulo 2 sur compteur
+		-- si = 0 alors on creer un nouveau walker !
+		walker_bis = ents.Create("Walker", otherX, otherY)
+		ents.Destroy(self.id)
+		Tank.Health = Tank.Health - 20
+	end
+	self:pivoter(dt)
+	self:avancer(dt)
 end
 
 function	ent:draw()

@@ -22,61 +22,82 @@ require "Sound"
 require "Ground"
 require "Menu"
 require "Entities"
-require "Tir"
 
 ChoixMap = 1
 Reso = {
-   Width,
-   Height,
-   Scale
+	Width,
+	Height,
+	Scale
 }
 resolution()
 
 Tank = {
-   Choix = 1,
-   Position = {x = 1024, y = 768},
-   OldPosition = {x, y},
-   Vitesse = Speed,
-   Angle = {Base = 0, Tourelle = 0},
-   RotTourelleWidth = 0,
-   Health = 0,
-   Dammage = 0,
-   CadenceTir = 0,
-   Tir = 10,
-   Score = 0
+	Choix = 1,
+	Position = {x = 1024, y = 768},
+	OldPosition = {x, y},
+	Vitesse = Speed,
+	Angle = {Base = 0, Tourelle = 0},
+	RotTourelleWidth = 0,
+	Health = 0,
+	Dammage = 0,
+	CadenceTir = 0,
+	Tir = 10,
+	Score = 0
 }
 
 -- Cette fonction est appelee une seule fois, on charge un max de truc ici au debut du jeu
 -- pour economiser les ressources systemes au maximum.
 function love.load()
+
    ents.Startup()
    ChoixTankLoad()
    SoundMenu()
    GroundLoad()
-   ShootLoad()
 
-   ---------------------------------------
-   -- Chargement des differents ennemies -
-   ---------------------------------------
+   Explosion = love.graphics.newImage("Images/explosion.png")
+   normalFont = love.graphics.newFont("Fonts/Pixel.ttf", 18)
+   countdownFont = love.graphics.newFont("Fonts/Pixel.ttf", 100)
+   
+   ----------------------------------------
+   -- Chargement des differents ennemies --
+   ----------------------------------------
    tankEnnemiePic = love.graphics.newImage("Images/BaseTank4.png")
    walker_z = love.graphics.newImage("Images/Walker.png")
    local walker_1 = ents.Create("Walker", 100, 100)
    TankLoad()
-   Explosion = love.graphics.newImage("Images/explosion.png")
+
 
 end
 
 function love.draw()
-   EtatJeuDraw()
+	EtatJeuDraw()
    
 end
 
 --Cette fonction est appelée en permanence
 --'dt' = "delta temps", nombre de secondes depuis la dernière fois que cette fonction a été appelée
 
+Countdown = 3
+CountdownSpeed = 1
+CountdownTimer = 0
+
 function love.update(dt)
-   if EtatJeu == "EnJeu" then		-- si l'état du jeu est Play
-      TankUpdate(dt)			-- on actualise la position du tank
-      ents:update(dt)			-- on actualise la position des bots
-   end
+	if EtatJeu == "Countdown" then
+		if EtatJeu == "Countdown" then
+			CountdownTimer = CountdownTimer + dt
+		end
+		if EtatJeu == "Countdown" and Countdown > 0 and CountdownTimer >= CountdownSpeed then
+			Countdown = Countdown - 1
+			CountdownTimer = 0
+		end
+		if EtatJeu == "Countdown" and Countdown == 0 then
+			love.graphics.printf("Go !", Reso.Width/2, Reso.Height/2, 50)
+			EtatJeu = "EnJeu"
+		end
+	end
+	
+	if EtatJeu == "EnJeu" then
+		TankUpdate(dt)
+		ents:update(dt)
+	end
 end

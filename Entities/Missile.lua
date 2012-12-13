@@ -19,47 +19,45 @@
 
 local ent = ents.Derive("Base")
 
-function	ent:load()
-   self:setVitesse(0.90)
-   self.w = 6
-   self.h = 19
-   self.angle = Tank.Angle.Tourelle
-   self.image = love.graphics.newImage("Images/Missile.png")
+function ent:load()
+	self:setVitesse(0.90)
+	self.w = 6
+	self.h = 19
+	self.angle = Tank.Angle.Tourelle
+	self.image = love.graphics.newImage("Images/Missile.png")
 end
 
-function	ent:setSize(w, h)
-   self.w = w
-   self.h = h
+function ent:setSize(w, h)
+	self.w = w
+	self.h = h
 end
 
-function	ent:getSize()
-   return self.w, self.h
+function ent:getSize()
+	return self.w, self.h
 end
 
-function	ent:avancer(dt)
-   self.x = self.x + math.cos(self.angle) * self.vitesse * dt / 0.002
-   self.y = self.y + math.sin(self.angle) * self.vitesse * dt / 0.002
+function ent:avancer(dt)
+	self.x = self.x + math.cos(self.angle) * self.vitesse * dt / 0.002
+	self.y = self.y + math.sin(self.angle) * self.vitesse * dt / 0.002
 end
 
-function	ent:Die()
-   print("Missile " .. self.id .. " efface du tableau")
-   ents.Create("Missile")
+function ent:Die()
+	print("Missile " .. self.id .. " efface du tableau")
+	ents.Create("Missile")
 end
 
-function	ent:update(dt)
-   self:avancer(dt)
-   if self.x > Reso.Width or self.x < Reso.Width or
-      self.y > Reso.Height or self.y < Reso.Height then
-      
-      ents.Destroy(self.id)
-   end
+function ent:update(dt)
+	self:avancer(dt)
+	if self.x > Reso.Width or self.x < Reso.Width or self.y > Reso.Height or self.y < Reso.Height then
+		ents.Destroy(self.id)
+	end
 end
 
-function	ent:draw()
-   local x, y = self:getPos()
-   local w, h = self:getSize()
+function ent:draw()
+	local x, y = self:getPos()
+	local w, h = self:getSize()
    
-   love.graphics.draw(self.image, x, y, self.angle, Reso.Scale, Reso.Scale, w / 2, h / 5)
+	love.graphics.draw(self.image, x, y, self.angle, Reso.Scale, Reso.Scale, w / 2, h / 5)
 end
 
 return ent;
