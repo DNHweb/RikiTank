@@ -30,8 +30,6 @@ local id = 0
 
 -- on remplie le registre avec nos objets
 function ents.Startup()
-	register["TankEnnemie"] = love.filesystem.load(ents.objectpath .. "TankEnnemie.lua")
-	register["Walker"] = love.filesystem.load(ents.objectpath .. "Walker.lua")
 	register["Missile"] = love.filesystem.load(ents.objectpath .. "Missile.lua")
 end
 
@@ -57,11 +55,11 @@ function ents.Create(name, x, y)
 		id = id + 1
 		local ent = register[name]()
 		ent:load()
+		ent.type = name
 		ent:setPos(x, y)
 		ent.id = id
-		-- un # devant un nom de tableau retourne le nombre d'element du tableau
-		ents.objects[#ents.objects + 1] = ent
-		return ents.objects[#ents.objects]
+		ents.objects[id] = ent
+		return ents.objects[id]
 	else
 		print("Erreur : l'entite " .. name .. " n'existe pas.")
 		return false
@@ -69,7 +67,7 @@ function ents.Create(name, x, y)
 end
 
 -- Quand on veut enlever un object du tableau d'objet
-function ents.Destroy(id)
+function ents.Destroy( id )
 	if ents.objects[id] then
 		if ents.objects[id].Die then
 			ents.objects[id]:Die()
@@ -81,21 +79,17 @@ end
 -- a chaque fois que cette fonction est appelee
 -- elle met a jour les objets du tableau
 function ents:update(dt)
-	if EtatJeu == "EnJeu" then
-		for i, ent in pairs(ents.objects) do
-			if ent.update then
-				ent:update(dt)
-			end
+	for i, ent in pairs(ents.objects) do
+		if ent.update then
+			ent:update(dt)
 		end
 	end
 end
 
 function ents:draw()
-	if EtatJeu == "EnJeu" then
-		for i, ent in pairs(ents.objects) do
-			if ent.draw then
-				ent:draw()
-			end
+	for i, ent in pairs(ents.objects) do
+		if ent.draw then
+			ent:draw()
 		end
 	end
 end

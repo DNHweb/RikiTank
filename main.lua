@@ -54,16 +54,13 @@ function love.load()
    SoundMenu()
    GroundLoad()
 
-   Explosion = love.graphics.newImage("Images/explosion.png")
    normalFont = love.graphics.newFont("Fonts/Pixel.ttf", 18)
    countdownFont = love.graphics.newFont("Fonts/Pixel.ttf", 100)
    
    ----------------------------------------
    -- Chargement des differents ennemies --
    ----------------------------------------
-   tankEnnemiePic = love.graphics.newImage("Images/BaseTank4.png")
-   walker_z = love.graphics.newImage("Images/Walker.png")
-   local walker_1 = ents.Create("Walker", 100, 100)
+ 
    TankLoad()
 
 
@@ -92,6 +89,7 @@ function love.update(dt)
 		end
 		if EtatJeu == "Countdown" and Countdown == 0 then
 			love.graphics.printf("Go !", Reso.Width/2, Reso.Height/2, 50)
+			Countdown = 3
 			EtatJeu = "EnJeu"
 		end
 	end
