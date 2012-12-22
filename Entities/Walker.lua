@@ -17,46 +17,23 @@
 -- along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -- 
 
-local ent = ents.Derive("Base")
+local ent = ents.Derive("base")
 
-local quad = {}
-	
-quad[0] = love.graphics.newQuad(0,0,64,64,256,256)
-quad[1] = love.graphics.newQuad(64,0,64,64,256,256)
-quad[2] = love.graphics.newQuad(128,0,64,64,256,256)
-quad[3] = love.graphics.newQuad(192,0,64,64,256,256)
-
-quad[4] = love.graphics.newQuad(0,64,64,64,256,256)
-quad[5] = love.graphics.newQuad(64,64,64,64,256,256)
-quad[6] = love.graphics.newQuad(128,64,64,64,256,256)
-quad[7] = love.graphics.newQuad(192,64,64,64,256,256)
-
-quad[8] = love.graphics.newQuad(0,128,64,64,256,256)
-quad[9] = love.graphics.newQuad(64,128,64,64,256,256)
-quad[10] = love.graphics.newQuad(128,128,64,64,256,256)
-quad[11] = love.graphics.newQuad(192,128,64,64,256,256)
-
-quad[12] = love.graphics.newQuad(0,192,64,64,256,256)
-quad[13] = love.graphics.newQuad(64,192,64,64,256,256)
-quad[14] = love.graphics.newQuad(128,192,64,64,256,256)
-quad[15] = love.graphics.newQuad(192,192,64,64,256,256)
-
-function	ent:load(x, y)
-   x = -100
-   y = -100
-   self:setPos(x, y)
-   self.w = 116
-   self.h = 59
-   self:setVitesse(0.40)	
+function ent:setPos( x, y )
+	self.x = x
+	self.y = y
 end
 
-function	ent:setSize(w, h)
-   self.w = w
-   self.h = h
+function ent:load( x, y )
+	self:setPos( x, y )
+	self.image = love.graphics.newImage("Images/Walker.png")
 end
 
-function	ent:getSize()
-   return self.w, self.h
+function ent:Die()
+	ents.Create("Walker", math.random(Reso.Width + 20, Reso.Width + 500), math.random(Reso.Height + 20, Reso.Height + 500))
+	ents.Create("Walker", math.random(-500, -20), math.random(-500, Reso.Height + 500))
+	Tank.Health = Tank.Health - 20
+	print("Tank " .. self.id .. " destroyed.")
 end
 
 function	ent:pivoter(dt)
@@ -68,55 +45,20 @@ function	ent:avancer(dt)
    self.y = self.y + math.sin(self.angle) * self.vitesse * dt / 0.002
 end
 
-function	ent:reculer(dt)
-   self.x = self.x - math.cos(self.angle) * self.vitesse * dt / 0.002
-   self.y = self.y - math.sin(self.angle) * self.vitesse * dt / 0.002
-end
-
-function	ent:Die()
-	for x = 0, 15 do
-		love.graphics.drawq(Explosion,quad[x],self.x,self.y)
-	end
-end
-
 function	ent:update(dt)
+
 	-- IA
 	distance = ((self.x - Tank.Position.x) ^ 2 + (self.y - Tank.Position.y) ^ 2) ^ 0.5
 	-- si collision
-	if distance < (walker_z:getWidth() / 3 + Tank.BaseImage:getWidth() / 3) then
-		side = math.random(1, 3)
-		newX = math.random(500, 1500)
-		newY = math.random(-800, 1800)
-		otherSide = math.random(1, 3)
-		otherX = math.random(500, 1500)
-		otherY = math.random(-800, 1800)
-		if side <= 2 then
-			newX = - newX
-		else
-			newX = newX + Reso.Width
-		end
-		self.x = newX
-		self.y = newY
-		if otherSide <= 2 then
-			otherX = - otherX
-		else
-			otherX = otherX + Reso.Width
-		end
-		-- pour limiter le nombre de walker qui pop
-		-- creer un compteur puis modulo 2 sur compteur
-		-- si = 0 alors on creer un nouveau walker !
-		walker_bis = ents.Create("Walker", otherX, otherY)
+	if distance < (self.image:getWidth() / 3 + Tank.BaseImage:getWidth() / 3) then
 		ents.Destroy(self.id)
-		Tank.Health = Tank.Health - 20
 	end
 	self:pivoter(dt)
 	self:avancer(dt)
 end
 
-function	ent:draw()
-   local x, y = self:getPos()
-   local w, h = self:getSize()
-   love.graphics.draw(walker_z, x, y, self.angle, Reso.Scale, Reso.Scale, w / 2, h / 2)
+function ent:draw()
+	love.graphics.draw(self.image, self.x, self.y, self.angle, Reso.Scale, Reso.Scale, 0, 0)
 end
 
 return ent;

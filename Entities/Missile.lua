@@ -32,7 +32,7 @@ function ent:load( x, y )
 end
 
 function ent:update(dt)
-	if self.id == 1 then
+	if self.id == 2 then
 		ents.Destroy( self.id )
 	end
 	self.x = self.x + math.cos(self.ang) * self.vitesse * dt / 0.002

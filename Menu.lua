@@ -75,7 +75,7 @@ end
 function EtatJeuDraw()
 	local x = love.mouse.getX( )
 	local y = love.mouse.getY( )
-   
+
 	if checkMusic == 0 then
 		love.audio.play(music)
 		checkMusic = 1

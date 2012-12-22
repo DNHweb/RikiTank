@@ -60,10 +60,9 @@ function love.load()
    ----------------------------------------
    -- Chargement des differents ennemies --
    ----------------------------------------
- 
+   ents.Create("Walker", math.random(-100, -20), math.random(-100, -20))
+   
    TankLoad()
-
-
 end
 
 function love.draw()
