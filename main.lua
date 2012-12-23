@@ -67,7 +67,6 @@ end
 
 function love.draw()
 	EtatJeuDraw()
-   
 end
 
 --Cette fonction est appelée en permanence

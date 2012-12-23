@@ -116,7 +116,6 @@ function EtatJeuDraw()
 	if EtatJeu == "EnJeu" then
 		love.mouse.setVisible(false)
 		GroundDraw()						-- on affiche le sol du jeu
-		Map()
 		ents:draw()
 	  
 		if Tank.Health > 0 then
@@ -135,6 +134,7 @@ function EtatJeuDraw()
 	
     love.audio.stop(music)                                   -- Et on arrete la musique epique !
     checkMusic = 0
+	
     if love.mouse.isDown("l") then
 		dt2 = love.timer.getDelta()
 		Tank.Tir = Tank.Tir + dt2		-- on ajoute dt a chaque tir
