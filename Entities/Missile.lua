@@ -17,7 +17,7 @@
 -- along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -- 
 
-local ent = ents.Derive("base")
+local ent = ents.Derive("Base")
 
 function ent:setPos( x, y )
 	self.x = x
