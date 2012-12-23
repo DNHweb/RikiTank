@@ -87,7 +87,7 @@ function ents:update(dt)
 				for j, obj in pairs(ents.objects) do
 					if obj.type == "Walker" then
 						local distance = ((obj.x - ent.x) ^ 2 + (obj.y - ent.y) ^ 2) ^ 0.5
-						if distance < (obj.image:getWidth() / 3 + ent.image:getWidth() / 3) * Reso.Scale then
+						if distance < (obj.image:getWidth() + ent.image:getWidth()) * Reso.Scale then
 							ents.Destroy( obj.id )
 							ents.Destroy( ent.id )
 							break
