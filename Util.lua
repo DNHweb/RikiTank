@@ -1,7 +1,7 @@
 -- 
--- @file Sound.lua
+-- @file Util.lua
 -- This file is a part of RikiTank project, an amazing tank game !
--- Copyright (C) 2012  Riki-Team
+-- Copyright (C) 2012  Riki-Team <rikitank.project@gmail.com>
 -- 
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -17,14 +17,17 @@
 -- along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -- 
 
-function SoundMenu()
-	music = love.audio.newSource("Sounds/Menu.mp3")
-	music:setVolume(0.25)
-	love.audio.play(music)
-
-	SonMenu2 = love.audio.newSource("Sounds/SonMenu2.mp3")
-	SonMenu2:setVolume(0.75)
-
-	SonMenu1 = love.audio.newSource("Sounds/SonMenu1.mp3")
-	SonMenu1:setVolume(0.75)
+function	getRandomCoord()
+	x = math.random(-500, 500 + Reso.Width)
+	y = 0
+	
+	if x < 0 or x > Reso.Width then
+		y = math.random(-500, 500 + Reso.Height)
+	else
+		while y < 0 or y > Reso.Height do
+			y = math.random(-500, 500 + Reso.Height)
+		end
+	end
+	
+	return x, y
 end

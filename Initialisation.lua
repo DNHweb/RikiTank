@@ -86,6 +86,7 @@ end
 function SoundMenu()
 	musicMenu = love.audio.newSource("Sounds/Confusus.mp3", "static")
 	musicMenu:setVolume(0.25)
+	musicMenu:rewind()
 	SonMenu1 = love.audio.newSource("Sounds/SonMenu1.mp3")
 	SonMenu1:setVolume(0.75)
 	SonMenu2 = love.audio.newSource("Sounds/SonMenu2.mp3")
@@ -97,6 +98,7 @@ end
 ]]-- ------------------------------------
 
 function GroundLoad()
-	Ground1 = love.graphics.newImage("Images/Ground1.png")
+	Ground1 = love.graphics.newImage("Images/Ground.jpg")
 	Mur1 = love.graphics.newImage("Images/Murs/Horizontal.png")
+	Explosion = love.graphics.newImage("Images/explosion.png")
 end

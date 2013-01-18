@@ -1,7 +1,7 @@
 -- 
--- @file Missile.lua
+-- @file Walker.lua
 -- This file is a part of RikiTank project, an amazing tank game !
--- Copyright (C) 2012  Riki-Team <rikitank.project@gmail.com>
+-- Copyright (C) 2012  Riki-Team
 -- 
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -22,39 +22,22 @@ local ent = ents.Derive("Base")
 function ent:setPos( x, y )
 	self.x = x
 	self.y = y
-	self.ang = Tank.Angle.Tourelle
-	self.vitesse = 0.90
 end
 
 function ent:load( x, y )
-	self:setPos( x, y )
-	self.image = love.graphics.newImage("Images/Missile.png")
+	anim = newAnimation(Explosion, 64, 64, 0.1, 0)
+	anim:setMode("once")
 end
 
-function ent:update(dt)
-	if self.id == 1 then
-		ents.Destroy( self.id )
-	end
-	self.x = self.x + math.cos(self.ang) * self.vitesse * dt / 0.002
-	self.y = self.y + math.sin(self.ang) * self.vitesse * dt / 0.002
-	
-	if (self.x > Reso.Width) then
-		ents.Destroy( self.id )
-	elseif (self.x < 0) then
-		ents.Destroy( self.id )
-	elseif (self.y < 0) then
-		ents.Destroy( self.id )
-	elseif (self.y > Reso.Height) then
-		ents.Destroy( self.id )
+function	ent:update(dt)
+	anim:update(dt)
+	if anim:getCurrentFrame() == 16 then
+		ents.Destroy(self.id)
 	end
 end
 
 function ent:draw()
-	love.graphics.draw(self.image, self.x, self.y, self.ang, Reso.Scale, Reso.Scale, self.image:getWidth() / 2, self.image:getHeight() / 2)
-end
-
-function ent:Die()
-	print("Missile " .. self.id .. " detruit.")
+	anim:draw(self.x, self.y)
 end
 
 return ent;

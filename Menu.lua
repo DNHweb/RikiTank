@@ -18,10 +18,13 @@
 -- 
 
 require "Initialisation"
+require "Util"
 require "Entities"
 
 EtatJeu = "Menu"
-checkMusic = 0
+startTime = love.timer.getTime()
+stime = love.timer.getTime()
+nbSeconde = 5
 
 local function drawButton(off, on, x, y, w, h, mx, my)
 	love.graphics.setBackgroundColor( 190, 190, 190, 255 )
@@ -78,6 +81,15 @@ function EtatJeuDraw()
 		GroundDraw()						-- on affiche le sol du jeu
 		ents:draw()
 		if Tank.Health > 0 then
+			local etime = love.timer.getTime()
+			if etime - stime > nbSeconde then
+				local xWalker, yWalker = getRandomCoord()
+				ents.Create("Walker", xWalker, yWalker)
+				stime = love.timer.getTime()
+			end
+			if etime - startTime > 180 then
+				nbSeconde = 3
+			end
 			TankDraw()
 			love.graphics.printf("Vie : " .. Tank.Health .. "\nScore : " .. Tank.Score, 10, 10, 300, "left")
 		else
@@ -135,6 +147,8 @@ function love.mousepressed(x, y, button )
 						ChargerTank3()
 						EtatJeu = "Countdown"
 					end
+					ents.objects = {}
+					-- ents.Create("Walker")
 				end
 			end
 		elseif EtatJeu == "Pause" then
@@ -176,6 +190,7 @@ function ChargerTank1()
 	Tank.Position.x = Reso.Width/2
 	Tank.Position.y = Reso.Height/4 
 	Tank.Angle.Base = 0
+	Tank.Score = 0
 end
 
 function ChargerTank2()
@@ -189,6 +204,7 @@ function ChargerTank2()
 	Tank.Position.x = Reso.Width/2
 	Tank.Position.y = Reso.Height/4 
 	Tank.Angle.Base = 0
+	Tank.Score = 0
 end
 
 function ChargerTank3()
@@ -202,4 +218,5 @@ function ChargerTank3()
 	Tank.Position.x = Reso.Width/2
 	Tank.Position.y = Reso.Height/4 
 	Tank.Angle.Base = 0
+	Tank.Score = 0
 end

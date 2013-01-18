@@ -32,6 +32,7 @@ local id = 0
 function ents.Startup()
 	register["Missile"] = love.filesystem.load(ents.objectpath .. "Missile.lua")
 	register["Walker"] = love.filesystem.load(ents.objectpath .. "Walker.lua")
+	register["Explosion"] = love.filesystem.load(ents.objectpath .. "Explosion.lua")
 end
 
 -- un peu comme une fonction d'heritage
@@ -86,10 +87,10 @@ function ents:update(dt)
 			if ent.type == "Missile" then
 				for j, obj in pairs(ents.objects) do
 					if obj.type == "Walker" then
-						local distance = ((obj.x - ent.x) ^ 2 + (obj.y - ent.y) ^ 2) ^ 0.5
-						if distance < (obj.image:getWidth() + ent.image:getWidth()) * Reso.Scale then
-							ents.Destroy( obj.id )
-							ents.Destroy( ent.id )
+						local distance = ((ent.x - obj.x) ^ 2.5 + (ent.y - obj.y) ^ 2) ^ 0.5
+						if distance < (obj.image:getWidth() / 2 + ent.image:getWidth() / 2) * Reso.Scale then
+							ents.Destroy(obj.id)
+							ents.Destroy(ent.id)
 							break
 						end
 					end

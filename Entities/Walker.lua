@@ -30,10 +30,11 @@ function ent:load( x, y )
 end
 
 function ent:Die()
-	ents.Create("Walker", math.random(Reso.Width + 20, Reso.Width + 500), math.random(Reso.Height + 20, Reso.Height + 500))
-	ents.Create("Walker", math.random(-500, -20), math.random(-500, Reso.Height + 500))
+	local SonExplosion = love.audio.newSource("Sounds/SonExplosion.mp3", "stream")
+	SonExplosion:setVolume(0.75)
+	love.audio.play(SonExplosion)
+	ents.Create("Explosion", self.x, self.y)
 	Tank.Score = Tank.Score + 20
-	print("Tank " .. self.id .. " destroyed.")
 end
 
 function	ent:pivoter(dt)
@@ -59,7 +60,7 @@ function	ent:update(dt)
 end
 
 function ent:draw()
-	love.graphics.draw(self.image, self.x, self.y, self.angle, Reso.Scale, Reso.Scale, 0, 0)
+	love.graphics.draw(self.image, self.x, self.y, self.angle, Reso.Scale, Reso.Scale, self.image:getWidth() / 2, self.image:getHeight() / 2)
 end
 
 return ent;

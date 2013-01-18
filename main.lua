@@ -22,6 +22,7 @@ require "Ground"
 require "Menu"
 require "Entities"
 require "Initialisation"
+require "AnAL"
 
 --[[ ---------------------------------------
 -- | Declaration des structures et variables
@@ -63,7 +64,6 @@ function love.load()
    GroundLoad()
    normalFont = love.graphics.newFont("Fonts/Pixel.ttf", 18)
    countdownFont = love.graphics.newFont("Fonts/Pixel.ttf", 100)
-   ents.Create("Walker")
    TankLoad()
 end
 
