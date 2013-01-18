@@ -78,15 +78,15 @@ end
 
 --> tourner à droite <--
 function TourneDroite(Angle, dt)
-	Angle = Angle + dt * math.pi/2	-- Calcule de
-	Angle = Angle % (2*math.pi)		-- l'angle
+	Angle = Angle + dt * math.pi / 2	-- Calcule de
+	Angle = Angle % (2 * math.pi)		-- l'angle
 	return Angle
 end
 
 --> tourner à gauche <--
 function TourneGauche(Angle, dt)
-	Angle = Angle - dt * math.pi/2
-	Angle = Angle % (2*math.pi)
+	Angle = Angle - dt * math.pi / 2
+	Angle = Angle % (2 * math.pi)
 	return Angle
 end
 
@@ -100,7 +100,7 @@ end
 
 --> Dessiner le tank en fonction de son angle et de sa position et de son centre de rotation <--
 function BaseTankDraw(Image, x, y, Angle)
-	Width = Image:getWidth()/2
-	Height = Image:getHeight()/2
+	Width = Image:getWidth() / 2
+	Height = Image:getHeight() / 2
 	love.graphics.draw(Image, x, y, Angle, Reso.Scale, Reso.Scale, Width, Height)
 end

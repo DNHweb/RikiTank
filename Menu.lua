@@ -17,48 +17,11 @@
 -- along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -- 
 
-require "Sound"
+require "Initialisation"
 require "Entities"
 
-EtatJeu = "Menu"	-- on initialise EtatJeu à Menu
-checkMusic = 0		-- variable de verification, si 1 la music est deja en lecture.
-
-function ChoixTankLoad()
-	JouerOn = love.graphics.newImage("Images/Menu/JouerOn.png")
-	JouerOff = love.graphics.newImage("Images/Menu/JouerOff.png")
-	MenuOn = love.graphics.newImage("Images/Menu/MenuOn.png")
-	MenuOff = love.graphics.newImage("Images/Menu/MenuOff.png")
-	QuitterOn = love.graphics.newImage("Images/Menu/QuitterOn.png")
-	QuitterOff = love.graphics.newImage("Images/Menu/QuitterOff.png")
-	Tank1On = love.graphics.newImage("Images/Menu/Tank1On.png")
-	Tank1Off = love.graphics.newImage("Images/Menu/Tank1Off.png")
-	Tank2On = love.graphics.newImage("Images/Menu/Tank2On.png")
-	Tank2Off = love.graphics.newImage("Images/Menu/Tank2Off.png")
-	Tank3On = love.graphics.newImage("Images/Menu/Tank3On.png")
-	Tank3Off = love.graphics.newImage("Images/Menu/Tank3Off.png")
-	Transparent = love.graphics.newImage("Images/Transparent.png")
-	GameOver = love.graphics.newImage("Images/GameOver.png")
-   
-	Bouton = {
-		Main = {
-			Jouer = {On = JouerOn, Off = JouerOff, x = 100, y = (Reso.Height/3)-35, Width = 260, Height = 70, Id = "GoChoixTank"},
-			Quitter1 = {On = QuitterOn, Off = QuitterOff, x = 100, y =(2*Reso.Height/3)-35, Width = 260, Height = 70, Id = "Quitter1"}
-			},
-		Pause = {
-			Reprendre = {On = JouerOn, Off = JouerOff, x = 100, y =(Reso.Height/4)-35, Width = 260, Height = 70, Id = "Reprendre"},
-			Menu = {On = MenuOn, Off = MenuOff, x = 100, y = (Reso.Height/2)-35, Width = 260, Height = 70, Id = "Menu"},
-			Quitter2 = {On = QuitterOn, Off = QuitterOff, x = 100, y = (3*Reso.Height/4)-35, Width = 260, Height = 70, Id = "Quitter2"}
-			},
-		Choix = {
-			Tank1 = {On = Tank1On, Off = Tank1Off, x = (Reso.Width/4)-115, y = (Reso.Height/2)-115, Width = 230, Height = 230, Id = "Tank1"},
-			Tank2 = {On = Tank2On, Off = Tank2Off, x = (Reso.Width/2)-115, y = (Reso.Height/2)-115, Width = 230, Height = 230, Id = "Tank2"},
-			Tank3 = {On = Tank3On, Off = Tank3Off, x = (3*Reso.Width/4)-115, y = (Reso.Height/2)-115, Width = 230, Height = 230, Id = "Tank3"}
-			},
-		GameOver = {
-			Menu = {On = MenuOn, Off = MenuOff, x = (Reso.Width/2)-70, y = (Reso.Height/2)-35, Width = 260, Height = 70, Id = "Menu"}
-			}
-	}
-end
+EtatJeu = "Menu"
+checkMusic = 0
 
 local function drawButton(off, on, x, y, w, h, mx, my)
 	love.graphics.setBackgroundColor( 190, 190, 190, 255 )
@@ -75,12 +38,8 @@ end
 function EtatJeuDraw()
 	local x = love.mouse.getX( )
 	local y = love.mouse.getY( )
-
-	if checkMusic == 0 then
-		love.audio.play(music)
-		checkMusic = 1
-	end
    
+	love.audio.play(musicMenu)
 	if EtatJeu == "Menu" then
 		love.mouse.setVisible(true)
 		for k, v in pairs(Bouton.Main) do
@@ -114,26 +73,21 @@ function EtatJeuDraw()
 	end
 
 	if EtatJeu == "EnJeu" then
+		love.audio.stop(musicMenu)
 		love.mouse.setVisible(false)
 		GroundDraw()						-- on affiche le sol du jeu
 		ents:draw()
-	  
 		if Tank.Health > 0 then
 			TankDraw()
-			love.graphics.print("vie :                   " .. Tank.Health, 10,10)
-			love.graphics.print("vitesse :            " .. Tank.Vitesse, 10,30)
-			love.graphics.print("Cadence :         " .. Tank.CadenceTir, 10,50)
-			love.graphics.print("Degats :           " .. Tank.Dammage, 10,70)
-			love.graphics.print("Delta Time dt :  " .. tostring(love.timer.getDelta()), 10, 90)
+			love.graphics.printf("Vie : " .. Tank.Health .. "\nScore : " .. Tank.Score, 10, 10, 300, "left")
 		else
+			local nameFile = tostring(os.date("%m%d%Y_%H%M%S"))
+			love.filesystem.write(nameFile, tostring(Tank.Score), all)
 			ents.objects = {}
 			love.graphics.draw(Transparent, 0, 0, 0, Reso.Width/2, Reso.Height/2)
-			love.graphics.draw(GameOver, Reso.Width/2, Reso.Height/2, 0, 1, 1, GameOver:getWidth()/2, GameOver:getHeight()/2)
+			love.graphics.draw(GameOver, Reso.Width/2, Reso.Height/2, 0, 1, 1, GameOver:getWidth()/2, GameOver:getHeight()/2)			
 		end
 	end
-	
-    love.audio.stop(music)                                   -- Et on arrete la musique epique !
-    checkMusic = 0
 	
     if love.mouse.isDown("l") then
 		dt2 = love.timer.getDelta()

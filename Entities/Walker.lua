@@ -32,6 +32,7 @@ end
 function ent:Die()
 	ents.Create("Walker", math.random(Reso.Width + 20, Reso.Width + 500), math.random(Reso.Height + 20, Reso.Height + 500))
 	ents.Create("Walker", math.random(-500, -20), math.random(-500, Reso.Height + 500))
+	Tank.Score = Tank.Score + 20
 	print("Tank " .. self.id .. " destroyed.")
 end
 

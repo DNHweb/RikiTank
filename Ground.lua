@@ -20,10 +20,6 @@
 --
 -- Ici on dessine le terrain
 --
-function GroundLoad()
-	Ground1 = love.graphics.newImage("Images/Ground1.png")
-	Mur1 = love.graphics.newImage("Images/Murs/Horizontal.png")
-end
 
 function GroundDraw()
 	width = love.graphics.getWidth( ) / 128
