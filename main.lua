@@ -44,7 +44,7 @@ Tank = {
 	Health = 0,
 	Dammage = 0,
 	CadenceTir = 0,
-	Tir = 10,
+	Tir = love.timer.getTime(),
 	Score = 0
 }
 

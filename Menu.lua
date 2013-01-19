@@ -104,13 +104,12 @@ function EtatJeuDraw()
 	end
 	
     if love.mouse.isDown("l") then
-		dt2 = love.timer.getDelta()
-		Tank.Tir = Tank.Tir + dt2		-- on ajoute dt a chaque tir
-		if Tank.Tir > 1 / Tank.CadenceTir then	-- si tir = 1(seconde)
+		local dt2 = love.timer.getTime()
+		if ((dt2 - Tank.Tir) > 1 / Tank.CadenceTir) then
 			xMissile = Tank.Position.x + (Tank.TourelleImage:getWidth() - Tank.RotTourelleWidth) * math.cos(Tank.Angle.Tourelle)
 			yMissile = Tank.Position.y + (Tank.TourelleImage:getWidth() - Tank.RotTourelleWidth) * math.sin(Tank.Angle.Tourelle)
 			ents.Create("Missile", xMissile, yMissile)
-			Tank.Tir = 0
+			Tank.Tir = love.timer.getTime()
 		end
     end
 end
@@ -150,7 +149,6 @@ function love.mousepressed(x, y, button )
 						EtatJeu = "Countdown"
 					end
 					ents.objects = {}
-					-- ents.Create("Walker")
 				end
 			end
 		elseif EtatJeu == "Pause" then
