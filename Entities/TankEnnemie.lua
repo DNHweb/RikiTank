@@ -19,35 +19,59 @@
 
 local ent = ents.Derive("Base")
 
-function ent:load(x, y)
-	self:setPos(x, y)
-	self.w = 95
-	self.h = 54
+function ent:setPos( x, y )
+	self.x = x
+	self.y = y
 end
 
-function ent:setSize(w, h)
-	self.w = w
-	self.h = h
+function ent:load( x, y )
+	self:setPos( x, y )
+	self.image = love.graphics.newImage("Images/BaseTank4.png")
+	self.imageT = love.graphics.newImage("Images/TourelleTank4.png")
+	self.angleT = self.angle
+	self.stime = love.timer.getTime()
 end
 
-function ent:getSize()
-	return self.w, self.h
+function ent:Die()
+	local SonExplosion = love.audio.newSource("Sounds/SonExplosion.mp3", "stream")
+	SonExplosion:setVolume(0.75)
+	love.audio.play(SonExplosion)
+	ents.Create("Explosion", self.x, self.y)
+	Tank.Score = Tank.Score + 50
 end
 
-function ent:update(dt)
-	-- a coder l'IA ici normalement
-	-- pour le moment on va juste le faire rouler de gauche a droite de l'ecran
-	if self.x > Reso.Width then
-		self.x = 50
+function	ent:pivoter(dt)
+   self.angle = math.atan2(self.x - Tank.Position.x, Tank.Position.y - self.y) + math.pi / 2
+end
+
+function	ent:avancer(dt)
+   self.x = self.x + math.cos(self.angle) * self.vitesse * dt / 0.002
+   self.y = self.y + math.sin(self.angle) * self.vitesse * dt / 0.002
+end
+
+function	ent:update(dt)
+	distance = ((self.x - Tank.Position.x) ^ 2 + (self.y - Tank.Position.y) ^ 2) ^ 0.5
+	local etime = love.timer.getTime()
+	
+	if distance < 800 and distance > 500 then
+		self:pivoter(dt)
+		self:avancer(dt)
+	else
+		self.angleT = math.atan2(self.x - Tank.Position.x, Tank.Position.y - self.y) + math.pi / 2
+		if etime - self.stime > 1 then
+			ents.Create("MissileE", self.x, self.y, self.angleT)
+			self.stime = love.timer.getTime()
+		end
 	end
-	self.x = self.x + 75 * dt
+	if distance < (self.image:getWidth() / 2 + Tank.BaseImage:getWidth() / 2) * Reso.Scale then
+		Tank.Health = Tank.Health - 50
+		ents.Destroy(self.id)
+	end
 end
 
 function ent:draw()
-	local x, y = self:getPos()
-	local w, h = self:getSize()
-   
-	love.graphics.draw(tankEnnemiePic, x, y)
+	love.graphics.draw(self.image, self.x, self.y, self.angle, Reso.Scale, Reso.Scale, self.image:getWidth() / 2, self.image:getHeight() / 2)
+	love.graphics.draw(self.imageT, self.x, self.y, self.angleT, Reso.Scale, Reso.Scale, self.imageT:getWidth() / 2, self.imageT:getHeight() / 2)
 end
 
 return ent;

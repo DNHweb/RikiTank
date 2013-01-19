@@ -1,7 +1,7 @@
 -- 
--- @file Walker.lua
+-- @file MissileE.lua
 -- This file is a part of RikiTank project, an amazing tank game !
--- Copyright (C) 2012  Riki-Team
+-- Copyright (C) 2012  Riki-Team <rikitank.project@gmail.com>
 -- 
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -22,46 +22,43 @@ local ent = ents.Derive("Base")
 function ent:setPos( x, y )
 	self.x = x
 	self.y = y
+	self.vitesse = 0.90
 end
 
 function ent:load( x, y )
-	self.vitesse = 0.40
 	self:setPos( x, y )
-	self.image = love.graphics.newImage("Images/Walker.png")
+	self.image = love.graphics.newImage("Images/Missile.png")
 end
 
-function ent:Die()
-	local SonExplosion = love.audio.newSource("Sounds/SonExplosion.mp3", "stream")
-	SonExplosion:setVolume(0.75)
-	love.audio.play(SonExplosion)
-	ents.Create("Explosion", self.x, self.y)
-	Tank.Score = Tank.Score + 20
-end
-
-function	ent:pivoter(dt)
-   self.angle = math.atan2(self.x - Tank.Position.x, Tank.Position.y - self.y) + math.pi / 2
-end
-
-function	ent:avancer(dt)
-   self.x = self.x + math.cos(self.angle) * self.vitesse * dt / 0.002
-   self.y = self.y + math.sin(self.angle) * self.vitesse * dt / 0.002
-end
-
-function	ent:update(dt)
-
-	-- IA
-	distance = ((self.x - Tank.Position.x) ^ 2 + (self.y - Tank.Position.y) ^ 2) ^ 0.5
-	-- si collision
-	if distance < (self.image:getWidth() / 2 + Tank.BaseImage:getWidth() / 2) * Reso.Scale then
-		Tank.Health = Tank.Health - 20
+function ent:update(dt)
+	self.x = self.x + math.cos(self.angle) * self.vitesse * dt / 0.002
+	self.y = self.y + math.sin(self.angle) * self.vitesse * dt / 0.002
+	local distance = ((self.x - Tank.Position.x) ^ 2 + (self.y - Tank.Position.y) ^ 2) ^ 0.5
+	
+	if (distance < (self.image:getWidth() / 2 + Tank.BaseImage:getWidth() / 2) * Reso.Scale) then
+		Tank.Health = Tank.Health - 30
+		local SonExplosion = love.audio.newSource("Sounds/SonExplosion.mp3", "stream")
+		SonExplosion:setVolume(0.75)
+		love.audio.play(SonExplosion)
+		ents.Create("Explosion", self.x, self.y)
 		ents.Destroy(self.id)
+	elseif (self.x > Reso.Width) then
+		ents.Destroy( self.id )
+	elseif (self.x < 0) then
+		ents.Destroy( self.id )
+	elseif (self.y < 0) then
+		ents.Destroy( self.id )
+	elseif (self.y > Reso.Height) then
+		ents.Destroy( self.id )
 	end
-	self:pivoter(dt)
-	self:avancer(dt)
 end
 
 function ent:draw()
 	love.graphics.draw(self.image, self.x, self.y, self.angle, Reso.Scale, Reso.Scale, self.image:getWidth() / 2, self.image:getHeight() / 2)
+end
+
+function ent:Die()
+	print("Missile " .. self.id .. " detruit.")
 end
 
 return ent;

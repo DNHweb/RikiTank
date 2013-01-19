@@ -83,6 +83,8 @@ function EtatJeuDraw()
 		if Tank.Health > 0 then
 			local etime = love.timer.getTime()
 			if etime - stime > nbSeconde then
+				local xTE, yTE = getRandomCoord()
+				ents.Create("TankEnnemie", xTE, yTE)
 				local xWalker, yWalker = getRandomCoord()
 				ents.Create("Walker", xWalker, yWalker)
 				stime = love.timer.getTime()

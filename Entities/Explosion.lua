@@ -25,19 +25,19 @@ function ent:setPos( x, y )
 end
 
 function ent:load( x, y )
-	anim = newAnimation(Explosion, 64, 64, 0.1, 0)
-	anim:setMode("once")
+	self.anim = newAnimation(Explosion, 64, 64, 0.1, 0)
+	self.anim:setMode("once")
 end
 
 function	ent:update(dt)
-	anim:update(dt)
-	if anim:getCurrentFrame() == 16 then
+	self.anim:update(dt)
+	if self.anim:getCurrentFrame() == 16 then
 		ents.Destroy(self.id)
 	end
 end
 
 function ent:draw()
-	anim:draw(self.x, self.y)
+	self.anim:draw(self.x, self.y)
 end
 
 return ent;

@@ -31,8 +31,10 @@ local id = 0
 -- on remplie le registre avec nos objets
 function ents.Startup()
 	register["Missile"] = love.filesystem.load(ents.objectpath .. "Missile.lua")
+	register["MissileE"] = love.filesystem.load(ents.objectpath .. "MissileE.lua")
 	register["Walker"] = love.filesystem.load(ents.objectpath .. "Walker.lua")
 	register["Explosion"] = love.filesystem.load(ents.objectpath .. "Explosion.lua")
+	register["TankEnnemie"] = love.filesystem.load(ents.objectpath .. "TankEnnemie.lua")
 end
 
 -- un peu comme une fonction d'heritage
@@ -41,13 +43,17 @@ function ents.Derive(name)
 	return love.filesystem.load(ents.objectpath .. name .. ".lua")()
 end
 
-function ents.Create(name, x, y)
+function ents.Create(name, x, y, angle)
 	if not x then
 		x = -100
 	end
 
 	if not y then
 		y = -100
+	end
+	
+	if not angle then
+		angle = 0
 	end
    
 	-- entite existe
@@ -58,6 +64,7 @@ function ents.Create(name, x, y)
 		local ent = register[name]()
 		ent:load()
 		ent.type = name
+		ent.angle = angle
 		ent:setPos(x, y)
 		ent.id = id
 		ents.objects[id] = ent
@@ -86,7 +93,7 @@ function ents:update(dt)
 			ent:update(dt)
 			if ent.type == "Missile" then
 				for j, obj in pairs(ents.objects) do
-					if obj.type == "Walker" then
+					if obj.type == "Walker" or obj.type == "TankEnnemie" then
 						local distance = ((ent.x - obj.x) ^ 2.5 + (ent.y - obj.y) ^ 2) ^ 0.5
 						if distance < (obj.image:getWidth() / 2 + ent.image:getWidth() / 2) * Reso.Scale then
 							ents.Destroy(obj.id)
