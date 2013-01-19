@@ -71,7 +71,7 @@ function EtatJeuDraw()
 		TankDraw()
 		love.graphics.setFont(countdownFont)
 		love.graphics.draw(Transparent, 0, 0, 0, Reso.Width/2, Reso.Height/2)
-		love.graphics.print(Countdown, Reso.Width/2, Reso.Height/2)
+		love.graphics.printf(Countdown, Reso.Width / 2, Reso.Height / 2, 0, "center")
 		love.graphics.setFont(normalFont)
 	end
 
@@ -95,11 +95,14 @@ function EtatJeuDraw()
 			TankDraw()
 			love.graphics.printf("Vie : " .. Tank.Health .. "\nScore : " .. Tank.Score, 10, 10, 300, "left")
 		else
-			local nameFile = tostring(os.date("%m%d%Y_%H%M%S"))
+			local nameFile = tostring(os.date("%m%d%Y_%H%M"))
 			love.filesystem.write(nameFile, tostring(Tank.Score), all)
 			ents.objects = {}
+			love.graphics.setFont(countdownFont)
 			love.graphics.draw(Transparent, 0, 0, 0, Reso.Width/2, Reso.Height/2)
-			love.graphics.draw(GameOver, Reso.Width/2, Reso.Height/2, 0, 1, 1, GameOver:getWidth()/2, GameOver:getHeight()/2)			
+			love.graphics.draw(GameOver, Reso.Width/2, Reso.Height/1.8, 0, 1, 1, GameOver:getWidth()/2, GameOver:getHeight()/2)
+			love.graphics.printf("Score " .. Tank.Score, Reso.Width / 2, Reso.Height / 30, 0, "center")
+			love.graphics.setFont(normalFont)
 		end
 	end
 	
