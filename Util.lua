@@ -21,10 +21,10 @@ function	getRandomCoord()
 	x = math.random(-500, 500 + Reso.Width)
 	y = 0
 	
-	if x < 0 or x > Reso.Width then
+	if x < -10 or x > Reso.Width + 10 then
 		y = math.random(-500, 500 + Reso.Height)
 	else
-		while y < 0 or y > Reso.Height do
+		while y < -10 or y < Reso.Height + 10 do
 			y = math.random(-500, 500 + Reso.Height)
 		end
 	end

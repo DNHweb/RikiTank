@@ -93,10 +93,20 @@ function ents:update(dt)
 			ent:update(dt)
 			if ent.type == "Missile" then
 				for j, obj in pairs(ents.objects) do
-					if obj.type == "Walker" or obj.type == "TankEnnemie" then
+					if obj.type == "Walker" then
 						local distance = ((ent.x - obj.x) ^ 2.5 + (ent.y - obj.y) ^ 2) ^ 0.5
 						if distance < (obj.image:getWidth() / 2 + ent.image:getWidth() / 2) * Reso.Scale then
 							ents.Destroy(obj.id)
+							ents.Destroy(ent.id)
+							break
+						end
+					elseif obj.type == "TankEnnemie" then
+						local distance = ((ent.x - obj.x) ^ 2.5 + (ent.y - obj.y) ^ 2) ^ 0.5
+						if distance < (obj.image:getWidth() / 2 + ent.image:getWidth() / 2) * Reso.Scale then
+							obj.health = obj.health - Tank.Dammage
+							if obj.health < 0 then
+								ents.Destroy(obj.id)
+							end
 							ents.Destroy(ent.id)
 							break
 						end
