@@ -101,4 +101,5 @@ function GroundLoad()
 	Ground1 = love.graphics.newImage("Images/Ground.jpg")
 	Mur1 = love.graphics.newImage("Images/Murs/Horizontal.png")
 	Explosion = love.graphics.newImage("Images/explosion.png")
+	ExplosionBomb = love.graphics.newImage("Images/explosionBomb.png")
 end

@@ -34,7 +34,9 @@ function ents.Startup()
 	register["MissileE"] = love.filesystem.load(ents.objectpath .. "MissileE.lua")
 	register["Walker"] = love.filesystem.load(ents.objectpath .. "Walker.lua")
 	register["Explosion"] = love.filesystem.load(ents.objectpath .. "Explosion.lua")
+	register["ExplosionBomb"] = love.filesystem.load(ents.objectpath .. "ExplosionBomb.lua")
 	register["TankEnnemie"] = love.filesystem.load(ents.objectpath .. "TankEnnemie.lua")
+	register["Bomb"] = love.filesystem.load(ents.objectpath .. "Bomb.lua")
 end
 
 -- un peu comme une fonction d'heritage
@@ -104,6 +106,10 @@ function ents:update(dt)
 						local distance = ((ent.x - obj.x) ^ 2.5 + (ent.y - obj.y) ^ 2) ^ 0.5
 						if distance < (obj.image:getWidth() / 2 + ent.image:getWidth() / 2) * Reso.Scale then
 							obj.health = obj.health - Tank.Dammage
+							local impact = love.audio.newSource("Sounds/impact.mp3", "stream")
+							impact:setVolume(0.75)
+							love.audio.play(impact)
+							ents.Create("Explosion", obj.x, obj.y)
 							if obj.health < 0 then
 								ents.Destroy(obj.id)
 							end

@@ -20,10 +20,12 @@
 require "Initialisation"
 require "Util"
 require "Entities"
+require "ATH"
 
 EtatJeu = "Menu"
 startTime = love.timer.getTime()
 stime = love.timer.getTime()
+bombTime = love.timer.getTime()
 nbSeconde = 5
 
 local function drawButton(off, on, x, y, w, h, mx, my)
@@ -82,6 +84,7 @@ function EtatJeuDraw()
 		ents:draw()
 		if Tank.Health > 0 then
 			local etime = love.timer.getTime()
+			local bombCheck = love.timer.getTime()
 			if etime - stime > nbSeconde then
 				local xTE, yTE = getRandomCoord()
 				ents.Create("TankEnnemie", xTE, yTE)
@@ -92,8 +95,13 @@ function EtatJeuDraw()
 			if etime - startTime > 180 then
 				nbSeconde = 3
 			end
+			--[[if bombCheck - bombTime >= 23 then
+				bombTime = love.timer.getTime()
+				ents.Create("Bomb", 400, 400)
+			end]]
 			TankDraw()
-			love.graphics.printf("Vie : " .. Tank.Health .. "\nScore : " .. Tank.Score, 10, 10, 300, "left")
+			ATH_Life()
+			-- love.graphics.printf("Vie : " .. Tank.Health .. "\nScore : " .. Tank.Score, 10, 10, 300, "left")
 		else
 			local nameFile = tostring(os.date("%m%d%Y_%H%M"))
 			love.filesystem.write(nameFile, tostring(Tank.Score), all)
