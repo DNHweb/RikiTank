@@ -103,8 +103,6 @@ function EtatJeuDraw()
 			ATH_Life()
 			-- love.graphics.printf("Vie : " .. Tank.Health .. "\nScore : " .. Tank.Score, 10, 10, 300, "left")
 		else
-			local nameFile = tostring(os.date("%m%d%Y_%H%M"))
-			love.filesystem.write(nameFile, tostring(Tank.Score), all)
 			ents.objects = {}
 			love.graphics.setFont(countdownFont)
 			love.graphics.draw(Transparent, 0, 0, 0, Reso.Width/2, Reso.Height/2)
