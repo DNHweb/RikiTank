@@ -87,10 +87,14 @@ function SoundMenu()
 	musicMenu = love.audio.newSource("Sounds/Confusus.mp3", "static")
 	musicMenu:setVolume(0.25)
 	musicMenu:rewind()
+	
 	SonMenu1 = love.audio.newSource("Sounds/SonMenu1.mp3")
 	SonMenu1:setVolume(0.75)
 	SonMenu2 = love.audio.newSource("Sounds/SonMenu2.mp3")
 	SonMenu2:setVolume(0.75)
+	
+	SonExplosion = love.audio.newSource("Sounds/SonExplosion.mp3", "stream")
+	SonExplosion:setVolume(0.75)
 end
 
 --[[ ------------------------------------
@@ -100,6 +104,13 @@ end
 function GroundLoad()
 	Ground1 = love.graphics.newImage("Images/Ground.jpg")
 	Mur1 = love.graphics.newImage("Images/Murs/Horizontal.png")
+	
+	picWalker = love.graphics.newImage("Images/Walker.png")
+	picTankEB = love.graphics.newImage("Images/BaseTank4.png")
+	picTankET = love.graphics.newImage("Images/TourelleTank4.png")
+	picMedikit = love.graphics.newImage("Images/medikit.png")
+	picMissile = love.graphics.newImage("Images/Missile.png")
+	
 	Explosion = love.graphics.newImage("Images/explosion.png")
 	ExplosionBomb = love.graphics.newImage("Images/explosionBomb.png")
 end

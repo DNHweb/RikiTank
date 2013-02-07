@@ -27,12 +27,12 @@ end
 function ent:load( x, y )
 	self.vitesse = 0.40
 	self:setPos( x, y )
-	self.image = love.graphics.newImage("Images/Walker.png")
+	self.image = picWalker
 end
 
 function ent:Die()
-	local SonExplosion = love.audio.newSource("Sounds/SonExplosion.mp3", "stream")
-	SonExplosion:setVolume(0.75)
+	--local SonExplosion = love.audio.newSource("Sounds/SonExplosion.mp3", "stream")
+	--SonExplosion:setVolume(0.75)
 	love.audio.play(SonExplosion)
 	ents.Create("Explosion", self.x, self.y)
 	Tank.Score = Tank.Score + 20

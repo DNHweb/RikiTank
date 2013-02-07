@@ -27,7 +27,7 @@ end
 
 function ent:load( x, y )
 	self:setPos( x, y )
-	self.image = love.graphics.newImage("Images/Missile.png")
+	self.image = picMissile
 end
 
 function ent:update(dt)
@@ -37,8 +37,8 @@ function ent:update(dt)
 	
 	if (distance < (self.image:getWidth() / 2 + Tank.BaseImage:getWidth() / 2) * Reso.Scale) then
 		Tank.Health = Tank.Health - 30
-		local SonExplosion = love.audio.newSource("Sounds/SonExplosion.mp3", "stream")
-		SonExplosion:setVolume(0.75)
+		--local SonExplosion = love.audio.newSource("Sounds/SonExplosion.mp3", "stream")
+		--SonExplosion:setVolume(0.75)
 		love.audio.play(SonExplosion)
 		ents.Create("Explosion", self.x, self.y)
 		ents.Destroy(self.id)

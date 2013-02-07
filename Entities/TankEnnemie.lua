@@ -26,18 +26,22 @@ end
 
 function ent:load( x, y )
 	self:setPos( x, y )
-	self.image = love.graphics.newImage("Images/BaseTank4.png")
-	self.imageT = love.graphics.newImage("Images/TourelleTank4.png")
+	self.image = picTankEB
+	self.imageT = picTankET
 	self.angleT = self.angle
 	self.stime = love.timer.getTime()
 end
 
 function ent:Die()
-	local SonExplosion = love.audio.newSource("Sounds/SonExplosion.mp3", "stream")
-	SonExplosion:setVolume(0.75)
+	-- local SonExplosion = love.audio.newSource("Sounds/SonExplosion.mp3", "stream")
+	-- SonExplosion:setVolume(0.75)
 	love.audio.play(SonExplosion)
 	ents.Create("Explosion", self.x, self.y)
 	Tank.Score = Tank.Score + 50
+	-- Pop des medikits
+	if (math.random(10) <= 2) then
+		ents.Create("Medikit", self.x, self.y)
+	end
 end
 
 function	ent:pivoter(dt)

@@ -18,9 +18,12 @@
 -- 
 
 function		ATH_Life()
+	-- Point de vie
 	love.graphics.print("VIE : ", 10, 15)
-	-- love.graphics.setColor(255, 0, 0)	
-	love.graphics.rectangle("fill", 60, 10, Tank.Health * Reso.Width / Reso.Height, 30 )
-	-- love.graphics.setColor(255, 255, 255)
+	love.graphics.setColor(255, 0, 0, 100)	
+	love.graphics.rectangle("fill", 60, 10, Tank.Health * Reso.Width / Reso.Height, 30)
+	love.graphics.setColor(255, 255, 255)
+	
+	-- Score
 	love.graphics.print("Score : " .. Tank.Score, 10, 50)
 end

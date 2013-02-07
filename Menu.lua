@@ -21,6 +21,7 @@ require "Initialisation"
 require "Util"
 require "Entities"
 require "ATH"
+require "EnJeu"
 
 EtatJeu = "Menu"
 startTime = love.timer.getTime()
@@ -78,38 +79,7 @@ function EtatJeuDraw()
 	end
 
 	if EtatJeu == "EnJeu" then
-		love.audio.stop(musicMenu)
-		love.mouse.setVisible(false)
-		GroundDraw()						-- on affiche le sol du jeu
-		ents:draw()
-		if Tank.Health > 0 then
-			local etime = love.timer.getTime()
-			local bombCheck = love.timer.getTime()
-			if etime - stime > nbSeconde then
-				local xTE, yTE = getRandomCoord()
-				ents.Create("TankEnnemie", xTE, yTE)
-				local xWalker, yWalker = getRandomCoord()
-				ents.Create("Walker", xWalker, yWalker)
-				stime = love.timer.getTime()
-			end
-			if etime - startTime > 180 then
-				nbSeconde = 3
-			end
-			--[[if bombCheck - bombTime >= 23 then
-				bombTime = love.timer.getTime()
-				ents.Create("Bomb", 400, 400)
-			end]]
-			TankDraw()
-			ATH_Life()
-			-- love.graphics.printf("Vie : " .. Tank.Health .. "\nScore : " .. Tank.Score, 10, 10, 300, "left")
-		else
-			ents.objects = {}
-			love.graphics.setFont(countdownFont)
-			love.graphics.draw(Transparent, 0, 0, 0, Reso.Width/2, Reso.Height/2)
-			love.graphics.draw(GameOver, Reso.Width/2, Reso.Height/1.8, 0, 1, 1, GameOver:getWidth()/2, GameOver:getHeight()/2)
-			love.graphics.printf("Score " .. Tank.Score, Reso.Width / 2, Reso.Height / 30, 0, "center")
-			love.graphics.setFont(normalFont)
-		end
+		EnJeu()
 	end
 	
     if love.mouse.isDown("l") then
