@@ -17,6 +17,11 @@
 -- along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -- 
 
+--- Creation de coordonnees aleatoires.
+-- Afin de faire apparaitre les ennemis a differents endroits pour un jeu un peu plus intense,
+-- cette fonction retourne des coordonnes en dehors de l'ecran.
+-- @return Coordonnee aleatoire en x.
+-- @return Coordonnee aleatoire en y.
 function	getRandomCoord()
 	x = math.random(-500, 500 + Reso.Width)
 	y = 0

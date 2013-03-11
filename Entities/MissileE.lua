@@ -19,17 +19,29 @@
 
 local ent = ents.Derive("Base")
 
+--- Fixer une position.
+-- @param x Position en x.
+-- @param y Position en y.
 function ent:setPos( x, y )
 	self.x = x
 	self.y = y
 	self.vitesse = 0.90
 end
 
+--- Charge les parametres en memoire.
+-- @param x Position en x.
+-- @param y Position en y.
 function ent:load( x, y )
 	self:setPos( x, y )
 	self.image = picMissile
 end
 
+--- Mise-a-jour de l'entite.
+-- Verification de la distance entre le missile et le tank.
+-- Si la distance est inferieur a un certain nombre alors il y a collision
+-- et joue un son, creer une explosion et detruit le missile.
+-- Sinon si le missile sort de l'ecran alors on le detruit.
+-- @param dt Delta Temps
 function ent:update(dt)
 	self.x = self.x + math.cos(self.angle) * self.vitesse * dt / 0.002
 	self.y = self.y + math.sin(self.angle) * self.vitesse * dt / 0.002
@@ -53,10 +65,12 @@ function ent:update(dt)
 	end
 end
 
+--- Affiche l'entite.
 function ent:draw()
 	love.graphics.draw(self.image, self.x, self.y, self.angle, Reso.Scale, Reso.Scale, self.image:getWidth() / 2, self.image:getHeight() / 2)
 end
 
+--- Code a executer avant la destruction de l'entite.
 function ent:Die()
 	print("Missile " .. self.id .. " detruit.")
 end

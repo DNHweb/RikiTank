@@ -17,15 +17,7 @@
 -- along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -- 
 
-function Collision(xa, ya, xb, yb)
-	x = Tank.Position.x
-	y = Tank.Position.y
-	if (x > xa) and (x < xb) and (y > ya) and (y < yb) then
-		Tank.Position.x = Tank.OldPosition.x
-		Tank.Position.y = Tank.OldPosition.y
-	end
-end
-
+--- Empeche la sortie d'ecran du tank.
 function SortieEcran()
 	if Tank.Position.x - (Reso.Scale * Tank.BaseImage:getHeight())/2 < 0 then
 		Tank.Position.x = (Reso.Scale * Tank.BaseImage:getHeight())/2

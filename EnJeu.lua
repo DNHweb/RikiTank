@@ -22,6 +22,11 @@ stime = love.timer.getTime()
 bombTime = love.timer.getTime()
 nbSeconde = 5
 
+--- Le jeu se deroule ici.
+-- C'est la boucle qui fait tourner la partie,
+-- utilisation de variable de temps pour l'apparition des ennemis a certain intervalle de temps.
+-- On cree les ennemis ici, on dessine l'ATH et le tank.
+-- Si la partie est termine, le contenu du tableau d'objets est efface, on lance le game over.
 function		EnJeu()
 	love.audio.stop(musicMenu)
 	love.mouse.setVisible(false)
@@ -56,6 +61,7 @@ function		EnJeu()
 	end
 end
 
+--- Affichage du game over.
 function		FinPartie()
 	love.graphics.setFont(countdownFont)
 	love.graphics.draw(Transparent, 0, 0, 0, Reso.Width/2, Reso.Height/2)

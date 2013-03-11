@@ -28,7 +28,9 @@ ents.objectpath = "Entities/"	-- ou sont les objects
 local register = {}
 local id = 0
 
--- on remplie le registre avec nos objets
+--- Demarrage des entites.
+-- Une sorte de catalogue qui dit quels objets on peut creer
+-- et les charge en memoire.
 function ents.Startup()
 	register["Missile"] = love.filesystem.load(ents.objectpath .. "Missile.lua")
 	register["MissileE"] = love.filesystem.load(ents.objectpath .. "MissileE.lua")
@@ -40,12 +42,19 @@ function ents.Startup()
 	register["Medikit"] = love.filesystem.load(ents.objectpath .. "Medikit.lua")
 end
 
--- un peu comme une fonction d'heritage
--- quand on va creer un objet, ca decoulera de ca
+--- Une fonction d'heritage.
+-- Quand on va creer un objet, l'objet sera cree en fonction de son modele charge en memoire.
+-- Cf : ents.Startup et son register.
 function ents.Derive(name)
 	return love.filesystem.load(ents.objectpath .. name .. ".lua")()
 end
 
+--- Creation d'une nouvelle entite
+-- Si on a pas specifie de coordonnes et/ou d'angle on en attribut par defaut.
+-- Si le nom de l'objet existe dans le registre alors on lui affecte different attribut
+-- (id, type, angle, coordonnees) puis on le stock dans le tableau d'objets a la case correspondant a son id.
+-- @return L'objet cree -> si l'entite existe dans le registre.
+-- @return False -> si l'entite n'existe pas de le registre.
 function ents.Create(name, x, y, angle)
 	if not x then
 		x = -100
@@ -58,11 +67,8 @@ function ents.Create(name, x, y, angle)
 	if not angle then
 		angle = 0
 	end
-   
-	-- entite existe
+  
 	if register[name] then
-		-- a chaque fois que l'on cree une entite
-		-- on veut lui donner un nouvel id
 		id = id + 1
 		local ent = register[name]()
 		ent:load()
@@ -78,7 +84,11 @@ function ents.Create(name, x, y, angle)
 	end
 end
 
--- Quand on veut enlever un object du tableau d'objet
+--- Destruction d'un objet.
+-- Quand on veut enlever un object du tableau d'objet :
+-- si il existe un objet dans le tableau d'objet correspondant a l'id donne alors on met cette case du tableau a nil ( = null ).
+-- Si l'objet que l'on veut effacer possede une fonction Die() alors on execute cette fonction avec de detruire l'objet.
+-- @param id L'id de l'objet a effacer.
 function ents.Destroy( id )
 	if ents.objects[id] then
 		if ents.objects[id].Die then
@@ -88,8 +98,10 @@ function ents.Destroy( id )
 	end
 end
 
--- a chaque fois que cette fonction est appelee
--- elle met a jour les objets du tableau
+--- Mise-a-jour des entites.
+-- Parcours le tableau d'entites et les met a jour.
+-- On gere les collisions entre entites, par exemple : entre les missiles et les walkers.
+-- @param dt Delta Temps.
 function ents:update(dt)
 	for i, ent in pairs(ents.objects) do
 		if ent.update then
@@ -124,6 +136,8 @@ function ents:update(dt)
 	end
 end
 
+--- Affichage des entites.
+-- Parcours le tableau d'entites et les affiche.
 function ents:draw()
 	for i, ent in pairs(ents.objects) do
 		if ent.draw then

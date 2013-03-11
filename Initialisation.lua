@@ -21,6 +21,9 @@
 -- | Initialisation de la resolution
 ]]-- -------------------------------
 
+--- Mise au point de l'ecran
+-- Cette fonction va rechercher les differentes resolutions disponible,
+-- les classer dans un tableau, puis choisira la plus grande resoltion pour le jeu.
 function resolution()
 	--> Met l'écran dans la résolution optimale <--
 	modes = love.graphics.getModes()
@@ -42,6 +45,9 @@ end
 -- | Initialisation du menu
 ]]-- ----------------------
 
+
+--- Creation du menu.
+-- Charge les boutons et affiche le menu a l'ecran.
 function ChoixTankLoad()
 	JouerOn = love.graphics.newImage("Images/Menu/JouerOn.png")
 	JouerOff = love.graphics.newImage("Images/Menu/JouerOff.png")
@@ -83,6 +89,8 @@ end
 -- | Initialisation des sons
 ]]-- -----------------------
 
+--- Chargement des sons.
+-- Charge les sons dans la memoire puis applique des modifications (volume, repeat, ...).
 function SoundMenu()
 	musicMenu = love.audio.newSource("Sounds/Confusus.mp3", "static")
 	musicMenu:setVolume(0.25)
@@ -101,6 +109,8 @@ end
 -- | Initialisation des elements du decor
 ]]-- ------------------------------------
 
+--- Chargement du decor
+-- Charge en memoire les images composant le decor.
 function GroundLoad()
 	Ground1 = love.graphics.newImage("Images/Ground.jpg")
 	Mur1 = love.graphics.newImage("Images/Murs/Horizontal.png")

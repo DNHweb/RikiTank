@@ -17,10 +17,7 @@
 -- along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -- 
 
---
--- Ici on dessine le terrain
---
-
+--- Affichage du terrain.
 function GroundDraw()
 	width = love.graphics.getWidth( ) / 128
 	height = love.graphics.getHeight( ) / 128

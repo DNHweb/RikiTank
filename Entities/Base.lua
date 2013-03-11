@@ -26,15 +26,23 @@ base.vitesse = 0.30
 base.damage = 0
 base.cadenceTir = 0
 
+--- Fixer une position.
+-- @param x Position en x.
+-- @param y Position en y.
 function base:setPos(x, y)
 	base.x = x
 	base.y = y
 end
 
+--- Retourne la position.
+-- @return La position en x.
+-- @return La position en y.
 function base:getPos()
 	return base.x, base.y
 end
 
+--- Fixe la vitesse.
+-- @param v Vitesse.
 function base:setVitesse(v)
 	base.vitesse = v
 end

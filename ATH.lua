@@ -17,13 +17,24 @@
 -- along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -- 
 
+--- Gestion de l' ATH
+-- Un ATH est une interface qui permet au joueur d'avoir des informations sur sa partie (vie, munitions par exemple).
+-- Ici : barre de vie, score, radar.
 function		ATH_Life()
 	-- Point de vie
 	love.graphics.print("VIE : ", 10, 15)
 	love.graphics.setColor(255, 0, 0, 100)	
 	love.graphics.rectangle("fill", 60, 10, Tank.Health * Reso.Width / Reso.Height, 30)
-	love.graphics.setColor(255, 255, 255)
+	love.graphics.reset()
 	
 	-- Score
 	love.graphics.print("Score : " .. Tank.Score, 10, 50)
+	
+	-- Radar
+	local xRadar = Reso.Width / 6
+	local yRadar = Reso.Height / 6
+	love.graphics.setColor(0, 255, 0, 100)
+	love.graphics.rectangle("fill", Reso.Width - xRadar, 0, xRadar, yRadar)
+	love.graphics.reset()
+	love.graphics.circle("fill", Reso.Width - xRadar / 2, yRadar / 2, 5, 5)
 end

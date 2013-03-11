@@ -19,16 +19,27 @@
 
 local ent = ents.Derive("Base")
 
+--- Fixer une position.
+-- @param x Position en x.
+-- @param y Position en y.
 function ent:setPos( x, y )
 	self.x = x
 	self.y = y
 end
 
+--- Charge les parametres en memoire.
+-- @param x Position en x.
+-- @param y Position en y.
 function ent:load( x, y )
 	self.anim = newAnimation(Explosion, 64, 64, 0.1, 0)
 	self.anim:setMode("once")
 end
 
+--- Mise-a-jour de l'entite.
+-- Joue l'animation de l'explosion.
+-- Si la frame courante est egale a 16 secondes ( la derniere frame )
+-- alors on efface l'explosion.
+-- @param dt Delta Temps
 function	ent:update(dt)
 	self.anim:update(dt)
 	if self.anim:getCurrentFrame() == 16 then
@@ -36,6 +47,7 @@ function	ent:update(dt)
 	end
 end
 
+--- Affiche l'entite.
 function ent:draw()
 	self.anim:draw(self.x, self.y)
 end

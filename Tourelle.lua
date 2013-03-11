@@ -19,10 +19,18 @@
 
 love.mouse.setVisible(false)
 
+--- Charge le viseur que la tourelle suivra.
 function TourelleLoad()
 	viseur = love.graphics.newImage("Images/viseur2.png")
 end
 
+--- Affichage du tank et tourelle.
+-- On dessine successivement la base du tank puis la tourelle par dessus.
+-- @param Image Base du tank.
+-- @param x Position en x du tank.
+-- @param y Position en y du tank.
+-- @param Angle Angle de la base du tank.
+-- @param Width Longeur de la tourelle.
 function TourelleDraw(Image, x, y, Angle, Width)
 	local Width2 = Image:getWidth()/2 - width
 	local Height = Image:getHeight()/2
@@ -32,6 +40,13 @@ function TourelleDraw(Image, x, y, Angle, Width)
 	love.graphics.draw(viseur , love.mouse.getX(), love.mouse.getY(), 0, Reso.Scale, Reso.Scale, largeur, hauteur)
 end
 
+--- Mise-a-jour de l'angle de la tourelle.
+-- En fonction de la position de la souris, la rotation de la tourelle est modifie.
+-- @param x Position en x du tank.
+-- @param y Position en y du tank.
+-- @param Angle Angle de la tourelle.
+-- @param dt Delta Temps.
+-- @return Retourne le nouvel angle de la tourelle.
 function TourelleUpdate(x, y, Angle,dt)
 	Angle = math.atan2(love.mouse.getX() - x, y - love.mouse.getY())-math.pi/2
 	return Angle

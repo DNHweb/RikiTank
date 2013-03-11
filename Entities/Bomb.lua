@@ -19,21 +19,32 @@
 
 local ent = ents.Derive("Base")
 
+--- Fixer une position.
+-- @param x Position en x.
+-- @param y Position en y.
 function ent:setPos( x, y )
 	self.x = x
 	self.y = y
 end
 
+--- Charge les parametres en memoire.
+-- @param x Position en x.
+-- @param y Position en y.
 function ent:load( x, y )
 	self:setPos( x, y )
 	self.size = math.random(50, Reso.Width / 6)
 	self.creationTime = love.timer.getTime()
 end
 
+--- Code a executer avant la destruction de l'entite.
 function ent:Die()
 	ents.Create("ExplosionBomb", self.x - self.size / 2, self.y - self.size / 2)
 end
 
+--- Mise-a-jour de l'entite.
+-- Si le temps d'apparition de la bombe est superieur a 4 secondes
+-- alors on la detruit.
+-- @param dt Delta Temps
 function ent:update(dt)
 	local newTime = love.timer.getTime()
 	if (newTime - self.creationTime >= 4) then
@@ -41,6 +52,7 @@ function ent:update(dt)
 	end
 end
 
+--- Affiche l'entite.
 function ent:draw()
 	local newTime = love.timer.getTime()
 	if (newTime - self.creationTime >= 1 and newTime - self.creationTime < 2) then

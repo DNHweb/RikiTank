@@ -1,7 +1,7 @@
--- 
+--
 -- @file main.lua
 -- This file is a part of RikiTank project, an amazing tank game !
--- Copyright (C) 2012  Riki-Team
+-- Copyright (C) 2012 Riki-Team
 -- 
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -28,12 +28,14 @@ require "AnAL"
 -- | Declaration des structures et variables
 ]]-- ---------------------------------------
 
+--- @field 
 Reso = {
 	Width,
 	Height,
 	Scale
 }
 
+--- @field
 Tank = {
 	Choix = 1,
 	Position = {x = 1024, y = 768},
@@ -56,6 +58,11 @@ CountdownTimer = 0
 -- | Fonctions principales
 ]]-- ---------------------
 
+
+--- Fonction de chargement.
+-- Cette fonction est appelée une seule fois, lorsque le jeu est lancé, 
+-- et est généralement celle où vous chargez des ressources,
+-- initialisez des variables et des paramètres spécifiques ce qui économise beaucoup de ressources système.
 function love.load()
    resolution()
    ents.Startup()
@@ -67,10 +74,17 @@ function love.load()
    TankLoad()
 end
 
+--- Fonction de dessin.
+-- C’est l'endroit pour tout ce qui concerne l'affichage et si vous appelez l'un des love.graphics.draw
+-- en dehors de cette fonction elle n'aura pas d'effet. Cette fonction est aussi appelée en permanence.
 function love.draw()
 	EtatJeuDraw()
 end
 
+--- Fonction de mise-a-jour.
+-- Cette fonction est appelée en permanence c’est l'endroit où la plupart des calculs sont fait.
+-- 'dt' signifie "delta temps", c'est le nombre de secondes depuis la dernière fois que cette fonction a été appelée.
+-- @param dt Nombre de seconde depuis le dernier appel a cette fonction.
 function love.update(dt)
 	if EtatJeu == "Countdown" then
 		if EtatJeu == "Countdown" then

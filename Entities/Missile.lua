@@ -19,6 +19,9 @@
 
 local ent = ents.Derive("Base")
 
+--- Fixer une position.
+-- @param x Position en x.
+-- @param y Position en y.
 function ent:setPos( x, y )
 	self.x = x
 	self.y = y
@@ -26,11 +29,16 @@ function ent:setPos( x, y )
 	self.vitesse = 0.90
 end
 
+--- Charge les parametres en memoire.
+-- @param x Position en x.
+-- @param y Position en y.
 function ent:load( x, y )
 	self:setPos( x, y )
 	self.image = picMissile
 end
 
+--- Mise-a-jour de l'entite.
+-- @param dt Delta Temps
 function ent:update(dt)
 	if self.id == 1 then
 		ents.Destroy( self.id )
@@ -49,10 +57,12 @@ function ent:update(dt)
 	end
 end
 
+--- Affiche l'entite.
 function ent:draw()
 	love.graphics.draw(self.image, self.x, self.y, self.ang, Reso.Scale, Reso.Scale, self.image:getWidth() / 2, self.image:getHeight() / 2)
 end
 
+--- Code a executer avant la destruction de l'entite.
 function ent:Die()
 	print("Missile " .. self.id .. " detruit.")
 end

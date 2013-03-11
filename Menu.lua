@@ -29,7 +29,16 @@ stime = love.timer.getTime()
 bombTime = love.timer.getTime()
 nbSeconde = 5
 
-local function drawButton(off, on, x, y, w, h, mx, my)
+--- Affiche un bouton.
+-- Si la souris est sur le bouton, un contour orange sera autour du bouton,
+-- sinon un contour noir.
+-- @param off Image du bouton avec le contour noir.
+-- @param on Image du bouton avec le contour orange.
+-- @param x Position x du bouton.
+-- @param y Position y du bouton.
+-- @param w Longeur du bouton.
+-- @param h Largeur du bouton.
+local function drawButton(off, on, x, y, w, h)
 	love.graphics.setBackgroundColor( 190, 190, 190, 255 )
 	local px = love.mouse.getX()
 	local py = love.mouse.getY()
@@ -40,7 +49,9 @@ local function drawButton(off, on, x, y, w, h, mx, my)
 	end
 end
 
-
+--- Gere les differents etat de jeu.
+-- Etat de jeu : choix, pause, countdown, en jeu.
+-- Dans cette fonction on a la gestion des menus et la gestion d'une partie.
 function EtatJeuDraw()
 	local x = love.mouse.getX( )
 	local y = love.mouse.getY( )
@@ -93,6 +104,12 @@ function EtatJeuDraw()
     end
 end
 
+--- Verifie le clique souris.
+-- Differente reaction en fonction de ou le joueur a clique;
+-- par exemple, dans un menu, si le joueur clique sur "Jouer", alors on lance le jeu.
+-- @param x Position x de la souris.
+-- @param y Position y de la souris.
+-- @param button Le bouton presse sur la souris.
 function love.mousepressed(x, y, button )
 	if button == "l" then
 		if EtatJeu == "Menu" then
@@ -150,6 +167,10 @@ function love.mousepressed(x, y, button )
 	end
 end
 
+--- Verifie les touches tape au clavier.
+-- Si on clique sur Echappe pendant une partie, le jeu se met en pause.
+-- Si on clique sur Echappe dans le menu pause, le jeu reprend.
+-- @param key La touche tape sur le clavier.
 function love.keypressed(key)
 	if key == "escape" and EtatJeu=="EnJeu" then
 		EtatJeu = "Pause"
@@ -158,6 +179,7 @@ function love.keypressed(key)
 	end
 end
 
+--- Charge le tank 1.
 function ChargerTank1()
 	Tank.BaseImage = love.graphics.newImage("Images/BaseTank1.png")
 	Tank.TourelleImage = love.graphics.newImage("Images/TourelleTank1.png")
@@ -172,6 +194,7 @@ function ChargerTank1()
 	Tank.Score = 0
 end
 
+--- Charge le tank 1.
 function ChargerTank2()
 	Tank.BaseImage = love.graphics.newImage("Images/BaseTank2.png")
 	Tank.TourelleImage = love.graphics.newImage("Images/TourelleTank2.png")
@@ -186,6 +209,7 @@ function ChargerTank2()
 	Tank.Score = 0
 end
 
+--- Charge le tank 1.
 function ChargerTank3()
 	Tank.BaseImage = love.graphics.newImage("Images/BaseTank3.png")
 	Tank.TourelleImage = love.graphics.newImage("Images/TourelleTank3.png")

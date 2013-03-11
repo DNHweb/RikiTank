@@ -17,7 +17,15 @@
 -- along with this program.  If not, see <http://www.gnu.org/licenses/>.
 --
 
---> marche avant <--
+--- Fait avancer le tank.
+-- Si on appuie sur w, z, ou fleche haut alors le tank avance.
+-- @param x Position x du tank.
+-- @param y Position y du tank.
+-- @param Angle Angle du tank.
+-- @param Vitesse Vitesse du tank.
+-- @param dt Delta Temps.
+-- @return La nouvelle coordonnee en x.
+-- @return La nouvelle coordonnee en y.
 function Avancer(x, y, Angle, Vitesse, dt)
 	if (love.keyboard.isDown("w") or love.keyboard.isDown("up") or love.keyboard.isDown("z")) then
 		Tank.OldPosition.x = x
@@ -30,7 +38,15 @@ function Avancer(x, y, Angle, Vitesse, dt)
 	return x, y
 end
 
---> marche arrière <--
+--- Fait reculer le tank.
+-- Si on appuie sur s ou fleche bas alors le tank recule.
+-- @param x Position x du tank.
+-- @param y Position y du tank.
+-- @param Angle Angle du tank.
+-- @param Vitesse Vitesse du tank.
+-- @param dt Delta Temps.
+-- @return La nouvelle coordonnee en x.
+-- @return La nouvelle coordonnee en y.
 function Reculer(x, y, Angle, Vitesse, dt)
 	if (love.keyboard.isDown("s") or love.keyboard.isDown("down")) then
 		Tank.OldPosition.x = x
@@ -43,7 +59,11 @@ function Reculer(x, y, Angle, Vitesse, dt)
 	return x, y
 end
 
---> Pivoter le tank <--
+--- Pivoter le tank.
+-- En fonction des touches sur lesquelles le joueur appuie, le tank avance ou recule et pivote en meme temps.
+-- @param Angle Angle du tank.
+-- @param dt Delta Temps
+-- @return Le nouvel angle du tank.
 function Pivoter(Angle, dt)
 	local Angle2 = Angle
 	--> Tourner en avançant <--
@@ -76,21 +96,35 @@ function Pivoter(Angle, dt)
 	return Angle2
 end
 
---> tourner à droite <--
+--- Tourner a droite.
+-- @param Angle Angle du tank.
+-- @param dt Delta Temps.
+-- @return Le nouvel angle du tank.
 function TourneDroite(Angle, dt)
 	Angle = Angle + dt * math.pi / 2	-- Calcule de
 	Angle = Angle % (2 * math.pi)		-- l'angle
 	return Angle
 end
 
---> tourner à gauche <--
+--- Tourner a gauche.
+-- @param Angle Angle du tank.
+-- @param dt Delta Temps.
+-- @return Le nouvel angle du tank.
 function TourneGauche(Angle, dt)
 	Angle = Angle - dt * math.pi / 2
 	Angle = Angle % (2 * math.pi)
 	return Angle
 end
 
---> MAJ des carac de l'image en fonction des actions de l'utilisateur <--
+--- Mise-a-jour du tank.
+-- @param x Position x du tank.
+-- @param y Position y du tank.
+-- @param Angle Angle du tank.
+-- @param Vitesse Vitesse du tank.
+-- @param dt Delta Temps.
+-- @return La nouvelle coordonnee en x.
+-- @return La nouvelle coordonnee en y.
+-- @return Le nouvel angle du tank.
 function BaseTankUpdate(x, y, Angle, Vitesse, dt)
 	Angle = Pivoter(Angle, dt)
 	x, y = Avancer(x, y, Angle, Vitesse, dt)
@@ -98,7 +132,11 @@ function BaseTankUpdate(x, y, Angle, Vitesse, dt)
 	return x, y, Angle
 end
 
---> Dessiner le tank en fonction de son angle et de sa position et de son centre de rotation <--
+--- Affichage du tank.
+-- @param Image L'image du tank.
+-- @param x Position en x.
+-- @param y Position en y.
+-- @param Angle L'angle du tank.
 function BaseTankDraw(Image, x, y, Angle)
 	Width = Image:getWidth() / 2
 	Height = Image:getHeight() / 2

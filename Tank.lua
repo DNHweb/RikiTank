@@ -21,15 +21,20 @@ require "BaseTank"
 require "Tourelle"
 require "Collision"
 
+--- Chargement du tank et tourelle.
 function TankLoad()
 	TourelleLoad()
 end
 
+--- Affichage du tank et tourelle.
 function TankDraw()
 	BaseTankDraw(Tank.BaseImage, Tank.Position.x, Tank.Position.y, Tank.Angle.Base)
 	TourelleDraw(Tank.TourelleImage , Tank.Position.x, Tank.Position.y, Tank.Angle.Tourelle, Tank.RotTourelleWidth)
 end
 
+--- Mise-a-jour du tank et tourelle.
+-- On met a jour les coordonnes (x, y), l'angle de la base du tank et de la tourelle.
+-- @param dt Delta Temps.
 function TankUpdate(dt)
 	Tank.Position.x, Tank.Position.y, Tank.Angle.Base = BaseTankUpdate(Tank.Position.x, Tank.Position.y, Tank.Angle.Base, Tank.Vitesse, dt)
 	SortieEcran()

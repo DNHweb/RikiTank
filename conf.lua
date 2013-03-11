@@ -17,11 +17,9 @@
 -- along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -- 
 
---
--- Fichier de configuration
--- il est execute avant que love soit lance
---
-
+--- Fichier de configuration
+-- il est execute avant que love soit lance.
+-- @param t Tableau contenant les parametres de configuration.
 function love.conf(t)
    t.title = "RikiTank"			-- The title of the window the game is in (string)
    t.author = "SexyTeam"		-- The author of the game (string)
