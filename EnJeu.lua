@@ -57,6 +57,9 @@ function		EnJeu()
 		ATH_Life()
 	else
 		ents.objects = {}
+		if Tank.Score > Tank.Old_Score then
+			Tank.Old_Score = Tank.Score
+		end
 		FinPartie()
 	end
 end

@@ -28,14 +28,18 @@ require "AnAL"
 -- | Declaration des structures et variables
 ]]-- ---------------------------------------
 
---- @field 
+--- 
+-- Table contenant les proprietes d'affichage
+-- 
 Reso = {
 	Width,
 	Height,
 	Scale
 }
 
---- @field
+--- 
+-- Table contenant les proprietes du tank
+-- 
 Tank = {
 	Choix = 1,
 	Position = {x = 1024, y = 768},
@@ -47,7 +51,8 @@ Tank = {
 	Dammage = 0,
 	CadenceTir = 0,
 	Tir = love.timer.getTime(),
-	Score = 0
+	Score = 0,
+	Old_Score = 0
 }
 
 Countdown = 3
@@ -63,7 +68,7 @@ CountdownTimer = 0
 -- Cette fonction est appelée une seule fois, lorsque le jeu est lancé, 
 -- et est généralement celle où vous chargez des ressources,
 -- initialisez des variables et des paramètres spécifiques ce qui économise beaucoup de ressources système.
-function love.load()
+function		love.load()
    resolution()
    ents.Startup()
    ChoixTankLoad()
@@ -72,12 +77,23 @@ function love.load()
    normalFont = love.graphics.newFont("Fonts/Pixel.ttf", 18)
    countdownFont = love.graphics.newFont("Fonts/Pixel.ttf", 100)
    TankLoad()
+   if love.filesystem.exists("highscore.lst") then
+   		print("found the highscore file")
+		for line in love.filesystem.lines("highscore.lst") do
+  			Tank.Old_Score = tonumber(line)
+		end
+   	else
+   		print("didn find the highscore file")
+   		file = love.filesystem.newFile("highscore.lst")
+   		file:open('w')
+   	end
+   	print("Ancien Score : " .. Tank.Old_Score)
 end
 
 --- Fonction de dessin.
 -- C’est l'endroit pour tout ce qui concerne l'affichage et si vous appelez l'un des love.graphics.draw
 -- en dehors de cette fonction elle n'aura pas d'effet. Cette fonction est aussi appelée en permanence.
-function love.draw()
+function 		love.draw()
 	EtatJeuDraw()
 end
 
@@ -85,7 +101,7 @@ end
 -- Cette fonction est appelée en permanence c’est l'endroit où la plupart des calculs sont fait.
 -- 'dt' signifie "delta temps", c'est le nombre de secondes depuis la dernière fois que cette fonction a été appelée.
 -- @param dt Nombre de seconde depuis le dernier appel a cette fonction.
-function love.update(dt)
+function 		love.update(dt)
 	if EtatJeu == "Countdown" then
 		if EtatJeu == "Countdown" then
 			CountdownTimer = CountdownTimer + dt
@@ -104,5 +120,15 @@ function love.update(dt)
 	if EtatJeu == "EnJeu" then
 		TankUpdate(dt)
 		ents:update(dt)
+	end
+end
+
+--- La fonction qui est appele avant de quitter le jeu.
+-- On rentre le plus gros score du joueur dans le fichier de score.
+-- 
+function		love.quit()
+	success = love.filesystem.write("highscore.lst", Tank.Old_Score, #tostring(Tank.Old_Score))
+	if success == false then
+		print("Erreur d'ecriture du score")
 	end
 end
