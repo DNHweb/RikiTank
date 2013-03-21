@@ -33,7 +33,7 @@ end
 -- @param y Position en y.
 function ent:load( x, y )
 	self:setPos( x, y )
-	self.image = picMissile
+	self.image = picMissileE
 end
 
 --- Mise-a-jour de l'entite.
