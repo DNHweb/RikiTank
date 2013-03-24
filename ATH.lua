@@ -29,4 +29,6 @@ function		ATH_Life()
 
 	-- Score
 	love.graphics.print("Score : " .. Tank.Score, 10, 50)
+	love.graphics.print("Speed : " .. Tank.Vitesse, 10, 70)
+	love.graphics.print("Damage : " .. Tank.Dammage, 10, 90)
 end
