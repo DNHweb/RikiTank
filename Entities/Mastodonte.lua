@@ -46,9 +46,13 @@ function ent:Die()
 	ents.Create("Explosion", self.x, self.y)
 	Tank.Score = Tank.Score + 500
 <<<<<<< HEAD
+<<<<<<< HEAD
 	Tank.Health = Tank.Health + 100
 =======
 >>>>>>> ca622c8... Ajout d'un nouvel ennemi : Mastodonte
+=======
+	Tank.Health = Tank.Health + 100
+>>>>>>> dc96298... Ajout d'un bonus à la mort du Mastodonte
 	Tank.PopBoss = 0
 end
 
