@@ -93,6 +93,10 @@ function EtatJeuDraw()
 		EnJeu()
 	end
 	
+	if EtatJeu == "Boss" then
+		Boss()
+	end
+	
     if love.mouse.isDown("l") then
 		local dt2 = love.timer.getTime()
 		if ((dt2 - Tank.Tir) > 1 / Tank.CadenceTir) then
@@ -192,6 +196,7 @@ function ChargerTank1()
 	Tank.Position.y = Reso.Height/4 
 	Tank.Angle.Base = 0
 	Tank.Score = 0
+	Tank.PopBoss = 0
 end
 
 --- Charge le tank 2.
@@ -207,6 +212,7 @@ function ChargerTank2()
 	Tank.Position.y = Reso.Height/4 
 	Tank.Angle.Base = 0
 	Tank.Score = 0
+	Tank.PopBoss = 0
 end
 
 --- Charge le tank 3.
@@ -222,4 +228,5 @@ function ChargerTank3()
 	Tank.Position.y = Reso.Height/4 
 	Tank.Angle.Base = 0
 	Tank.Score = 0
+	Tank.PopBoss = 0
 end

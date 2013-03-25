@@ -20,7 +20,8 @@
 startTime = love.timer.getTime()
 stime = love.timer.getTime()
 bombTime = love.timer.getTime()
-nbSeconde = 5
+creerMastodonte = 0
+BossScore = 0
 
 --- Le jeu se deroule ici.
 -- C'est la boucle qui fait tourner la partie,
@@ -30,7 +31,7 @@ nbSeconde = 5
 function		EnJeu()
 	love.audio.stop(musicMenu)
 	love.mouse.setVisible(false)
-	GroundDraw()						-- on affiche le sol du jeu
+	GroundDraw()
 	ents:draw()
 	if Tank.Health > 0 then
 		-- Timer pour l'apparition des ennemis
@@ -45,10 +46,10 @@ function		EnJeu()
 			stime = love.timer.getTime()
 		end
 		
-		-- Apres 3 minutes de jeu, l'apparition des ennemis est plus rapide
-		if etime - startTime > 180 then
-			nbSeconde = 3
+		if Tank.PopBoss >= 750 then
+			EtatJeu = "Boss"
 		end
+		
 		--[[if bombCheck - bombTime >= 23 then
 			bombTime = love.timer.getTime()
 			ents.Create("Bomb", 400, 400)
@@ -60,6 +61,26 @@ function		EnJeu()
 		if Tank.Score > Tank.Old_Score then
 			Tank.Old_Score = Tank.Score
 		end
+		FinPartie()
+	end
+end
+
+function 		Boss()
+	love.audio.stop(musicMenu)
+	GroundDraw()
+	ents:draw()
+	
+	if Tank.Health > 0 then
+	TankDraw()
+	ATH_Life()
+		if creerMastodonte == 0 then
+			local xMastodonte, yMastodonte = getRandomCoord()
+			Mastodonte = ents.Create("Mastodonte", xMastodonte, yMastodonte)
+			creerMastodonte = 1
+		end
+	else
+		Tank.Health = 0
+		ents.objects = {}
 		FinPartie()
 	end
 end

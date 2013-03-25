@@ -52,6 +52,7 @@ Tank = {
 	CadenceTir = 0,
 	Tir = love.timer.getTime(),
 	Score = 0,
+	PopBoss = 0,
 	Old_Score = 0
 }
 
@@ -118,6 +119,11 @@ function 		love.update(dt)
 	end
 	
 	if EtatJeu == "EnJeu" then
+		TankUpdate(dt)
+		ents:update(dt)
+	end
+	
+	if EtatJeu == "Boss" then
 		TankUpdate(dt)
 		ents:update(dt)
 	end

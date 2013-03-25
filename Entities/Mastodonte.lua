@@ -45,7 +45,10 @@ function ent:Die()
 	love.audio.play(SonExplosion)
 	ents.Create("Explosion", self.x, self.y)
 	Tank.Score = Tank.Score + 500
+<<<<<<< HEAD
 	Tank.Health = Tank.Health + 100
+=======
+>>>>>>> ca622c8... Ajout d'un nouvel ennemi : Mastodonte
 	Tank.PopBoss = 0
 end
 
