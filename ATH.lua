@@ -21,14 +21,14 @@
 -- Un ATH est une interface qui permet au joueur d'avoir des informations sur sa partie (vie, munitions par exemple).
 -- Ici : barre de vie, score, radar.
 function		ATH_Life()
-	-- Point de vie
-	love.graphics.print("VIE : ", 10, 15)
-	love.graphics.setColor(255, 0, 0, 100)
-	love.graphics.rectangle("fill", 60, 10, Tank.Health * Reso.Width / Reso.Height, 30)
-	love.graphics.reset()
-
-	-- Score
-	love.graphics.print("Score : " .. Tank.Score, 10, 50)
-	love.graphics.print("Speed : " .. Tank.Vitesse, 10, 70)
-	love.graphics.print("Damage : " .. Tank.Dammage, 10, 90)
+   -- Point de vie
+   love.graphics.print("VIE : ", 10, 15)
+   love.graphics.setColor(255, 0, 0, 100)
+   love.graphics.rectangle("fill", 60, 10, Tank.Health * Reso.Width / Reso.Height, 30)
+   love.graphics.reset()
+   
+   -- Score
+   love.graphics.print("Score : " .. Tank.Score, 10, 50)
+   love.graphics.print("Speed : " .. Tank.Vitesse, 10, 70)
+   love.graphics.print("Damage : " .. Tank.Dammage, 10, 90)
 end

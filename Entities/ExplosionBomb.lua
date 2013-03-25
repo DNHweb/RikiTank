@@ -23,16 +23,16 @@ local ent = ents.Derive("Base")
 -- @param x Position en x.
 -- @param y Position en y.
 function ent:setPos( x, y )
-	self.x = x
-	self.y = y
+   self.x = x
+   self.y = y
 end
 
 --- Charge les parametres en memoire.
 -- @param x Position en x.
 -- @param y Position en y.
 function ent:load( x, y )
-	self.anim = newAnimation(ExplosionBomb, 256, 128, 0.1, 0)
-	self.anim:setMode("once")
+   self.anim = newAnimation(ExplosionBomb, 256, 128, 0.1, 0)
+   self.anim:setMode("once")
 end
 
 --- Mise-a-jour de l'entite.
@@ -41,15 +41,15 @@ end
 -- alors on efface l'explosion.
 -- @param dt Delta Temps
 function	ent:update(dt)
-	self.anim:update(dt)
-	if self.anim:getCurrentFrame() == 12 then
-		ents.Destroy(self.id)
-	end
+   self.anim:update(dt)
+   if self.anim:getCurrentFrame() == 12 then
+      ents.Destroy(self.id)
+   end
 end
 
 --- Affiche l'entite.
 function ent:draw()
-	self.anim:draw(self.x, self.y)
+   self.anim:draw(self.x, self.y)
 end
 
 return ent;

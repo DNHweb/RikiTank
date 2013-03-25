@@ -23,17 +23,17 @@ local ent = ents.Derive("Base")
 -- @param x Position en x.
 -- @param y Position en y.
 function ent:setPos( x, y )
-	self.x = x
-	self.y = y
-	self.vitesse = 0.60
+   self.x = x
+   self.y = y
+   self.vitesse = 0.60
 end
 
 --- Charge les parametres en memoire.
 -- @param x Position en x.
 -- @param y Position en y.
 function ent:load( x, y )
-	self:setPos( x, y )
-	self.image = picMissileM
+   self:setPos( x, y )
+   self.image = picMissileM
 end
 
 --- Mise-a-jour de l'entite.
@@ -43,36 +43,36 @@ end
 -- Sinon si le missile sort de l'ecran alors on le detruit.
 -- @param dt Delta Temps
 function ent:update(dt)
-	self.x = self.x + math.cos(self.angle) * self.vitesse * dt / 0.002
-	self.y = self.y + math.sin(self.angle) * self.vitesse * dt / 0.002
-	local distance = ((self.x - Tank.Position.x) ^ 2 + (self.y - Tank.Position.y) ^ 2) ^ 0.5
-	
-	if (distance < (self.image:getWidth() / 2 + Tank.BaseImage:getWidth() / 2) * Reso.Scale) then
-		Tank.Health = Tank.Health - 50
-		--local SonExplosion = love.audio.newSource("Sounds/SonExplosion.mp3", "stream")
-		--SonExplosion:setVolume(0.75)
-		love.audio.play(SonExplosion)
-		ents.Create("Explosion", self.x, self.y)
-		ents.Destroy(self.id)
-	elseif (self.x > Reso.Width) then
-		ents.Destroy( self.id )
-	elseif (self.x < 0) then
-		ents.Destroy( self.id )
-	elseif (self.y < 0) then
-		ents.Destroy( self.id )
-	elseif (self.y > Reso.Height) then
-		ents.Destroy( self.id )
-	end
+   self.x = self.x + math.cos(self.angle) * self.vitesse * dt / 0.002
+   self.y = self.y + math.sin(self.angle) * self.vitesse * dt / 0.002
+   local distance = ((self.x - Tank.Position.x) ^ 2 + (self.y - Tank.Position.y) ^ 2) ^ 0.5
+   
+   if (distance < (self.image:getWidth() / 2 + Tank.BaseImage:getWidth() / 2) * Reso.Scale) then
+      Tank.Health = Tank.Health - 50
+      --local SonExplosion = love.audio.newSource("Sounds/SonExplosion.mp3", "stream")
+      --SonExplosion:setVolume(0.75)
+      love.audio.play(SonExplosion)
+      ents.Create("Explosion", self.x, self.y)
+      ents.Destroy(self.id)
+   elseif (self.x > Reso.Width) then
+      ents.Destroy( self.id )
+   elseif (self.x < 0) then
+      ents.Destroy( self.id )
+   elseif (self.y < 0) then
+      ents.Destroy( self.id )
+   elseif (self.y > Reso.Height) then
+      ents.Destroy( self.id )
+   end
 end
 
 --- Affiche l'entite.
 function ent:draw()
-	love.graphics.draw(self.image, self.x, self.y, self.angle, Reso.Scale, Reso.Scale, self.image:getWidth() / 2, self.image:getHeight() / 2)
+   love.graphics.draw(self.image, self.x, self.y, self.angle, Reso.Scale, Reso.Scale, self.image:getWidth() / 2, self.image:getHeight() / 2)
 end
 
 --- Code a executer avant la destruction de l'entite.
 function ent:Die()
-	print("Missile " .. self.id .. " detruit.")
+   print("Missile " .. self.id .. " detruit.")
 end
 
 return ent;

@@ -21,7 +21,7 @@ love.mouse.setVisible(false)
 
 --- Charge le viseur que la tourelle suivra.
 function TourelleLoad()
-	viseur = love.graphics.newImage("Images/viseur2.png")
+   viseur = love.graphics.newImage("Images/viseur2.png")
 end
 
 --- Affichage du tank et tourelle.
@@ -32,12 +32,12 @@ end
 -- @param Angle Angle de la base du tank.
 -- @param Width Longeur de la tourelle.
 function TourelleDraw(Image, x, y, Angle, Width)
-	local Width2 = Image:getWidth()/2 - width
-	local Height = Image:getHeight()/2
-	love.graphics.draw(Image, x, y, Angle, Reso.Scale, Reso.Scale, Width2, Height)
-	largeur = viseur:getWidth()/2
-	hauteur = viseur:getHeight()/2
-	love.graphics.draw(viseur , love.mouse.getX(), love.mouse.getY(), 0, Reso.Scale, Reso.Scale, largeur, hauteur)
+   local Width2 = Image:getWidth()/2 - width
+   local Height = Image:getHeight()/2
+   love.graphics.draw(Image, x, y, Angle, Reso.Scale, Reso.Scale, Width2, Height)
+   largeur = viseur:getWidth()/2
+   hauteur = viseur:getHeight()/2
+   love.graphics.draw(viseur , love.mouse.getX(), love.mouse.getY(), 0, Reso.Scale, Reso.Scale, largeur, hauteur)
 end
 
 --- Mise-a-jour de l'angle de la tourelle.
@@ -48,6 +48,6 @@ end
 -- @param dt Delta Temps.
 -- @return Retourne le nouvel angle de la tourelle.
 function TourelleUpdate(x, y, Angle,dt)
-	Angle = math.atan2(love.mouse.getX() - x, y - love.mouse.getY())-math.pi/2
-	return Angle
+   Angle = math.atan2(love.mouse.getX() - x, y - love.mouse.getY())-math.pi/2
+   return Angle
 end

@@ -19,14 +19,14 @@
 
 --- Empeche la sortie d'ecran du tank.
 function SortieEcran()
-	if Tank.Position.x - (Reso.Scale * Tank.BaseImage:getHeight())/2 < 0 then
-		Tank.Position.x = (Reso.Scale * Tank.BaseImage:getHeight())/2
-	elseif Tank.Position.x + (Reso.Scale * Tank.BaseImage:getHeight()/2) > Reso.Width then
-		Tank.Position.x = Reso.Width - (Reso.Scale * Tank.BaseImage:getHeight())/2
-	end
-	if Tank.Position.y - (Reso.Scale * Tank.BaseImage:getHeight())/2 < 0 then
-		Tank.Position.y = (Reso.Scale * Tank.BaseImage:getHeight())/2
-	elseif Tank.Position.y + (Reso.Scale * Tank.BaseImage:getHeight())/2 > Reso.Height then
-		Tank.Position.y = Reso.Height - (Reso.Scale * Tank.BaseImage:getHeight())/2
-	end
+   if Tank.Position.x - (Reso.Scale * Tank.BaseImage:getHeight())/2 < 0 then
+      Tank.Position.x = (Reso.Scale * Tank.BaseImage:getHeight())/2
+   elseif Tank.Position.x + (Reso.Scale * Tank.BaseImage:getHeight()/2) > Reso.Width then
+      Tank.Position.x = Reso.Width - (Reso.Scale * Tank.BaseImage:getHeight())/2
+   end
+   if Tank.Position.y - (Reso.Scale * Tank.BaseImage:getHeight())/2 < 0 then
+      Tank.Position.y = (Reso.Scale * Tank.BaseImage:getHeight())/2
+   elseif Tank.Position.y + (Reso.Scale * Tank.BaseImage:getHeight())/2 > Reso.Height then
+      Tank.Position.y = Reso.Height - (Reso.Scale * Tank.BaseImage:getHeight())/2
+   end
 end

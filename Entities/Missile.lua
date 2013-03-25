@@ -23,48 +23,48 @@ local ent = ents.Derive("Base")
 -- @param x Position en x.
 -- @param y Position en y.
 function ent:setPos( x, y )
-	self.x = x
-	self.y = y
-	self.ang = Tank.Angle.Tourelle
-	self.vitesse = 0.90
+   self.x = x
+   self.y = y
+   self.ang = Tank.Angle.Tourelle
+   self.vitesse = 0.90
 end
 
 --- Charge les parametres en memoire.
 -- @param x Position en x.
 -- @param y Position en y.
 function ent:load( x, y )
-	self:setPos( x, y )
-	self.image = picMissile
+   self:setPos( x, y )
+   self.image = picMissile
 end
 
 --- Mise-a-jour de l'entite.
 -- @param dt Delta Temps
 function ent:update(dt)
-	if self.id == 1 then
-		ents.Destroy( self.id )
-	end
-	self.x = self.x + math.cos(self.ang) * self.vitesse * dt / 0.002
-	self.y = self.y + math.sin(self.ang) * self.vitesse * dt / 0.002
-	
-	if (self.x > Reso.Width) then
-		ents.Destroy( self.id )
-	elseif (self.x < 0) then
-		ents.Destroy( self.id )
-	elseif (self.y < 0) then
-		ents.Destroy( self.id )
-	elseif (self.y > Reso.Height) then
-		ents.Destroy( self.id )
-	end
+   if self.id == 1 then
+      ents.Destroy( self.id )
+   end
+   self.x = self.x + math.cos(self.ang) * self.vitesse * dt / 0.002
+   self.y = self.y + math.sin(self.ang) * self.vitesse * dt / 0.002
+   
+   if (self.x > Reso.Width) then
+      ents.Destroy( self.id )
+   elseif (self.x < 0) then
+      ents.Destroy( self.id )
+   elseif (self.y < 0) then
+      ents.Destroy( self.id )
+   elseif (self.y > Reso.Height) then
+      ents.Destroy( self.id )
+   end
 end
 
 --- Affiche l'entite.
 function ent:draw()
-	love.graphics.draw(self.image, self.x, self.y, self.ang, Reso.Scale, Reso.Scale, self.image:getWidth() / 2, self.image:getHeight() / 2)
+   love.graphics.draw(self.image, self.x, self.y, self.ang, Reso.Scale, Reso.Scale, self.image:getWidth() / 2, self.image:getHeight() / 2)
 end
 
 --- Code a executer avant la destruction de l'entite.
 function ent:Die()
-	print("Missile " .. self.id .. " detruit.")
+   print("Missile " .. self.id .. " detruit.")
 end
 
 return ent;

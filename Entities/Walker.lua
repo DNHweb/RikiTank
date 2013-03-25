@@ -23,31 +23,31 @@ local ent = ents.Derive("Base")
 -- @param x Position en x.
 -- @param y Position en y.
 function ent:setPos( x, y )
-	self.x = x
-	self.y = y
+   self.x = x
+   self.y = y
 end
 
 --- Charge les parametres en memoire.
 -- @param x Position en x.
 -- @param y Position en y.
 function ent:load( x, y )
-	self.vitesse = 0.40
-	self:setPos( x, y )
-	self.image = picWalker
-	self.xx = Reso.Width / 6
-	self.yy = Reso.Height / 6
+   self.vitesse = 0.40
+   self:setPos( x, y )
+   self.image = picWalker
+   self.xx = Reso.Width / 6
+   self.yy = Reso.Height / 6
 end
 
 --- Code a executer avant la destruction de l'entite.
 function ent:Die()
-	love.audio.play(SonExplosion)
-	ents.Create("Explosion", self.x, self.y)
-	Tank.Score = Tank.Score + 20
-	Tank.PopBoss = Tank.PopBoss + 20
-
-	if (math.random(10) <= 2) then
-		ents.Create("Vitesse", self.x, self.y)
-	end
+   love.audio.play(SonExplosion)
+   ents.Create("Explosion", self.x, self.y)
+   Tank.Score = Tank.Score + 20
+   Tank.PopBoss = Tank.PopBoss + 20
+   
+   if (math.random(10) <= 2) then
+      ents.Create("Vitesse", self.x, self.y)
+   end
 end
 
 --- Fait pivoter le Walker.
@@ -71,28 +71,28 @@ end
 -- Sinon on dirige le Walker vers le joueur.
 -- @param dt Delta Temps
 function	ent:update(dt)
-
-	-- IA
-	distance = ((self.x - Tank.Position.x) ^ 2 + (self.y - Tank.Position.y) ^ 2) ^ 0.5
-	-- si collision
-	if distance < (self.image:getWidth() / 2 + Tank.BaseImage:getWidth() / 2) * Reso.Scale then
-		Tank.Health = Tank.Health - 20
-		ents.Destroy(self.id)
-	end
-	self:pivoter(dt)
-	self:avancer(dt)
-	
-	self.xx = self.xx + self.xx / distance
-	self.yy = self.yy + self.yy / distance
+   
+   -- IA
+   distance = ((self.x - Tank.Position.x) ^ 2 + (self.y - Tank.Position.y) ^ 2) ^ 0.5
+   -- si collision
+   if distance < (self.image:getWidth() / 2 + Tank.BaseImage:getWidth() / 2) * Reso.Scale then
+      Tank.Health = Tank.Health - 20
+      ents.Destroy(self.id)
+   end
+   self:pivoter(dt)
+   self:avancer(dt)
+   
+   self.xx = self.xx + self.xx / distance
+   self.yy = self.yy + self.yy / distance
 end
 
 --- Affiche l'entite.
 function ent:draw()
-	love.graphics.draw(self.image, self.x, self.y, self.angle, Reso.Scale, Reso.Scale, self.image:getWidth() / 2, self.image:getHeight() / 2)
-	--[[ Apparition sur le radar
-	love.graphics.setColor(255, 0, 0)
-	love.graphics.circle("fill", Reso.Width - self.xx / 2, self.yy / 2, 5, 5)
-	love.graphics.reset()]]
+   love.graphics.draw(self.image, self.x, self.y, self.angle, Reso.Scale, Reso.Scale, self.image:getWidth() / 2, self.image:getHeight() / 2)
+   --[[ Apparition sur le radar
+   love.graphics.setColor(255, 0, 0)
+   love.graphics.circle("fill", Reso.Width - self.xx / 2, self.yy / 2, 5, 5)
+   love.graphics.reset()]]
 end
 
 return ent;

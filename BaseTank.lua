@@ -27,15 +27,15 @@
 -- @return La nouvelle coordonnee en x.
 -- @return La nouvelle coordonnee en y.
 function Avancer(x, y, Angle, Vitesse, dt)
-	if (love.keyboard.isDown("w") or love.keyboard.isDown("up") or love.keyboard.isDown("z")) then
-		Tank.OldPosition.x = x
-		Tank.OldPosition.y = y
-		avX = math.cos(Angle) * Vitesse * dt / 0.002		-- calcule de l'avancement en X selon la vitesse choisie et l'angle du tank
-		avY = math.sin(Angle) * Vitesse * dt / 0.002		-- calcule de l'avancement en Y selon la vitesse choisie et l'angle du tank
-		x = x + avX
-		y = y + avY
-	end
-	return x, y
+   if (love.keyboard.isDown("w") or love.keyboard.isDown("up") or love.keyboard.isDown("z")) then
+      Tank.OldPosition.x = x
+      Tank.OldPosition.y = y
+      avX = math.cos(Angle) * Vitesse * dt / 0.002		-- calcule de l'avancement en X selon la vitesse choisie et l'angle du tank
+      avY = math.sin(Angle) * Vitesse * dt / 0.002		-- calcule de l'avancement en Y selon la vitesse choisie et l'angle du tank
+      x = x + avX
+      y = y + avY
+   end
+   return x, y
 end
 
 --- Fait reculer le tank.
@@ -48,15 +48,15 @@ end
 -- @return La nouvelle coordonnee en x.
 -- @return La nouvelle coordonnee en y.
 function Reculer(x, y, Angle, Vitesse, dt)
-	if (love.keyboard.isDown("s") or love.keyboard.isDown("down")) then
-		Tank.OldPosition.x = x
-		Tank.OldPosition.y = y
-		avX = math.cos(Angle) * Vitesse * dt / 0.002
-		avY = math.sin(Angle)* Vitesse * dt / 0.002
-		x = x - avX
-		y = y - avY
-	end
-	return x, y
+   if (love.keyboard.isDown("s") or love.keyboard.isDown("down")) then
+      Tank.OldPosition.x = x
+      Tank.OldPosition.y = y
+      avX = math.cos(Angle) * Vitesse * dt / 0.002
+      avY = math.sin(Angle)* Vitesse * dt / 0.002
+      x = x - avX
+      y = y - avY
+   end
+   return x, y
 end
 
 --- Pivoter le tank.
@@ -65,35 +65,35 @@ end
 -- @param dt Delta Temps
 -- @return Le nouvel angle du tank.
 function Pivoter(Angle, dt)
-	local Angle2 = Angle
-	--> Tourner en avançant <--
-	if (love.keyboard.isDown("w") or love.keyboard.isDown("up")) then
-		if (love.keyboard.isDown("d") or love.keyboard.isDown("right")) then
-			Angle2 = TourneDroite(Angle, dt)
-		end
-		if (love.keyboard.isDown("a") or love.keyboard.isDown("left") or love.keyboard.isDown("q")) then
-			Angle2 = TourneGauche(Angle, dt)
-		end
-	end
-	--> Tourner en reculant <--
-	if (love.keyboard.isDown("s") or love.keyboard.isDown("down")) then
-		if (love.keyboard.isDown("d") or love.keyboard.isDown("right")) then
-			Angle2 = TourneGauche(Angle, dt)
-		end
-		if (love.keyboard.isDown("a") or love.keyboard.isDown("left") or love.keyboard.isDown("q")) then
-			Angle2 = TourneDroite(Angle, dt)
-		end
-	end
-	--> Tourner sur place <--
-	if (not love.keyboard.isDown("w") and not love.keyboard.isDown("up") and not love.keyboard.isDown("s") and not love.keyboard.isDown("down")) then
-		if (love.keyboard.isDown("d") or love.keyboard.isDown("right")) then
-			Angle2 = TourneDroite(Angle, dt)
-		end
-		if (love.keyboard.isDown("a") or love.keyboard.isDown("left") or love.keyboard.isDown("q")) then
-			Angle2 = TourneGauche(Angle, dt)
-		end
-	end
-	return Angle2
+   local Angle2 = Angle
+   --> Tourner en avançant <--
+   if (love.keyboard.isDown("w") or love.keyboard.isDown("up")) then
+      if (love.keyboard.isDown("d") or love.keyboard.isDown("right")) then
+	 Angle2 = TourneDroite(Angle, dt)
+      end
+      if (love.keyboard.isDown("a") or love.keyboard.isDown("left") or love.keyboard.isDown("q")) then
+	 Angle2 = TourneGauche(Angle, dt)
+      end
+   end
+   --> Tourner en reculant <--
+   if (love.keyboard.isDown("s") or love.keyboard.isDown("down")) then
+      if (love.keyboard.isDown("d") or love.keyboard.isDown("right")) then
+	 Angle2 = TourneGauche(Angle, dt)
+      end
+      if (love.keyboard.isDown("a") or love.keyboard.isDown("left") or love.keyboard.isDown("q")) then
+	 Angle2 = TourneDroite(Angle, dt)
+      end
+   end
+   --> Tourner sur place <--
+   if (not love.keyboard.isDown("w") and not love.keyboard.isDown("up") and not love.keyboard.isDown("s") and not love.keyboard.isDown("down")) then
+      if (love.keyboard.isDown("d") or love.keyboard.isDown("right")) then
+	 Angle2 = TourneDroite(Angle, dt)
+      end
+      if (love.keyboard.isDown("a") or love.keyboard.isDown("left") or love.keyboard.isDown("q")) then
+	 Angle2 = TourneGauche(Angle, dt)
+      end
+   end
+   return Angle2
 end
 
 --- Tourner a droite.
@@ -101,9 +101,9 @@ end
 -- @param dt Delta Temps.
 -- @return Le nouvel angle du tank.
 function TourneDroite(Angle, dt)
-	Angle = Angle + dt * math.pi / 2	-- Calcule de
-	Angle = Angle % (2 * math.pi)		-- l'angle
-	return Angle
+   Angle = Angle + dt * math.pi / 2	-- Calcule de
+   Angle = Angle % (2 * math.pi)		-- l'angle
+   return Angle
 end
 
 --- Tourner a gauche.
@@ -111,9 +111,9 @@ end
 -- @param dt Delta Temps.
 -- @return Le nouvel angle du tank.
 function TourneGauche(Angle, dt)
-	Angle = Angle - dt * math.pi / 2
-	Angle = Angle % (2 * math.pi)
-	return Angle
+   Angle = Angle - dt * math.pi / 2
+   Angle = Angle % (2 * math.pi)
+   return Angle
 end
 
 --- Mise-a-jour du tank.
@@ -126,10 +126,10 @@ end
 -- @return La nouvelle coordonnee en y.
 -- @return Le nouvel angle du tank.
 function BaseTankUpdate(x, y, Angle, Vitesse, dt)
-	Angle = Pivoter(Angle, dt)
-	x, y = Avancer(x, y, Angle, Vitesse, dt)
-	x, y = Reculer(x, y, Angle, Vitesse, dt)
-	return x, y, Angle
+   Angle = Pivoter(Angle, dt)
+   x, y = Avancer(x, y, Angle, Vitesse, dt)
+   x, y = Reculer(x, y, Angle, Vitesse, dt)
+   return x, y, Angle
 end
 
 --- Affichage du tank.
@@ -138,7 +138,7 @@ end
 -- @param y Position en y.
 -- @param Angle L'angle du tank.
 function BaseTankDraw(Image, x, y, Angle)
-	Width = Image:getWidth() / 2
-	Height = Image:getHeight() / 2
-	love.graphics.draw(Image, x, y, Angle, Reso.Scale, Reso.Scale, Width, Height)
+   Width = Image:getWidth() / 2
+   Height = Image:getHeight() / 2
+   love.graphics.draw(Image, x, y, Angle, Reso.Scale, Reso.Scale, Width, Height)
 end

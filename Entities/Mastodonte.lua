@@ -23,37 +23,33 @@ local ent = ents.Derive("Base")
 -- @param x Position en x.
 -- @param y Position en y.
 function ent:setPos( x, y )
-	self.x = x
-	self.y = y
+   self.x = x
+   self.y = y
 end
 
 --- Charge les parametres en memoire.
 -- @param x Position en x.
 -- @param y Position en y.
 function ent:load( x, y )
-	self.vitesse = 0.1
-	self.health = 1000
-	self:setPos( x, y )
-	self.image = picMastodonte
-	self.xx = Reso.Width / 6
-	self.yy = Reso.Height / 6
-	self.stime = love.timer.getTime()
+   self.vitesse = 0.1
+   self.health = 1000
+   self:setPos( x, y )
+   self.image = picMastodonte
+   self.xx = Reso.Width / 6
+   self.yy = Reso.Height / 6
+   self.stime = love.timer.getTime()
 end
 
 --- Code a executer avant la destruction de l'entite.
 function ent:Die()
-	love.audio.play(SonExplosion)
-	ents.Create("Explosion", self.x, self.y)
-	Tank.Score = Tank.Score + 500
-<<<<<<< HEAD
-<<<<<<< HEAD
-	Tank.Health = Tank.Health + 100
-=======
->>>>>>> ca622c8... Ajout d'un nouvel ennemi : Mastodonte
-=======
-	Tank.Health = Tank.Health + 100
->>>>>>> dc96298... Ajout d'un bonus à la mort du Mastodonte
-	Tank.PopBoss = 0
+   love.audio.play(SonExplosion)
+   ents.Create("Explosion", self.x, self.y)
+   Tank.Score = Tank.Score + 500
+   Tank.Health = Tank.Health + 100
+   --Ajout d'un nouvel ennemi : Mastodonte
+   Tank.Health = Tank.Health + 100
+   --Ajout d'un bonus à la mort du Mastodonte
+   Tank.PopBoss = 0
 end
 
 --- Fait pivoter le Mastodonte.
@@ -76,28 +72,35 @@ end
 -- du joueur puis le Mastodonte se met a faire feu ( creation de Missile Mastodonte ).
 -- Si collision le tank est detruit.
 -- @param dt Delta Temps
+local cote = 0
 function	ent:update(dt)
-	distance = ((self.x - Tank.Position.x) ^ 2 + (self.y - Tank.Position.y) ^ 2) ^ 0.5
-	local etime = love.timer.getTime()
-	
-	self:pivoter(dt)
-	if distance > (Reso.Width / 2) then
-		self:avancer(dt)
-	else
-		self.angleT = math.atan2(self.x - Tank.Position.x, Tank.Position.y - self.y) + math.pi / 2
-		if etime - self.stime > 0.33 then
-			ents.Create("MissileM", self.x, self.y, self.angleT)
-			self.stime = love.timer.getTime()
-		end
-	end
-	if distance < (self.image:getWidth() / 2 + Tank.BaseImage:getWidth() / 2) * Reso.Scale then
-		Tank.Health = 0
-	end
+   distance = ((self.x - Tank.Position.x) ^ 2 + (self.y - Tank.Position.y) ^ 2) ^ 0.5
+   local etime = love.timer.getTime()
+   
+   self:pivoter(dt)
+   if distance > (Reso.Width / 2) then
+      self:avancer(dt)
+   else
+      self.angleT = math.atan2(self.x - Tank.Position.x, Tank.Position.y - self.y) + math.pi / 2
+      if etime - self.stime > 0.33 then
+	 if cote == 0 then
+	    ents.Create("MissileM", self.x, self.y, self.angleT)
+	    cote = 1
+	 else 
+	    ents.Create("MissileM", self.x, self.y, self.angleT)
+	    cote = 0
+	 end
+	 self.stime = love.timer.getTime()
+      end
+   end
+   if distance < (self.image:getWidth() / 2 + Tank.BaseImage:getWidth() / 2) * Reso.Scale then
+      Tank.Health = 0
+   end
 end
 
 --- Affiche l'entite.
 function ent:draw()
-	love.graphics.draw(self.image, self.x, self.y, self.angle, Reso.Scale, Reso.Scale, self.image:getWidth() / 2, self.image:getHeight() / 2)
+   love.graphics.draw(self.image, self.x, self.y, self.angle, Reso.Scale, Reso.Scale, self.image:getWidth() / 2, self.image:getHeight() / 2)
 end
 
 return ent;

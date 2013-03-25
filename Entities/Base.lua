@@ -30,25 +30,25 @@ base.cadenceTir = 0
 -- @param x Position en x.
 -- @param y Position en y.
 function base:setPos(x, y)
-	base.x = x
-	base.y = y
+   base.x = x
+   base.y = y
 end
 
 --- Retourne la position.
 -- @return La position en x.
 -- @return La position en y.
 function base:getPos()
-	return base.x, base.y
+   return base.x, base.y
 end
 
 --- Fixe la vitesse.
 -- @param v Vitesse.
 function base:setVitesse(v)
-	base.vitesse = v
+   base.vitesse = v
 end
 
 function base:load()
-
+   
 end
 
 return (base)

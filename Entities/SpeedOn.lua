@@ -23,8 +23,8 @@ local ent = ents.Derive("Base")
 -- @param x Position en x.
 -- @param y Position en y.
 function ent:setPos( x, y )
-	self.x = x
-	self.y = y
+   self.x = x
+   self.y = y
 end
 
 --- Charge les parametres en memoire.
@@ -32,9 +32,9 @@ end
 -- @param x Position en x.
 -- @param y Position en y.
 function ent:load( x, y )
-	self:setPos( x, y )
-	self.image = picVitesse
-	self.stime = love.timer.getTime()
+   self:setPos( x, y )
+   self.image = picVitesse
+   self.stime = love.timer.getTime()
 end
 
 --- Mise-a-jour de l'entite.
@@ -42,20 +42,20 @@ end
 -- Si le temps d'apparition du bonus depasse les 10 secondes alors il est detruit.
 -- @param dt Delta Temps
 function	ent:update(dt)
-	local etime = love.timer.getTime()
-	
-	if etime - self.stime >= 10 then
-		Tank.Vitesse = Tank.Vitesse - (Speed * 0.2)
-		ents.Destroy(self.id)
-	end
+   local etime = love.timer.getTime()
+   
+   if etime - self.stime >= 10 then
+      Tank.Vitesse = Tank.Vitesse - (Speed * 0.2)
+      ents.Destroy(self.id)
+   end
 end
 
 --- Affiche l'entite.
 -- On lui donne un petit effet de transparence.
 function ent:draw()
-	love.graphics.setColor(0, 255, 0, 150)
-	love.graphics.draw(self.image, self.x, self.y, 0, Reso.Scale, Reso.Scale, self.image:getWidth() / 2, self.image:getHeight() / 2)
-	love.graphics.reset()
+   love.graphics.setColor(0, 255, 0, 150)
+   love.graphics.draw(self.image, self.x, self.y, 0, Reso.Scale, Reso.Scale, self.image:getWidth() / 2, self.image:getHeight() / 2)
+   love.graphics.reset()
 end
 
 return ent;

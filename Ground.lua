@@ -19,25 +19,25 @@
 
 --- Affichage du terrain.
 function GroundDraw()
-	width = love.graphics.getWidth( ) / 128
-	height = love.graphics.getHeight( ) / 128
-	start2 = 0
-	for i = 0, width do
-		start = 0
-		for j = 0, height do
-			love.graphics.draw(Ground1, start2, start)
-			start = start + 128
-		end
-		start2 = start2 + 128
-	end
+   width = love.graphics.getWidth( ) / 128
+   height = love.graphics.getHeight( ) / 128
+   start2 = 0
+   for i = 0, width do
+      start = 0
+      for j = 0, height do
+	 love.graphics.draw(Ground1, start2, start)
+	 start = start + 128
+      end
+      start2 = start2 + 128
+   end
 end
 
 function Map()
-	if ChoixMap == 1 then
-		Width = love.graphics.getWidth()/2
-		Height = love.graphics.getHeight()/2
-		ScaleX = Width/500
-		ScaleY = Reso.Scale * 1.50
-		love.graphics.draw(Mur1, Width/2, Height - 25, 0, ScaleX, ScaleY)
-	end
+   if ChoixMap == 1 then
+      Width = love.graphics.getWidth()/2
+      Height = love.graphics.getHeight()/2
+      ScaleX = Width/500
+      ScaleY = Reso.Scale * 1.50
+      love.graphics.draw(Mur1, Width/2, Height - 25, 0, ScaleX, ScaleY)
+   end
 end

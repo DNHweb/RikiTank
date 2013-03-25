@@ -23,33 +23,33 @@ local ent = ents.Derive("Base")
 -- @param x Position en x.
 -- @param y Position en y.
 function ent:setPos( x, y )
-	self.x = x
-	self.y = y
+   self.x = x
+   self.y = y
 end
 
 --- Charge les parametres en memoire.
 -- @param x Position en x.
 -- @param y Position en y.
 function ent:load( x, y )
-	self:setPos( x, y )
-	self.image = picTankEB
-	self.imageT = picTankET
-	self.angleT = self.angle
-	self.stime = love.timer.getTime()
+   self:setPos( x, y )
+   self.image = picTankEB
+   self.imageT = picTankET
+   self.angleT = self.angle
+   self.stime = love.timer.getTime()
 end
 
 --- Code a executer avant la destruction de l'entite.
 -- Joue un son d'explosion, on cree l'explosion et augmente le score du joueur,
 -- il y a 1 chance sur 10 pour qu'un medikit apparaisse.
 function ent:Die()
-	love.audio.play(SonExplosion)
-	ents.Create("Explosion", self.x, self.y)
-	Tank.Score = Tank.Score + 50
-	Tank.PopBoss = Tank.PopBoss + 50
-	-- Pop des medikits
-	if (math.random(10) <= 2) then
-		ents.Create("Medikit", self.x, self.y)
-	end
+   love.audio.play(SonExplosion)
+   ents.Create("Explosion", self.x, self.y)
+   Tank.Score = Tank.Score + 50
+   Tank.PopBoss = Tank.PopBoss + 50
+   -- Pop des medikits
+   if (math.random(10) <= 2) then
+      ents.Create("Medikit", self.x, self.y)
+   end
 end
 
 --- Fait pivoter le Tank Ennemi.
@@ -73,29 +73,29 @@ end
 -- Si collision le tank ennemi est detruit.
 -- @param dt Delta Temps
 function	ent:update(dt)
-	distance = ((self.x - Tank.Position.x) ^ 2 + (self.y - Tank.Position.y) ^ 2) ^ 0.5
-	local etime = love.timer.getTime()
-	
-	if distance > (Reso.Width / 3.2) then
-		self:pivoter(dt)
-		self:avancer(dt)
-	else
-		self.angleT = math.atan2(self.x - Tank.Position.x, Tank.Position.y - self.y) + math.pi / 2
-		if etime - self.stime > 1.5 then
-			ents.Create("MissileE", self.x, self.y, self.angleT)
-			self.stime = love.timer.getTime()
-		end
-	end
-	if distance < (self.image:getWidth() / 2 + Tank.BaseImage:getWidth() / 2) * Reso.Scale then
-		Tank.Health = Tank.Health - 50
-		ents.Destroy(self.id)
-	end
+   distance = ((self.x - Tank.Position.x) ^ 2 + (self.y - Tank.Position.y) ^ 2) ^ 0.5
+   local etime = love.timer.getTime()
+   
+   if distance > (Reso.Width / 3.2) then
+      self:pivoter(dt)
+      self:avancer(dt)
+   else
+      self.angleT = math.atan2(self.x - Tank.Position.x, Tank.Position.y - self.y) + math.pi / 2
+      if etime - self.stime > 1.5 then
+	 ents.Create("MissileE", self.x, self.y, self.angleT)
+	 self.stime = love.timer.getTime()
+      end
+   end
+   if distance < (self.image:getWidth() / 2 + Tank.BaseImage:getWidth() / 2) * Reso.Scale then
+      Tank.Health = Tank.Health - 50
+      ents.Destroy(self.id)
+   end
 end
 
 --- Affiche l'entite.
 function ent:draw()
-	love.graphics.draw(self.image, self.x, self.y, self.angle, Reso.Scale, Reso.Scale, self.image:getWidth() / 2, self.image:getHeight() / 2)
-	love.graphics.draw(self.imageT, self.x, self.y, self.angleT, Reso.Scale, Reso.Scale, self.imageT:getWidth() / 2, self.imageT:getHeight() / 2)
+   love.graphics.draw(self.image, self.x, self.y, self.angle, Reso.Scale, Reso.Scale, self.image:getWidth() / 2, self.image:getHeight() / 2)
+   love.graphics.draw(self.imageT, self.x, self.y, self.angleT, Reso.Scale, Reso.Scale, self.imageT:getWidth() / 2, self.imageT:getHeight() / 2)
 end
 
 return ent;
