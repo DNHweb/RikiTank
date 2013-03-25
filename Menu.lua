@@ -194,14 +194,14 @@ function ChargerTank1()
 	Tank.Score = 0
 end
 
---- Charge le tank 1.
+--- Charge le tank 2.
 function ChargerTank2()
 	Tank.BaseImage = love.graphics.newImage("Images/BaseTank2.png")
 	Tank.TourelleImage = love.graphics.newImage("Images/TourelleTank2.png")
 	Tank.RotTourelleWidth = 103
-	Tank.Vitesse = (Speed * 3)/7
+	Tank.Vitesse = (Speed * 4)/7
 	Tank.Dammage = 48
-	Tank.Health = 360
+	Tank.Health = 315
 	Tank.CadenceTir = 1.02
 	Tank.Position.x = Reso.Width/2
 	Tank.Position.y = Reso.Height/4 
@@ -209,7 +209,7 @@ function ChargerTank2()
 	Tank.Score = 0
 end
 
---- Charge le tank 1.
+--- Charge le tank 3.
 function ChargerTank3()
 	Tank.BaseImage = love.graphics.newImage("Images/BaseTank3.png")
 	Tank.TourelleImage = love.graphics.newImage("Images/TourelleTank3.png")

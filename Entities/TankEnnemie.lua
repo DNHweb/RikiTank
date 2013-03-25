@@ -80,7 +80,7 @@ function	ent:update(dt)
 		self:avancer(dt)
 	else
 		self.angleT = math.atan2(self.x - Tank.Position.x, Tank.Position.y - self.y) + math.pi / 2
-		if etime - self.stime > 1 then
+		if etime - self.stime > 1.5 then
 			ents.Create("MissileE", self.x, self.y, self.angleT)
 			self.stime = love.timer.getTime()
 		end
