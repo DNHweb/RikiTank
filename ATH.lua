@@ -29,7 +29,11 @@ function		ATH_Life()
    love.graphics.setColor(52, 255, 52, 100)
    love.graphics.rectangle("fill", 60, 10, Tank.Health / Tank.HealthBase * 200 * Reso.Width / Reso.Height, 30)
    love.graphics.reset()
-   
+   love.graphics.setColor(0, 0, 0, 255)
+   love.graphics.setFont(HealthFont)
+   love.graphics.printf(Tank.Health .. " / " .. Tank.HealthBase, 60, 15, 200 * Reso.Width / Reso.Height, "center")
+   love.graphics.setFont(normalFont)
+   love.graphics.reset()
    -- Score
    love.graphics.print("Score : " .. Tank.Score, 10, 50)
    love.graphics.print("Speed : " .. Tank.Vitesse, 10, 70)

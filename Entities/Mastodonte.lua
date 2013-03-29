@@ -46,10 +46,12 @@ function ent:Die()
    love.audio.play(SonExplosion)
    ents.Create("Explosion", self.x, self.y)
    Tank.Score = Tank.Score + 500
-   Tank.Health = Tank.Health + 100
-   --Ajout d'un nouvel ennemi : Mastodonte
-   Tank.Health = Tank.Health + 100
-   --Ajout d'un bonus à la mort du Mastodonte
+   
+   if (Tank.Health + 100 > Tank.HealthBase) then
+      Tank.Health = Tank.HealthBase
+   else
+      Tank.Health = Tank.Health + 100
+   end
    Tank.PopBoss = 0
 end
 
@@ -96,13 +98,17 @@ function	ent:update(dt)
    end
    if etime - self.qtime > 10 then
       ents.Create("SpecialM", self.x, self.y, 0)
-      ents.Create("SpecialM", self.x, self.y, math.pi / 4)
+      ents.Create("SpecialM", self.x, self.y, math.pi / 6)
+      ents.Create("SpecialM", self.x, self.y, math.pi / 3)
       ents.Create("SpecialM", self.x, self.y, math.pi / 2)
-      ents.Create("SpecialM", self.x, self.y, (3 * math.pi) / 4)
+      ents.Create("SpecialM", self.x, self.y, (2 * math.pi) / 3)
+      ents.Create("SpecialM", self.x, self.y, (5 * math.pi) / 6)
       ents.Create("SpecialM", self.x, self.y, math.pi)
-      ents.Create("SpecialM", self.x, self.y, (5 * math.pi) / 4)
+      ents.Create("SpecialM", self.x, self.y, (7 * math.pi) / 6)
+      ents.Create("SpecialM", self.x, self.y, (4 * math.pi) / 3)
       ents.Create("SpecialM", self.x, self.y, (3 * math.pi) / 2)
-      ents.Create("SpecialM", self.x, self.y, (7 * math.pi) / 4)
+      ents.Create("SpecialM", self.x, self.y, (5 * math.pi) / 3)
+      ents.Create("SpecialM", self.x, self.y, (11 * math.pi) / 6)
       self.qtime = love.timer.getTime()
    end
    if distance < (self.image:getWidth() / 2 + Tank.BaseImage:getWidth() / 2) * Reso.Scale then

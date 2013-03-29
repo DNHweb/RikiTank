@@ -46,7 +46,11 @@ function	ent:update(dt)
    local etime = love.timer.getTime()
    
    if distance < (self.image:getWidth() / 2 + Tank.BaseImage:getWidth() / 2) * Reso.Scale then
-      Tank.Health = Tank.Health + 20
+      if (Tank.Health + 20 > Tank.HealthBase ) then
+	 Tank.Health = Tank.HealthBase
+      else
+	 Tank.Health = Tank.Health + 20
+      end
       ents.Destroy(self.id)
    end
    

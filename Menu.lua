@@ -1,7 +1,7 @@
 -- 
 -- @file Menu.lua
 -- This file is a part of RikiTank project, an amazing tank game !
--- Copyright (C) 2012  Riki-Team
+--1;2403;0c- Copyright (C) 2012  Riki-Team
 -- 
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
