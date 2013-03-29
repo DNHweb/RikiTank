@@ -204,6 +204,7 @@ function ChargerTank1()
    Tank.Vitesse = (Speed * 5)/7
    Tank.Dammage = 40
    Tank.Health = 225
+   Tank.HealthBase = 225
    Tank.CadenceTir = 1.7
    Tank.Position.x = Reso.Width/2
    Tank.Position.y = Reso.Height/4 
@@ -220,6 +221,7 @@ function ChargerTank2()
    Tank.Vitesse = (Speed * 4)/7
    Tank.Dammage = 48
    Tank.Health = 315
+   Tank.HealthBase = 315
    Tank.CadenceTir = 1.02
    Tank.Position.x = Reso.Width/2
    Tank.Position.y = Reso.Height/4 
@@ -236,6 +238,7 @@ function ChargerTank3()
    Tank.Vitesse = Speed
    Tank.Dammage = 24
    Tank.Health = 135
+   Tank.HealthBase = 135
    Tank.CadenceTir = 2.38
    Tank.Position.x = Reso.Width/2
    Tank.Position.y = Reso.Height/4 

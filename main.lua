@@ -47,6 +47,7 @@ Tank = {
    Vitesse = Speed,
    Angle = {Base = 0, Tourelle = 0},
    RotTourelleWidth = 0,
+   HealthBase = 0,
    Health = 0,
    Dammage = 0,
    CadenceTir = 0,
