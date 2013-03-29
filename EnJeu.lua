@@ -20,6 +20,7 @@
 startTime = love.timer.getTime()
 stime = love.timer.getTime()
 bombTime = love.timer.getTime()
+PopHeavyTank = 0
 creerMastodonte = 0
 BossScore = 0
 
@@ -43,12 +44,21 @@ function		EnJeu()
 	 ents.Create("TankEnnemie", xTE, yTE)
 	 local xWalker, yWalker = getRandomCoord()
 	 ents.Create("Walker", xWalker, yWalker)
+	 PopHeavyTank = PopHeavyTank + 1
+		if PopHeavyTank >= 15 then
+			local xHT, yHT = getRandomCoord()
+			ents.Create("HeavyTank", xHT, yHT)
+			stime = love.timer.getTime()
+			PopHeavyTank = 0
+		end
 	 stime = love.timer.getTime()
       end
       
       if Tank.PopBoss >= 750 then
 	 EtatJeu = "Boss"
       end
+	  
+	  
       
       --[[
       if bombCheck - bombTime >= 23 then

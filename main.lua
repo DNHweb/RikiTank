@@ -78,8 +78,8 @@ function		love.load()
    GroundLoad()
    normalFont = love.graphics.newFont("Fonts/Pixel.ttf", 18)
    countdownFont = love.graphics.newFont("Fonts/Pixel.ttf", 100)
-   HealthFont = love.graphics.newFont("Fonts/Starcraft.ttf", 21)
-   TankLoad()
+   HealthFont = love.graphics.newFont("Fonts/Starcraft.ttf", 20)
+   HealthFontBlanc = love.graphics.newFont("Fonts/Starcraft.ttf", 19)
    --[[if love.filesystem.exists("highscore.lst") then
       print("found the highscore file")
       for line in love.filesystem.lines("highscore.lst") do

@@ -37,12 +37,14 @@ function ents.Startup()
    register["MissileM"] = love.filesystem.load(ents.objectpath .. "MissileM.lua")
    register["Walker"] = love.filesystem.load(ents.objectpath .. "Walker.lua")
    register["Mastodonte"] = love.filesystem.load(ents.objectpath .. "Mastodonte.lua")
+   register["HeavyTank"] = love.filesystem.load(ents.objectpath .. "HeavyTank.lua")
    register["Explosion"] = love.filesystem.load(ents.objectpath .. "Explosion.lua")
    register["ExplosionBomb"] = love.filesystem.load(ents.objectpath .. "ExplosionBomb.lua")
    register["TankEnnemie"] = love.filesystem.load(ents.objectpath .. "TankEnnemie.lua")
    register["Bomb"] = love.filesystem.load(ents.objectpath .. "Bomb.lua")
    register["Medikit"] = love.filesystem.load(ents.objectpath .. "Medikit.lua")
    register["Vitesse"] = love.filesystem.load(ents.objectpath .. "Vitesse.lua")
+   register["Resistance"] = love.filesystem.load(ents.objectpath .. "Resistance.lua")
    register["SpeedOn"] = love.filesystem.load(ents.objectpath .. "SpeedOn.lua")
    register["SpecialM"] = love.filesystem.load(ents.objectpath .. "SpecialM.lua")
 end
@@ -121,6 +123,20 @@ function ents:update(dt)
 		     break
 		  end
 	       elseif obj.type == "TankEnnemie" then
+		  local distance = ((ent.x - obj.x) ^ 2.5 + (ent.y - obj.y) ^ 2) ^ 0.5
+		  if distance < (obj.image:getWidth() / 2 + ent.image:getWidth() / 2) * Reso.Scale then
+		     obj.health = obj.health - Tank.Dammage
+		     local impact = love.audio.newSource("Sounds/impact.mp3", "stream")
+		     impact:setVolume(0.75)
+		     love.audio.play(impact)
+		     ents.Create("Explosion", obj.x, obj.y)
+		     if obj.health < 0 then
+			ents.Destroy(obj.id)
+		     end
+		     ents.Destroy(ent.id)
+		     break
+		  end
+		  elseif obj.type == "HeavyTank" then
 		  local distance = ((ent.x - obj.x) ^ 2.5 + (ent.y - obj.y) ^ 2) ^ 0.5
 		  if distance < (obj.image:getWidth() / 2 + ent.image:getWidth() / 2) * Reso.Scale then
 		     obj.health = obj.health - Tank.Dammage

@@ -21,11 +21,6 @@ require "BaseTank"
 require "Tourelle"
 require "Collision"
 
---- Chargement du tank et tourelle.
-function TankLoad()
-   TourelleLoad()
-end
-
 --- Affichage du tank et tourelle.
 function TankDraw()
    BaseTankDraw(Tank.BaseImage, Tank.Position.x, Tank.Position.y, Tank.Angle.Base)

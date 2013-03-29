@@ -19,11 +19,6 @@
 
 love.mouse.setVisible(false)
 
---- Charge le viseur que la tourelle suivra.
-function TourelleLoad()
-   viseur = love.graphics.newImage("Images/viseur2.png")
-end
-
 --- Affichage du tank et tourelle.
 -- On dessine successivement la base du tank puis la tourelle par dessus.
 -- @param Image Base du tank.
@@ -35,9 +30,9 @@ function TourelleDraw(Image, x, y, Angle, Width)
    local Width2 = Image:getWidth()/2 - width
    local Height = Image:getHeight()/2
    love.graphics.draw(Image, x, y, Angle, Reso.Scale, Reso.Scale, Width2, Height)
-   largeur = viseur:getWidth()/2
-   hauteur = viseur:getHeight()/2
-   love.graphics.draw(viseur , love.mouse.getX(), love.mouse.getY(), 0, Reso.Scale, Reso.Scale, largeur, hauteur)
+   love.graphics.setColor(255, 0, 0, 255)
+   love.graphics.circle("fill", love.mouse.getX(), love.mouse.getY(), 2, 10)
+   love.graphics.reset()
 end
 
 --- Mise-a-jour de l'angle de la tourelle.
