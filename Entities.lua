@@ -44,6 +44,7 @@ function ents.Startup()
    register["Medikit"] = love.filesystem.load(ents.objectpath .. "Medikit.lua")
    register["Vitesse"] = love.filesystem.load(ents.objectpath .. "Vitesse.lua")
    register["SpeedOn"] = love.filesystem.load(ents.objectpath .. "SpeedOn.lua")
+   register["SpecialM"] = love.filesystem.load(ents.objectpath .. "SpecialM.lua")
 end
 
 --- Une fonction d'heritage.

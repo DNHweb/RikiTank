@@ -124,6 +124,7 @@ function GroundLoad()
    picMissileE = love.graphics.newImage("Images/MissileE.png")
    picMissileM = love.graphics.newImage("Images/MissileM.png")
    picVitesse = love.graphics.newImage("Images/BonusVitesse.png")
+   picSpecialM = love.graphics.newImage("Images/SpecialM.png")
    
    Explosion = love.graphics.newImage("Images/explosion.png")
    ExplosionBomb = love.graphics.newImage("Images/explosionBomb.png")

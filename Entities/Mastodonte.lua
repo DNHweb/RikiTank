@@ -38,6 +38,7 @@ function ent:load( x, y )
    self.xx = Reso.Width / 6
    self.yy = Reso.Height / 6
    self.stime = love.timer.getTime()
+   self.qtime = love.timer.getTime()
 end
 
 --- Code a executer avant la destruction de l'entite.
@@ -92,6 +93,17 @@ function	ent:update(dt)
 	 end
 	 self.stime = love.timer.getTime()
       end
+   end
+   if etime - self.qtime > 10 then
+      ents.Create("SpecialM", self.x, self.y, 0)
+      ents.Create("SpecialM", self.x, self.y, math.pi / 4)
+      ents.Create("SpecialM", self.x, self.y, math.pi / 2)
+      ents.Create("SpecialM", self.x, self.y, (3 * math.pi) / 4)
+      ents.Create("SpecialM", self.x, self.y, math.pi)
+      ents.Create("SpecialM", self.x, self.y, (5 * math.pi) / 4)
+      ents.Create("SpecialM", self.x, self.y, (3 * math.pi) / 2)
+      ents.Create("SpecialM", self.x, self.y, (7 * math.pi) / 4)
+      self.qtime = love.timer.getTime()
    end
    if distance < (self.image:getWidth() / 2 + Tank.BaseImage:getWidth() / 2) * Reso.Scale then
       Tank.Health = 0
