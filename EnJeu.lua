@@ -45,7 +45,7 @@ function		EnJeu()
 	 local xWalker, yWalker = getRandomCoord()
 	 ents.Create("Walker", xWalker, yWalker)
 	 PopHeavyTank = PopHeavyTank + 1
-		if PopHeavyTank >= 15 then
+		if PopHeavyTank >= 10 then
 			local xHT, yHT = getRandomCoord()
 			ents.Create("HeavyTank", xHT, yHT)
 			stime = love.timer.getTime()
@@ -72,7 +72,7 @@ function		EnJeu()
       if Tank.Score > Tank.Old_Score then
 	 Tank.Old_Score = Tank.Score
       end
-      FinPartie()
+      EtatJeu = "GameOver"
    end
 end
 
@@ -92,15 +92,6 @@ function 		Boss()
    else
       Tank.Health = 0
       ents.objects = {}
-      FinPartie()
+      EtatJeu = "GameOver"
    end
-end
-
---- Affichage du game over.
-function		FinPartie()
-   love.graphics.setFont(countdownFont)
-   love.graphics.draw(Transparent, 0, 0, 0, Reso.Width/2, Reso.Height/2)
-   love.graphics.draw(GameOver, Reso.Width/2, Reso.Height/1.8, 0, 1, 1, GameOver:getWidth()/2, GameOver:getHeight()/2)
-   love.graphics.printf("Score " .. Tank.Score, Reso.Width / 2, Reso.Height / 30, 0, "center")
-   love.graphics.setFont(normalFont)
 end

@@ -49,6 +49,11 @@ end
 --- Creation du menu.
 -- Charge les boutons et affiche le menu a l'ecran.
 function ChoixTankLoad()
+
+	LogoRT = love.graphics.newImage("Images/LogoRT.png")
+	ImageTankMenu = love.graphics.newImage("Images/ImageTankMenu.png")
+	ImageTankPause = love.graphics.newImage("Images/ImageTankPause.png")
+	
    JouerOn = love.graphics.newImage("Images/Menu/JouerOn.png")
    JouerOff = love.graphics.newImage("Images/Menu/JouerOff.png")
    MenuOn = love.graphics.newImage("Images/Menu/MenuOn.png")
@@ -61,6 +66,8 @@ function ChoixTankLoad()
    ValiderOff = love.graphics.newImage("Images/Menu/ValiderOff.png")
    AnnulerOn = love.graphics.newImage("Images/Menu/AnnulerOn.png")
    AnnulerOff = love.graphics.newImage("Images/Menu/AnnulerOff.png")
+   ReprendreOn = love.graphics.newImage("Images/Menu/ReprendreOn.png")
+   ReprendreOff = love.graphics.newImage("Images/Menu/ReprendreOff.png")
    QuitterOn = love.graphics.newImage("Images/Menu/QuitterOn.png")
    QuitterOff = love.graphics.newImage("Images/Menu/QuitterOff.png")
    Tank1On = love.graphics.newImage("Images/Menu/Tank1On.png")
@@ -79,9 +86,9 @@ function ChoixTankLoad()
 			Quitter1 = {On = QuitterOn, Off = QuitterOff, x = 120, y =(3*Reso.Height/4)-35, Width = 260, Height = 70, Id = "Quitter1"}
 		},
 		Pause = {
-			Reprendre = {On = JouerOn, Off = JouerOff, x = 100, y =(Reso.Height/4)-35, Width = 260, Height = 70, Id = "Reprendre"},
-			Menu = {On = MenuOn, Off = MenuOff, x = 100, y = (Reso.Height/2)-35, Width = 260, Height = 70, Id = "Menu"},
-			Quitter2 = {On = QuitterOn, Off = QuitterOff, x = 100, y = (3*Reso.Height/4)-35, Width = 260, Height = 70, Id = "Quitter2"}
+			Reprendre = {On = ReprendreOn, Off = ReprendreOff, x = 120, y =(Reso.Height/3)+15, Width = 260, Height = 70, Id = "Reprendre"},
+			Menu = {On = MenuOn, Off = MenuOff, x = 120, y = (Reso.Height/2)+22, Width = 260, Height = 70, Id = "Menu"},
+			Quitter2 = {On = QuitterOn, Off = QuitterOff, x = 120, y = (3*Reso.Height/4)-35, Width = 260, Height = 70, Id = "Quitter2"}
 		},
 		Choix = {
 			Tank1 = {On = Tank1On, Off = Tank1Off, x = (Reso.Width/4)-115, y = (Reso.Height/2)-115, Width = 230, Height = 230, Id = "Tank1"},
@@ -89,7 +96,7 @@ function ChoixTankLoad()
 			Tank3 = {On = Tank3On, Off = Tank3Off, x = (3*Reso.Width/4)-115, y = (Reso.Height/2)-115, Width = 230, Height = 230, Id = "Tank3"}
 		},
 		GameOver = {
-			Menu = {On = MenuOn, Off = MenuOff, x = (Reso.Width/2)-70, y = (Reso.Height/2)-35, Width = 260, Height = 70, Id = "Menu"}
+			Menu = {On = MenuOn, Off = MenuOff, x = (Reso.Width/2)-130, y = (Reso.Height)-140, Width = 260, Height = 70, Id = "Menu"}
 		},
 		Regles = {
 			Retour = {On = RetourOn, Off = RetourOff, x = (Reso.Width)-53, y = (Reso.Height)-53, Width = 33, Height = 33, Id = "Retour"}
@@ -128,9 +135,6 @@ end
 --- Chargement du decor
 -- Charge en memoire les images composant le decor.
 function GroundLoad()
-	LogoRT = love.graphics.newImage("Images/LogoRT.png")
-	ImageTank = love.graphics.newImage("Images/ImageTank.png")
-
    Ground1 = love.graphics.newImage("Images/Ground.jpg")
    Mur1 = love.graphics.newImage("Images/Murs/Horizontal.png")
    

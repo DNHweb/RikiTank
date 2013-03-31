@@ -59,7 +59,7 @@ function EtatJeuDraw()
 	love.audio.play(musicMenu)
 	if EtatJeu == "Menu" then
 		love.graphics.draw(LogoRT, Reso.Width/2 - (LogoRT:getWidth()/2), 15)
-		love.graphics.draw(ImageTank, Reso.Width - ImageTank:getWidth(), Reso.Height - ImageTank:getHeight())
+		love.graphics.draw(ImageTankMenu, Reso.Width - ImageTankMenu:getWidth(), Reso.Height - ImageTankMenu:getHeight())
 		love.mouse.setVisible(true)
 		for k, v in pairs(Bouton.Main) do
 			drawButton( v.Off, v.On, v.x, v.y, v.Width, v.Height, x, y )
@@ -87,7 +87,25 @@ function EtatJeuDraw()
    
 	if EtatJeu == "Pause" then
 		love.mouse.setVisible(true)
+		love.graphics.setFont(countdownFont)
+		love.graphics.printf("Pause", (Reso.Width/2)-100, 70, 200, "center")
+		love.graphics.draw(ImageTankPause, Reso.Width - ImageTankPause:getWidth(), Reso.Height - ImageTankPause:getHeight() - 50)
 		for k, v in pairs(Bouton.Pause) do
+			drawButton( v.Off, v.On, v.x, v.y, v.Width, v.Height, x, y )
+		end
+		love.graphics.setFont(normalFont)
+	end
+	
+	if EtatJeu == "GameOver" then
+		love.mouse.setVisible(true)
+		GroundDraw()
+		Map()
+		love.graphics.setFont(countdownFont)
+		love.graphics.draw(Transparent, 0, 0, 0, Reso.Width/2, Reso.Height/2)
+		love.graphics.draw(GameOver, Reso.Width/2, (Reso.Height/3)+140, 0, 1, 1, GameOver:getWidth()/2, GameOver:getHeight()/2)
+		love.graphics.printf("Score " .. Tank.Score, (Reso.Width/2)-15, 30, 30, "center")
+		love.graphics.setFont(normalFont)
+		for k, v in pairs(Bouton.GameOver) do
 			drawButton( v.Off, v.On, v.x, v.y, v.Width, v.Height, x, y )
 		end
 	end
@@ -95,6 +113,9 @@ function EtatJeuDraw()
 	--> Validation de continuer ou non la partie <--
 	if EtatJeu == "Valide1" then
 		love.mouse.setVisible(true)
+		love.graphics.setFont(countdownFont)
+		love.graphics.printf("Pause", (Reso.Width/2)-100, 70, 200, "center")
+		love.graphics.draw(ImageTankPause, Reso.Width - ImageTankPause:getWidth(), Reso.Height - ImageTankPause:getHeight() - 50)
 		for k, v in pairs(Bouton.Pause) do
 			drawButton( v.Off, v.On, v.x, v.y, v.Width, v.Height, x, y )
 		end
@@ -102,12 +123,16 @@ function EtatJeuDraw()
 		for k, v in pairs(Bouton.Valide) do
 			drawButton( v.Off, v.On, v.x, v.y, v.Width, v.Height, x, y )
 		end
+		love.graphics.setFont(normalFont)
 		love.graphics.printf("Etes-vous sur de vouloir quitter la partie en cours et revenir au menu principal ?", Reso.Width/2-175, (Reso.Height/2)-50, 350, "center")
 	end
 	
-	--> Validation de quitter le jeu ou nom dans le menu pause <--
+	--> Validation de quitter le jeu ou non dans le menu pause <--
 	if EtatJeu == "Valide2" then
 		love.mouse.setVisible(true)
+		love.graphics.setFont(countdownFont)
+		love.graphics.printf("Pause", (Reso.Width/2)-100, 70, 200, "center")
+		love.graphics.draw(ImageTankPause, Reso.Width - ImageTankPause:getWidth(), Reso.Height - ImageTankPause:getHeight() - 50)
 		for k, v in pairs(Bouton.Pause) do
 			drawButton( v.Off, v.On, v.x, v.y, v.Width, v.Height, x, y )
 		end
@@ -115,15 +140,16 @@ function EtatJeuDraw()
 		for k, v in pairs(Bouton.Valide) do
 			drawButton( v.Off, v.On, v.x, v.y, v.Width, v.Height, x, y )
 		end
+		love.graphics.setFont(normalFont)
 		love.graphics.printf("Etes-vous sur de vouloir quitter la partie en cours et revenir au bureau ?", Reso.Width/2-175, (Reso.Height/2)-50, 350, "center")
 	end
 	
-	--> Validation de quitter le jeu ou nom dans le menu principal <--
+	--> Validation de quitter le jeu ou non dans le menu principal <--
 	if EtatJeu == "Valide3" then
-		love.graphics.setFont(normalFont)
 		love.mouse.setVisible(true)
+		love.graphics.setFont(normalFont)
 		love.graphics.draw(LogoRT, Reso.Width/2 - (LogoRT:getWidth()/2), 15)
-		love.graphics.draw(ImageTank, Reso.Width - ImageTank:getWidth(), Reso.Height - ImageTank:getHeight())
+		love.graphics.draw(ImageTankMenu, Reso.Width - ImageTankMenu:getWidth(), Reso.Height - ImageTankMenu:getHeight())
 		for k, v in pairs(Bouton.Main) do
 			drawButton( v.Off, v.On, v.x, v.y, v.Width, v.Height, x, y )
 		end
@@ -257,6 +283,15 @@ function love.mousepressed(x, y, button )
 						love.audio.play(SonMenu2)
 						love.event.push("quit")
 					elseif v.Id == "Annuler" then
+						love.audio.play(SonMenu2)
+						EtatJeu = "Menu"
+					end
+				end
+			end
+		elseif EtatJeu == "GameOver" then
+			for k, v in pairs(Bouton.GameOver) do
+				if x > v.x and x < v.x + v.Width and y > v.y and  y < v.y + v.Height then
+					if v.Id == "Menu" then
 						love.audio.play(SonMenu2)
 						EtatJeu = "Menu"
 					end
