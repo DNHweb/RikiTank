@@ -347,10 +347,10 @@ function ChargerTank3()
    Tank.BaseImage = love.graphics.newImage("Images/BaseTank3.png")
    Tank.TourelleImage = love.graphics.newImage("Images/TourelleTank3.png")
    Tank.RotTourelleWidth = 50
-   Tank.Vitesse = Speed
+   Tank.Vitesse = (Speed * 6) / 7
    Tank.Dammage = 24
-   Tank.Health = 135
-   Tank.HealthBase = 135
+   Tank.Health = 180
+   Tank.HealthBase = 180
    Tank.CadenceTir = 2.38
    Tank.Position.x = Reso.Width/2
    Tank.Position.y = Reso.Height/4 

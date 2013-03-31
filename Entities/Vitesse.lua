@@ -46,7 +46,7 @@ function	ent:update(dt)
    local etime = love.timer.getTime()
    
    if distance < (self.image:getWidth() / 2 + Tank.BaseImage:getWidth() / 2) * Reso.Scale then
-      Tank.Vitesse = Tank.Vitesse + (Speed * 0.20)
+      Tank.Vitesse = Tank.Vitesse + (Speed * 0.35)
       ents.Create("SpeedOn", Reso.Width - (Reso.Width / 19), Reso.Height / 17)
       ents.Destroy(self.id)
    end
