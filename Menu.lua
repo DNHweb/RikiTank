@@ -53,59 +53,116 @@ end
 -- Etat de jeu : choix, pause, countdown, en jeu.
 -- Dans cette fonction on a la gestion des menus et la gestion d'une partie.
 function EtatJeuDraw()
-   local x = love.mouse.getX( )
-   local y = love.mouse.getY( )
+	local x = love.mouse.getX( )
+	local y = love.mouse.getY( )
    
-   love.audio.play(musicMenu)
-   if EtatJeu == "Menu" then
-      love.mouse.setVisible(true)
-      for k, v in pairs(Bouton.Main) do
-	 drawButton( v.Off, v.On, v.x, v.y, v.Width, v.Height, x, y )
-      end
-   end
+	love.audio.play(musicMenu)
+	if EtatJeu == "Menu" then
+		love.graphics.draw(LogoRT, Reso.Width/2 - (LogoRT:getWidth()/2), 15)
+		love.graphics.draw(ImageTank, Reso.Width - ImageTank:getWidth(), Reso.Height - ImageTank:getHeight())
+		love.mouse.setVisible(true)
+		for k, v in pairs(Bouton.Main) do
+			drawButton( v.Off, v.On, v.x, v.y, v.Width, v.Height, x, y )
+		end
+	end
    
-   if EtatJeu == "Choix" then
-      love.mouse.setVisible(true)
-      for k, v in pairs(Bouton.Choix) do
-	 drawButton( v.Off, v.On, v.x, v.y, v.Width, v.Height, x, y )
-      end
-   end
+	if EtatJeu == "Regles" then
+		love.mouse.setVisible(true)
+		love.graphics.setFont(normalFont)
+		love.graphics.printf("Ici prochainement les regles du jeu.", (Reso.Width/2)-250, Reso.Height/2, 500, "center")
+		for k, v in pairs(Bouton.Regles) do
+			drawButton( v.Off, v.On, v.x, v.y, v.Width, v.Height, x, y )
+		end
+	end
    
-   if EtatJeu == "Pause" then
-      love.mouse.setVisible(true)
-      for k, v in pairs(Bouton.Pause) do
-	 drawButton( v.Off, v.On, v.x, v.y, v.Width, v.Height, x, y )
-      end
-   end
+	if EtatJeu == "Choix" then
+		love.mouse.setVisible(true)
+		for k, v in pairs(Bouton.Choix) do
+			drawButton( v.Off, v.On, v.x, v.y, v.Width, v.Height, x, y )
+		end
+		for k, v in pairs(Bouton.Regles) do
+			drawButton( v.Off, v.On, v.x, v.y, v.Width, v.Height, x, y )
+		end
+	end
    
-   if EtatJeu == "Countdown" then
-      love.mouse.setVisible(false)
-      GroundDraw()
-      Map()
-      TankDraw()
-      love.graphics.setFont(countdownFont)
-      love.graphics.draw(Transparent, 0, 0, 0, Reso.Width/2, Reso.Height/2)
-      love.graphics.printf(Countdown, Reso.Width / 2, Reso.Height / 2, 0, "center")
-      love.graphics.setFont(normalFont)
-   end
-   
-   if EtatJeu == "EnJeu" then
-      EnJeu()
-   end
+	if EtatJeu == "Pause" then
+		love.mouse.setVisible(true)
+		for k, v in pairs(Bouton.Pause) do
+			drawButton( v.Off, v.On, v.x, v.y, v.Width, v.Height, x, y )
+		end
+	end
 	
-   if EtatJeu == "Boss" then
-      Boss()
-   end
+	--> Validation de continuer ou non la partie <--
+	if EtatJeu == "Valide1" then
+		love.mouse.setVisible(true)
+		for k, v in pairs(Bouton.Pause) do
+			drawButton( v.Off, v.On, v.x, v.y, v.Width, v.Height, x, y )
+		end
+		love.graphics.draw(Transparent, 0, 0, 0, Reso.Width/2, Reso.Height/2)
+		for k, v in pairs(Bouton.Valide) do
+			drawButton( v.Off, v.On, v.x, v.y, v.Width, v.Height, x, y )
+		end
+		love.graphics.printf("Etes-vous sur de vouloir quitter la partie en cours et revenir au menu principal ?", Reso.Width/2-175, (Reso.Height/2)-50, 350, "center")
+	end
 	
-   if love.mouse.isDown("l") then
-      local dt2 = love.timer.getTime()
-      if ((dt2 - Tank.Tir) > 1 / Tank.CadenceTir) then
-	 xMissile = Tank.Position.x + (Tank.TourelleImage:getWidth() - Tank.RotTourelleWidth) * math.cos(Tank.Angle.Tourelle)
-	 yMissile = Tank.Position.y + (Tank.TourelleImage:getWidth() - Tank.RotTourelleWidth) * math.sin(Tank.Angle.Tourelle)
-	 ents.Create("Missile", xMissile, yMissile)
-	 Tank.Tir = love.timer.getTime()
-      end
-   end
+	--> Validation de quitter le jeu ou nom dans le menu pause <--
+	if EtatJeu == "Valide2" then
+		love.mouse.setVisible(true)
+		for k, v in pairs(Bouton.Pause) do
+			drawButton( v.Off, v.On, v.x, v.y, v.Width, v.Height, x, y )
+		end
+		love.graphics.draw(Transparent, 0, 0, 0, Reso.Width/2, Reso.Height/2)
+		for k, v in pairs(Bouton.Valide) do
+			drawButton( v.Off, v.On, v.x, v.y, v.Width, v.Height, x, y )
+		end
+		love.graphics.printf("Etes-vous sur de vouloir quitter la partie en cours et revenir au bureau ?", Reso.Width/2-175, (Reso.Height/2)-50, 350, "center")
+	end
+	
+	--> Validation de quitter le jeu ou nom dans le menu principal <--
+	if EtatJeu == "Valide3" then
+		love.graphics.setFont(normalFont)
+		love.mouse.setVisible(true)
+		love.graphics.draw(LogoRT, Reso.Width/2 - (LogoRT:getWidth()/2), 15)
+		love.graphics.draw(ImageTank, Reso.Width - ImageTank:getWidth(), Reso.Height - ImageTank:getHeight())
+		for k, v in pairs(Bouton.Main) do
+			drawButton( v.Off, v.On, v.x, v.y, v.Width, v.Height, x, y )
+		end
+		love.graphics.draw(Transparent, 0, 0, 0, Reso.Width/2, Reso.Height/2)
+		for k, v in pairs(Bouton.Valide) do
+			drawButton( v.Off, v.On, v.x, v.y, v.Width, v.Height, x, y )
+		end
+		love.graphics.printf("Etes-vous sur de vouloir quitter la partie en cours et revenir au bureau ?", (Reso.Width/2)-175, (Reso.Height/2)-50, 350, "center")
+	end
+   
+	if EtatJeu == "Countdown" then
+		love.mouse.setVisible(false)
+		GroundDraw()
+		Map()
+		TankDraw()
+		love.graphics.draw(Transparent, 0, 0, 0, Reso.Width/2, Reso.Height/2)
+		love.graphics.printf("La partie debute dans :",( Reso.Width/2)-100, (Reso.Height/2)-50, 200, "center")
+		love.graphics.setFont(countdownFont)
+		love.graphics.printf(Countdown, (Reso.Width/2)-10, Reso.Height/2, 10, "center")
+		love.graphics.setFont(normalFont)
+	end
+   
+	if EtatJeu == "EnJeu" then
+		EnJeu()
+	end
+	
+	if EtatJeu == "Boss" then
+		Boss()
+	end
+	
+	if love.mouse.isDown("l") then
+		local dt2 = love.timer.getTime()
+		if ((dt2 - Tank.Tir) > 1 / Tank.CadenceTir) then
+			xMissile = Tank.Position.x + (Tank.TourelleImage:getWidth() - Tank.RotTourelleWidth) * math.cos(Tank.Angle.Tourelle)
+			yMissile = Tank.Position.y + (Tank.TourelleImage:getWidth() - Tank.RotTourelleWidth) * math.sin(Tank.Angle.Tourelle)
+			ents.Create("Missile", xMissile, yMissile)
+			Tank.Tir = love.timer.getTime()
+		end
+	end
 end
 
 --- Verifie le clique souris.
@@ -115,64 +172,119 @@ end
 -- @param y Position y de la souris.
 -- @param button Le bouton presse sur la souris.
 function love.mousepressed(x, y, button )
-   if button == "l" then
-      if EtatJeu == "Menu" then
-	 for k, v in pairs(Bouton.Main) do
-	    if x > v.x and x < v.x + v.Width and y > v.y and  y < v.y + v.Height then
-	       if v.Id == "GoChoixTank" then
-		  love.audio.play(SonMenu2)
-		  EtatJeu = "Choix"
-	       elseif v.Id == "Quitter1" then
-		  love.event.push("quit")
-	       end
-	    end
-	 end
-      elseif EtatJeu == "Choix" then
-	 for k, v in pairs(Bouton.Choix) do
-	    if x > v.x and x < v.x + v.Width and y > v.y and  y < v.y + v.Height then
-	       --> Si on choisit le Tank 1 <--
-	       if v.Id == "Tank1" then
-		  love.audio.play(SonMenu2)
-		  ChargerTank1()
-		  EtatJeu = "Countdown"
-	       end
-	       --> Si on choisit le Tank 2 <--
-	       if v.Id == "Tank2" then
-		  love.audio.play(SonMenu2)
-		  ChargerTank2()
-		  EtatJeu = "Countdown"
-	       end
-	       --> Si on choisit le Tank 3 <--
-	       if v.Id == "Tank3" then
-		  love.audio.play(SonMenu2)
-		  ChargerTank3()
-		  EtatJeu = "Countdown"
-	       end
-	       ents.objects = {}
-	    end
-	 end
-      elseif EtatJeu == "Pause" then
-	 for k, v in pairs(Bouton.Pause) do
-	    if x > v.x and x < v.x + v.Width and y > v.y and  y < v.y + v.Height then
-	       if v.Id == "Reprendre" then
-		  love.audio.play(SonMenu2)
-		  if oldEJ == 0 then
-		     EtatJeu = "EnJeu"
-		  elseif oldEJ == 1 then
-		     EtatJeu = "Boss"
-		  end
-		  --> Si on choisit le bouton menu du menu pause <--
-	       elseif v.Id == "Menu" then
-		  love.audio.play(SonMenu2)
-		  EtatJeu = "Menu"
-		  --> Si on choisit le bouton quitter du menu pause <--
-	       elseif v.Id == "Quitter2" then
-		  love.event.push("quit")
-	       end
-	    end
-	 end
-      end
-   end
+	if button == "l" then
+		if EtatJeu == "Menu" then
+			for k, v in pairs(Bouton.Main) do
+				if x > v.x and x < v.x + v.Width and y > v.y and  y < v.y + v.Height then
+					if v.Id == "GoChoixTank" then
+						love.audio.play(SonMenu2)
+						EtatJeu = "Choix"
+					elseif v.Id == "Regles" then
+						love.audio.play(SonMenu2)
+						EtatJeu = "Regles"
+					elseif v.Id == "Quitter1" then
+						EtatJeu = "Valide3"
+					end
+				end
+			end
+		elseif EtatJeu == "Regles" then
+			for k, v in pairs(Bouton.Regles) do
+				if x > v.x and x < v.x + v.Width and y > v.y and  y < v.y + v.Height then
+					love.audio.play(SonMenu2)
+					EtatJeu = "Menu"
+				end
+			end
+		elseif EtatJeu == "Choix" then
+			for k, v in pairs(Bouton.Choix) do
+				if x > v.x and x < v.x + v.Width and y > v.y and  y < v.y + v.Height then
+					--> Si on choisit le Tank 1 <--
+					if v.Id == "Tank1" then
+						love.audio.play(SonMenu2)
+						ChargerTank1()
+						EtatJeu = "Countdown"
+					end
+					--> Si on choisit le Tank 2 <--
+					if v.Id == "Tank2" then
+						love.audio.play(SonMenu2)
+						ChargerTank2()
+						EtatJeu = "Countdown"
+					end
+					--> Si on choisit le Tank 3 <--
+					if v.Id == "Tank3" then
+						love.audio.play(SonMenu2)
+						ChargerTank3()
+						EtatJeu = "Countdown"
+					end
+				ents.objects = {}
+				end
+			end
+			for k, v in pairs(Bouton.Regles) do
+				if x > v.x and x < v.x + v.Width and y > v.y and  y < v.y + v.Height then
+					if v.Id == "Retour" then
+						love.audio.play(SonMenu2)
+						EtatJeu = "Menu"
+					end
+				end
+			end
+		elseif EtatJeu == "Valide1" then
+			for k, v in pairs(Bouton.Valide) do
+				if x > v.x and x < v.x + v.Width and y > v.y and  y < v.y + v.Height then
+					if v.Id == "Valider" then
+						love.audio.play(SonMenu2)
+						EtatJeu = "Menu"
+					elseif v.Id == "Annuler" then
+						love.audio.play(SonMenu2)
+						EtatJeu = "Pause"
+					end
+				end
+			end
+		elseif EtatJeu == "Valide2" then
+			for k, v in pairs(Bouton.Valide) do
+				if x > v.x and x < v.x + v.Width and y > v.y and  y < v.y + v.Height then
+					if v.Id == "Valider" then
+						love.audio.play(SonMenu2)
+						love.event.push("quit")
+					elseif v.Id == "Annuler" then
+						love.audio.play(SonMenu2)
+						EtatJeu = "Pause"
+					end
+				end
+			end
+		elseif EtatJeu == "Valide3" then
+			for k, v in pairs(Bouton.Valide) do
+				if x > v.x and x < v.x + v.Width and y > v.y and  y < v.y + v.Height then
+					if v.Id == "Valider" then
+						love.audio.play(SonMenu2)
+						love.event.push("quit")
+					elseif v.Id == "Annuler" then
+						love.audio.play(SonMenu2)
+						EtatJeu = "Menu"
+					end
+				end
+			end
+		elseif EtatJeu == "Pause" then
+			for k, v in pairs(Bouton.Pause) do
+				if x > v.x and x < v.x + v.Width and y > v.y and  y < v.y + v.Height then
+					if v.Id == "Reprendre" then
+						love.audio.play(SonMenu2)
+						if oldEJ == 0 then
+							EtatJeu = "EnJeu"
+						elseif oldEJ == 1 then
+							EtatJeu = "Boss"
+						end
+						--> Si on choisit le bouton menu du menu pause <--
+					elseif v.Id == "Menu" then
+						love.audio.play(SonMenu2)
+						EtatJeu = "Valide1"
+						--> Si on choisit le bouton quitter du menu pause <--
+					elseif v.Id == "Quitter2" then
+						love.audio.play(SonMenu2)
+						EtatJeu = "Valide2"
+					end
+				end
+			end
+		end
+	end
 end
 
 --- Verifie les touches tape au clavier.
@@ -180,20 +292,20 @@ end
 -- Si on clique sur Echappe dans le menu pause, le jeu reprend.
 -- @param key La touche tape sur le clavier.
 function love.keypressed(key)
-   if key == "escape" and (EtatJeu=="EnJeu" or EtatJeu == "Boss") then
-      if EtatJeu == "Boss" then
-	 oldEJ = 1
-      else 
-	 oldEJ = 0
-      end
-      EtatJeu = "Pause"
-   elseif key == "escape" and EtatJeu=="Pause" then
-      if oldEJ == 1 then
-	 EtatJeu = "Boss"
-      elseif oldEJ == 0 then
-	 EtatJeu = "EnJeu"
-      end
-   end
+	if key == "escape" and (EtatJeu=="EnJeu" or EtatJeu == "Boss") then
+		if EtatJeu == "Boss" then
+			oldEJ = 1
+		else 
+			oldEJ = 0
+		end
+		EtatJeu = "Pause"
+	elseif key == "escape" and EtatJeu=="Pause" then
+		if oldEJ == 1 then
+			EtatJeu = "Boss"
+		elseif oldEJ == 0 then
+			EtatJeu = "EnJeu"
+		end
+	end
 end
 
 --- Charge le tank 1.
