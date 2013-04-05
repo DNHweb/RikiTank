@@ -30,50 +30,50 @@ BossScore = 0
 -- On cree les ennemis ici, on dessine l'ATH et le tank.
 -- Si la partie est termine, le contenu du tableau d'objets est efface, on lance le game over.
 function		EnJeu()
-   love.audio.stop(musicMenu)
-   love.mouse.setVisible(false)
-   GroundDraw()
-   ents:draw()
-   if Tank.Health > 0 then
-      -- Timer pour l'apparition des ennemis
-      local etime = love.timer.getTime()
-      local bombCheck = love.timer.getTime()
+	love.audio.stop(musicMenu)
+	love.mouse.setVisible(false)
+	GroundDraw()
+	
+	if Tank.Health > 0 then
+		-- Timer pour l'apparition des ennemis
+		local etime = love.timer.getTime()
+		local bombCheck = love.timer.getTime()
       
-      if etime - stime > nbSeconde then
-	 local xTE, yTE = getRandomCoord()
-	 ents.Create("TankEnnemie", xTE, yTE)
-	 local xWalker, yWalker = getRandomCoord()
-	 ents.Create("Walker", xWalker, yWalker)
-	 PopHeavyTank = PopHeavyTank + 1
-		if PopHeavyTank >= 10 then
-			local xHT, yHT = getRandomCoord()
-			ents.Create("HeavyTank", xHT, yHT)
+		if etime - stime > nbSeconde then
+			local xTE, yTE = getRandomCoord()
+			ents.Create("TankEnnemie", xTE, yTE)
+			local xWalker, yWalker = getRandomCoord()
+			ents.Create("Walker", xWalker, yWalker)
+			PopHeavyTank = PopHeavyTank + 1
+			if PopHeavyTank >= 10 then
+				local xHT, yHT = getRandomCoord()
+				ents.Create("HeavyTank", xHT, yHT)
+				stime = love.timer.getTime()
+				PopHeavyTank = 0
+			end
 			stime = love.timer.getTime()
-			PopHeavyTank = 0
 		end
-	 stime = love.timer.getTime()
-      end
       
-      if Tank.PopBoss >= 750 then
-	 EtatJeu = "Boss"
-      end
-	  
-	  
-      
-      --[[
-      if bombCheck - bombTime >= 23 then
-	 bombTime = love.timer.getTime()
-	 ents.Create("Bomb", 400, 400)
-      end]]--
-      TankDraw()
-      ATH_Life()
-   else
-      ents.objects = {}
-      if Tank.Score > Tank.Old_Score then
-	 Tank.Old_Score = Tank.Score
-      end
-      EtatJeu = "GameOver"
-   end
+		if Tank.PopBoss >= 750 then
+			EtatJeu = "Boss"
+		end
+		
+		--[[
+		if bombCheck - bombTime >= 23 then
+		bombTime = love.timer.getTime()
+		ents.Create("Bomb", 400, 400)
+		end]]--
+		TankDraw()
+		ents:draw()
+		ATH_Life()
+	else
+		ents.objects = {}
+		if Tank.Score > Tank.Old_Score then
+			Tank.Old_Score = Tank.Score
+		end
+		EtatJeu = "GameOver"
+		--love.audio.play(ExplosionTank)
+	end
 end
 
 function 		Boss()

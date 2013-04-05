@@ -26,6 +26,7 @@
 -- @param dt Delta Temps.
 -- @return La nouvelle coordonnee en x.
 -- @return La nouvelle coordonnee en y.
+
 function Avancer(x, y, Angle, Vitesse, dt)
    if (love.keyboard.isDown("w") or love.keyboard.isDown("up") or love.keyboard.isDown("z")) then
       Tank.OldPosition.x = x

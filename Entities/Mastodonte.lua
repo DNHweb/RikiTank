@@ -46,7 +46,7 @@ function ent:Die()
    love.audio.play(SonExplosion)
    ents.Create("Explosion", self.x, self.y)
    Tank.Score = Tank.Score + 500
-   
+   Tank.PourcentagePassif = Tank.PourcentagePassif + 20
    if (Tank.Health + 100 > Tank.HealthBase) then
       Tank.Health = Tank.HealthBase
    else

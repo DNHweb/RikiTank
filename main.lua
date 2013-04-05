@@ -23,6 +23,8 @@ require "Menu"
 require "Entities"
 require "Initialisation"
 require "AnAL"
+require "Sort"
+require "Passif"
 
 --[[ ---------------------------------------
 -- | Declaration des structures et variables
@@ -54,12 +56,17 @@ Tank = {
    Tir = love.timer.getTime(),
    Score = 0,
    PopBoss = 0,
-   Old_Score = 0
+   Old_Score = 0,
+   PourcentagePassif = 0,
 }
 
 Countdown = 3
 CountdownSpeed = 1
 CountdownTimer = 0
+
+CountdownSpeedSort = 1
+CountdownTimerSort = 0
+
 
 --[[ ---------------------
 -- | Fonctions principales
@@ -71,15 +78,13 @@ CountdownTimer = 0
 -- et est généralement celle où vous chargez des ressources,
 -- initialisez des variables et des paramètres spécifiques ce qui économise beaucoup de ressources système.
 function		love.load()
-   resolution()
-   ents.Startup()
-   ChoixTankLoad()
-   SoundMenu()
-   GroundLoad()
-   normalFont = love.graphics.newFont("Fonts/ActionMan.ttf", 18)
-   countdownFont = love.graphics.newFont("Fonts/ActionMan.ttf", 100)
-   HealthFont = love.graphics.newFont("Fonts/Starcraft.ttf", 20)
-   HealthFontBlanc = love.graphics.newFont("Fonts/Starcraft.ttf", 19)
+	resolution()
+	ChoixTankLoad()
+	SoundMenu()
+	GroundLoad()
+	FontLoad()
+    ents.Startup()
+
    --[[if love.filesystem.exists("highscore.lst") then
       print("found the highscore file")
       for line in love.filesystem.lines("highscore.lst") do
@@ -105,6 +110,7 @@ end
 -- 'dt' signifie "delta temps", c'est le nombre de secondes depuis la dernière fois que cette fonction a été appelée.
 -- @param dt Nombre de seconde depuis le dernier appel a cette fonction.
 function 		love.update(dt)
+
    if EtatJeu == "Countdown" then
       if EtatJeu == "Countdown" then
 	 CountdownTimer = CountdownTimer + dt
@@ -114,7 +120,6 @@ function 		love.update(dt)
 	 CountdownTimer = 0
       end
       if EtatJeu == "Countdown" and Countdown == 0 then
-	 love.graphics.printf("Go !", Reso.Width/2, Reso.Height/2, 50)
 	 Countdown = 3
 	 EtatJeu = "EnJeu"
       end
@@ -125,10 +130,19 @@ function 		love.update(dt)
       ents:update(dt)
    end
    
+   if EtatJeu == "Boss" or EtatJeu == "EnJeu" then
+		CountdownTimerSort = CountdownTimerSort + dt
+		if CountdownSort > 0 and CountdownTimerSort >= CountdownSpeedSort then
+			CountdownSort = CountdownSort - 1
+			CountdownTimerSort = 0	
+		end
+   end
+   
    if EtatJeu == "Boss" then
       TankUpdate(dt)
       ents:update(dt)
    end
+  
 end
 
 --- La fonction qui est appele avant de quitter le jeu.

@@ -35,19 +35,54 @@ function		ATH_Life()
    love.graphics.reset()
    love.graphics.setColor(0, 0, 0, 255)
    love.graphics.setFont(HealthFont)
-   love.graphics.printf(Tank.Health .. " / " .. Tank.HealthBase, 80, 15, 200 * Reso.Width / Reso.Height, "center")
+   love.graphics.printf(Tank.Health .. " / " .. Tank.HealthBase, 80, 17, 200 * Reso.Width / Reso.Height, "center")
    love.graphics.reset()
-   love.graphics.setColor(255, 255, 255, 255)
-   love.graphics.setFont(HealthFontBlanc)
-   love.graphics.printf(Tank.Health .. " / " .. Tank.HealthBase, 80, 15, 200 * Reso.Width / Reso.Height, "center")
-   love.graphics.setFont(normalFont)
-   love.graphics.reset()
+   
    -- Score
    love.graphics.setColor(0, 0, 0, 255)
    love.graphics.setFont(HealthFont)
    love.graphics.print("Score : " .. Tank.Score, 10, 50)
    love.graphics.setFont(normalFont)
    love.graphics.reset()
-   --love.graphics.print("Speed : " .. Tank.Vitesse, 10, 70)
-   --love.graphics.print("Damage : " .. Tank.Dammage, 10, 90)
+   
+   -- Sort
+	if ChoixSort == 1 then
+		love.graphics.draw(BlastOn, 10, 80)
+	elseif ChoixSort == 2 then
+		love.graphics.draw(FlashOn, 10, 80)
+	elseif ChoixSort == 3 then
+		love.graphics.draw(SoinOn, 10, 80)
+	end
+	if CountdownSort ~= 0 then
+		love.graphics.setColor(50, 50, 50, 190)
+		love.graphics.rectangle("fill", 12, 148 - 100 * CountdownSort / 180, 90, 25 + (100 * CountdownSort / 180))
+		love.graphics.reset()
+		love.graphics.setColor(255, 0, 0, 255)
+		love.graphics.setFont(CDSortFont)
+		love.graphics.printf(CountdownSort, 53, 118, 10, "center")
+		love.graphics.reset()
+		love.graphics.setFont(normalFont)
+	end
+	
+	-- Barre de Passif
+	love.graphics.setColor(0, 0, 0, 255)
+	love.graphics.setFont(HealthFont)
+	love.graphics.print("PASSIF : ", Reso.Width/2 - 110, 15)
+	love.graphics.setFont(normalFont)
+	love.graphics.reset()
+	love.graphics.setColor(0, 0, 0, 100)
+	love.graphics.rectangle("fill", Reso.Width/2, 10, 200 * Reso.Width / Reso.Height, 30)
+	love.graphics.reset()
+	if Tank.PourcentagePassif > 100 then
+		Tank.PourcentagePassif = 100
+	end
+	love.graphics.setColor(0, 0, 255, 100)
+	love.graphics.rectangle("fill", Reso.Width/2, 10, Tank.PourcentagePassif / 100 * 200 * Reso.Width / Reso.Height, 30)
+	love.graphics.reset()
+	love.graphics.setColor(0, 0, 0, 255)
+	love.graphics.setFont(HealthFont)
+	love.graphics.printf(Tank.PourcentagePassif .. " %", Reso.Width/2, 17, 200 * Reso.Width / Reso.Height, "center")
+	love.graphics.reset()
+	love.graphics.setFont(normalFont)
+	
 end

@@ -70,12 +70,29 @@ function ChoixTankLoad()
    ReprendreOff = love.graphics.newImage("Images/Menu/ReprendreOff.png")
    QuitterOn = love.graphics.newImage("Images/Menu/QuitterOn.png")
    QuitterOff = love.graphics.newImage("Images/Menu/QuitterOff.png")
+   DemarrerOn = love.graphics.newImage("Images/Menu/demarrerOn.png")
+   DemarrerOff = love.graphics.newImage("Images/Menu/demarrerOff.png")
+   
    Tank1On = love.graphics.newImage("Images/Menu/Tank1On.png")
    Tank1Off = love.graphics.newImage("Images/Menu/Tank1Off.png")
    Tank2On = love.graphics.newImage("Images/Menu/Tank2On.png")
    Tank2Off = love.graphics.newImage("Images/Menu/Tank2Off.png")
    Tank3On = love.graphics.newImage("Images/Menu/Tank3On.png")
    Tank3Off = love.graphics.newImage("Images/Menu/Tank3Off.png")
+   Tank4On = love.graphics.newImage("Images/Menu/Tank4On.png")
+   Tank4Off = love.graphics.newImage("Images/Menu/Tank4Off.png")
+   InfoTankVide = love.graphics.newImage("Images/Menu/InfoTankVide.png")
+   InfoTank1 = love.graphics.newImage("Images/Menu/InfoTank1.png")
+   InfoTank2 = love.graphics.newImage("Images/Menu/InfoTank2.png")
+   InfoTank3 = love.graphics.newImage("Images/Menu/InfoTank3.png")
+   
+   BlastOn = love.graphics.newImage("Images/Menu/BlastOn.png")
+   BlastOff = love.graphics.newImage("Images/Menu/BlastOff.png")
+   FlashOn = love.graphics.newImage("Images/Menu/FlashOn.png")
+   FlashOff = love.graphics.newImage("Images/Menu/FlashOff.png")
+   SoinOn = love.graphics.newImage("Images/Menu/SoinOn.png")
+   SoinOff = love.graphics.newImage("Images/Menu/SoinOff.png")
+   
    Transparent = love.graphics.newImage("Images/Transparent.png")
    GameOver = love.graphics.newImage("Images/GameOver.png")
    
@@ -91,9 +108,14 @@ function ChoixTankLoad()
 			Quitter2 = {On = QuitterOn, Off = QuitterOff, x = 120, y = (3*Reso.Height/4)-35, Width = 260, Height = 70, Id = "Quitter2"}
 		},
 		Choix = {
-			Tank1 = {On = Tank1On, Off = Tank1Off, x = (Reso.Width/4)-115, y = (Reso.Height/2)-115, Width = 230, Height = 230, Id = "Tank1"},
-			Tank2 = {On = Tank2On, Off = Tank2Off, x = (Reso.Width/2)-115, y = (Reso.Height/2)-115, Width = 230, Height = 230, Id = "Tank2"},
-			Tank3 = {On = Tank3On, Off = Tank3Off, x = (3*Reso.Width/4)-115, y = (Reso.Height/2)-115, Width = 230, Height = 230, Id = "Tank3"}
+			Tank1 = {On = Tank1On, Off = Tank1Off, x = (Reso.Width/4)-58, y = (Reso.Height/4)-100, Width = 164, Height = 164, Id = "Tank1"},
+			Tank2 = {On = Tank2On, Off = Tank2Off, x = (Reso.Width/3), y = (Reso.Height/4)-100, Width = 164, Height = 164, Id = "Tank2"},
+			Tank3 = {On = Tank3On, Off = Tank3Off, x = (Reso.Width/4)-58, y = (Reso.Height/2)-120, Width = 164, Height = 164, Id = "Tank3"},
+			Tank4 = {On = Tank4On, Off = Tank4Off, x = (Reso.Width/3), y = (Reso.Height/2)-120, Width = 164, Height = 164, Id = "Tank4"},
+			Demarrer = {On = DemarrerOn, Off = DemarrerOff, x = (Reso.Width/2)-130, y = (Reso.Height)-130, Width = 260, Height = 70, Id = "Demarrer"},
+			Blast = {On = BlastOn, Off = BlastOff, x = (Reso.Width/4)-40, y = (Reso.Height/2)+138, Width = 94, Height = 94, Id = "Blast"},
+			Flash = {On = FlashOn, Off = FlashOff, x = (Reso.Width/4)+63, y = (Reso.Height/2)+138, Width = 94, Height = 94, Id = "Flash"},
+			Soin = {On = SoinOn, Off = SoinOff, x = (Reso.Width/3)+52, y = (Reso.Height/2)+138, Width = 94, Height = 94, Id = "Soin"}			
 		},
 		GameOver = {
 			Menu = {On = MenuOn, Off = MenuOff, x = (Reso.Width/2)-130, y = (Reso.Height)-140, Width = 260, Height = 70, Id = "Menu"}
@@ -104,8 +126,25 @@ function ChoixTankLoad()
 		Valide = {
 			Valider = {On = ValiderOn, Off = ValiderOff, x = (Reso.Width/2)-124, y = (Reso.Height/2), Width = 104, Height = 34, Id = "Valider"},
 			Annuler = {On = AnnulerOn, Off = AnnulerOff, x = (Reso.Width/2)+20, y = (Reso.Height/2), Width = 104, Height = 34, Id = "Annuler"}
+		},
+		Ok = {
+			Ok = {On = ValiderOn, Off = ValiderOff, x = (Reso.Width/2)-52, y = (Reso.Height/2), Width = 104, Height = 34, Id = "Ok"}
 		}
 	}	
+end
+
+--[[ --------------------------
+-- | Initialisation des polices
+]]-- --------------------------
+
+--- Chargement des polices.
+-- Charge en memoire les polices composant le jeu.
+function FontLoad()
+	normalFont = love.graphics.newFont("Fonts/ActionMan.ttf", 18)
+	menuFont = love.graphics.newFont("Fonts/old_stamper.ttf", 50)
+	countdownFont = love.graphics.newFont("Fonts/ActionMan.ttf", 100)
+	HealthFont = love.graphics.newFont("Fonts/ActionMan.ttf", 25)
+	CDSortFont = love.graphics.newFont("Fonts/ActionMan.ttf", 25)
 end
 
 --[[ -----------------------
@@ -123,9 +162,17 @@ function SoundMenu()
    SonMenu1:setVolume(0.75)
    SonMenu2 = love.audio.newSource("Sounds/SonMenu2.mp3")
    SonMenu2:setVolume(0.75)
+   Retour = love.audio.newSource("Sounds/Retour.mp3")
+   SonMenu2:setVolume(0.75)
    
    SonExplosion = love.audio.newSource("Sounds/SonExplosion.mp3", "stream")
    SonExplosion:setVolume(0.75)
+   SonTir = love.audio.newSource("Sounds/Tir.mp3")
+   SonTir:setVolume(0.75)
+   SonSoin = love.audio.newSource("Sounds/Soin.mp3")
+   SonSoin:setVolume(0.75)
+   ExplosionTank = love.audio.newSource("Sounds/ExplosionTank.mp3")
+   ExplosionTank:setVolume(0.75)
 end
 
 --[[ ------------------------------------
@@ -144,14 +191,19 @@ function GroundLoad()
    picTankHB = love.graphics.newImage("Images/BaseHeavyTank.png")
    picTankHT = love.graphics.newImage("Images/TourelleHeavyTank.png")
    picMastodonte = love.graphics.newImage("Images/Mastodonte.png")
-   picMedikit = love.graphics.newImage("Images/medikit.png")
+   
    picMissile = love.graphics.newImage("Images/Missile.png")
    picMissileE = love.graphics.newImage("Images/MissileE.png")
    picMissileM = love.graphics.newImage("Images/MissileM.png")
+   picSpecialM = love.graphics.newImage("Images/SpecialM.png")
+   BaseBlast = love.graphics.newImage("Images/Blast.png")
+   picBlast = love.graphics.newImage("Images/Blast.png")
+   
+   picMedikit = love.graphics.newImage("Images/medikit.png")
    picVitesse = love.graphics.newImage("Images/BonusVitesse.png")
    picResistance = love.graphics.newImage("Images/BonusResistance.png")
-   picSpecialM = love.graphics.newImage("Images/SpecialM.png")
    
    Explosion = love.graphics.newImage("Images/explosion.png")
    ExplosionBomb = love.graphics.newImage("Images/explosionBomb.png")
+   AnimationSoin = love.graphics.newImage("Images/AnimationSoin.png")
 end

@@ -1,5 +1,5 @@
 -- 
--- @file Explosion.lua
+-- @file AnimationSoin.lua
 -- This file is a part of RikiTank project, an amazing tank game !
 -- Copyright (C) 2012  Riki-Team
 -- 
@@ -23,26 +23,28 @@ local ent = ents.Derive("Base")
 -- @param x Position en x.
 -- @param y Position en y.
 function ent:setPos( x, y )
-   self.x = x - 32
-   self.y = y - 32
+   self.x = Tank.Position.x
+   self.y = Tank.Position.y
 end
 
 --- Charge les parametres en memoire.
 -- @param x Position en x.
 -- @param y Position en y.
 function ent:load( x, y )
-   self.anim = newAnimation(Explosion, 64, 64, 0.1, 0)
+   self.anim = newAnimation(AnimationSoin, 96, 96, 0.055, 0)
    self.anim:setMode("once")
 end
 
 --- Mise-a-jour de l'entite.
--- Joue l'animation de l'explosion.
--- Si la frame courante est egale a 16 secondes ( la derniere frame )
--- alors on efface l'explosion.
+-- Joue l'animation du soin.
+-- Si la frame courante est egale a 20 secondes ( la derniere frame )
+-- alors on efface la soin.
 -- @param dt Delta Temps
 function	ent:update(dt)
-   self.anim:update(dt)
-   if self.anim:getCurrentFrame() == 16 then
+	self.x = Tank.Position.x - 48
+	self.y = Tank.Position.y - 48
+	self.anim:update(dt)
+   if self.anim:getCurrentFrame() == 20 then
       ents.Destroy(self.id)
    end
 end

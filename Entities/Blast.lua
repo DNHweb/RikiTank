@@ -1,7 +1,7 @@
 -- 
--- @file Explosion.lua
+-- @file Blast.lua
 -- This file is a part of RikiTank project, an amazing tank game !
--- Copyright (C) 2012  Riki-Team
+-- Copyright (C) 2012  Riki-Team <rikitank.project@gmail.com>
 -- 
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -23,33 +23,48 @@ local ent = ents.Derive("Base")
 -- @param x Position en x.
 -- @param y Position en y.
 function ent:setPos( x, y )
-   self.x = x - 32
-   self.y = y - 32
+   self.x = x
+   self.y = y
+   self.ang = Tank.Angle.Tourelle
+   self.vitesse = 2
 end
 
 --- Charge les parametres en memoire.
 -- @param x Position en x.
 -- @param y Position en y.
 function ent:load( x, y )
-   self.anim = newAnimation(Explosion, 64, 64, 0.1, 0)
-   self.anim:setMode("once")
+   self:setPos( x, y )
+   self.image = picBlast
 end
 
 --- Mise-a-jour de l'entite.
--- Joue l'animation de l'explosion.
--- Si la frame courante est egale a 16 secondes ( la derniere frame )
--- alors on efface l'explosion.
 -- @param dt Delta Temps
-function	ent:update(dt)
-   self.anim:update(dt)
-   if self.anim:getCurrentFrame() == 16 then
-      ents.Destroy(self.id)
+function ent:update(dt)
+   if self.id == 1 then
+      ents.Destroy( self.id )
+   end
+   self.x = self.x + math.cos(self.ang) * self.vitesse * dt / 0.002
+   self.y = self.y + math.sin(self.ang) * self.vitesse * dt / 0.002
+   
+   if (self.x > Reso.Width) then
+      ents.Destroy( self.id )
+   elseif (self.x < 0) then
+      ents.Destroy( self.id )
+   elseif (self.y < 0) then
+      ents.Destroy( self.id )
+   elseif (self.y > Reso.Height) then
+      ents.Destroy( self.id )
    end
 end
 
 --- Affiche l'entite.
 function ent:draw()
-   self.anim:draw(self.x, self.y)
+   love.graphics.draw(self.image, self.x, self.y, self.ang, Reso.Scale, Reso.Scale, self.image:getWidth() / 2, self.image:getHeight() / 2)
+end
+
+--- Code a executer avant la destruction de l'entite.
+function ent:Die()
+   print("Blast " .. self.id .. " detruit.")
 end
 
 return ent;

@@ -32,21 +32,27 @@ local id = 0
 -- Une sorte de catalogue qui dit quels objets on peut creer
 -- et les charge en memoire.
 function ents.Startup()
-   register["Missile"] = love.filesystem.load(ents.objectpath .. "Missile.lua")
-   register["MissileE"] = love.filesystem.load(ents.objectpath .. "MissileE.lua")
-   register["MissileM"] = love.filesystem.load(ents.objectpath .. "MissileM.lua")
-   register["Walker"] = love.filesystem.load(ents.objectpath .. "Walker.lua")
-   register["Mastodonte"] = love.filesystem.load(ents.objectpath .. "Mastodonte.lua")
-   register["HeavyTank"] = love.filesystem.load(ents.objectpath .. "HeavyTank.lua")
-   register["Explosion"] = love.filesystem.load(ents.objectpath .. "Explosion.lua")
-   register["ExplosionBomb"] = love.filesystem.load(ents.objectpath .. "ExplosionBomb.lua")
-   register["TankEnnemie"] = love.filesystem.load(ents.objectpath .. "TankEnnemie.lua")
-   register["Bomb"] = love.filesystem.load(ents.objectpath .. "Bomb.lua")
-   register["Medikit"] = love.filesystem.load(ents.objectpath .. "Medikit.lua")
-   register["Vitesse"] = love.filesystem.load(ents.objectpath .. "Vitesse.lua")
-   register["Resistance"] = love.filesystem.load(ents.objectpath .. "Resistance.lua")
-   register["SpeedOn"] = love.filesystem.load(ents.objectpath .. "SpeedOn.lua")
-   register["SpecialM"] = love.filesystem.load(ents.objectpath .. "SpecialM.lua")
+	register["Missile"] = love.filesystem.load(ents.objectpath .. "Missile.lua")
+	register["MissileE"] = love.filesystem.load(ents.objectpath .. "MissileE.lua")
+	register["MissileM"] = love.filesystem.load(ents.objectpath .. "MissileM.lua")
+	register["SpecialM"] = love.filesystem.load(ents.objectpath .. "SpecialM.lua")
+	register["Blast"] = love.filesystem.load(ents.objectpath .. "Blast.lua")
+	
+	register["Walker"] = love.filesystem.load(ents.objectpath .. "Walker.lua")
+	register["Mastodonte"] = love.filesystem.load(ents.objectpath .. "Mastodonte.lua")
+	register["HeavyTank"] = love.filesystem.load(ents.objectpath .. "HeavyTank.lua")
+	register["TankEnnemie"] = love.filesystem.load(ents.objectpath .. "TankEnnemie.lua")
+	  
+	register["Explosion"] = love.filesystem.load(ents.objectpath .. "Explosion.lua")
+	register["ExplosionBomb"] = love.filesystem.load(ents.objectpath .. "ExplosionBomb.lua")
+	register["AnimationSoin"] = love.filesystem.load(ents.objectpath .. "AnimationSoin.lua")
+
+	register["Bomb"] = love.filesystem.load(ents.objectpath .. "Bomb.lua")
+	register["Medikit"] = love.filesystem.load(ents.objectpath .. "Medikit.lua")
+	register["Vitesse"] = love.filesystem.load(ents.objectpath .. "Vitesse.lua")
+	register["Resistance"] = love.filesystem.load(ents.objectpath .. "Resistance.lua")
+	register["SpeedOn"] = love.filesystem.load(ents.objectpath .. "SpeedOn.lua")
+
 end
 
 --- Une fonction d'heritage.
@@ -110,75 +116,131 @@ end
 -- On gere les collisions entre entites, par exemple : entre les missiles et les walkers.
 -- @param dt Delta Temps.
 function ents:update(dt)
-   for i, ent in pairs(ents.objects) do
-      if ent.update then
-	 ent:update(dt)
-	 if ent.type == "Missile" then
-	    for j, obj in pairs(ents.objects) do
-	       if obj.type == "Walker" then
-		  local distance = ((ent.x - obj.x) ^ 2.5 + (ent.y - obj.y) ^ 2) ^ 0.5
-		  if distance < (obj.image:getWidth() / 2 + ent.image:getWidth() / 2) * Reso.Scale then
-		     ents.Destroy(obj.id)
-		     ents.Destroy(ent.id)
-		     break
-		  end
-	       elseif obj.type == "TankEnnemie" then
-		  local distance = ((ent.x - obj.x) ^ 2.5 + (ent.y - obj.y) ^ 2) ^ 0.5
-		  if distance < (obj.image:getWidth() / 2 + ent.image:getWidth() / 2) * Reso.Scale then
-		     obj.health = obj.health - Tank.Dammage
-		     local impact = love.audio.newSource("Sounds/impact.mp3", "stream")
-		     impact:setVolume(0.75)
-		     love.audio.play(impact)
-		     ents.Create("Explosion", obj.x, obj.y)
-		     if obj.health < 0 then
-			ents.Destroy(obj.id)
-		     end
-		     ents.Destroy(ent.id)
-		     break
-		  end
-		  elseif obj.type == "HeavyTank" then
-		  local distance = ((ent.x - obj.x) ^ 2.5 + (ent.y - obj.y) ^ 2) ^ 0.5
-		  if distance < (obj.image:getWidth() / 2 + ent.image:getWidth() / 2) * Reso.Scale then
-		     obj.health = obj.health - Tank.Dammage
-		     local impact = love.audio.newSource("Sounds/impact.mp3", "stream")
-		     impact:setVolume(0.75)
-		     love.audio.play(impact)
-		     ents.Create("Explosion", obj.x, obj.y)
-		     if obj.health < 0 then
-			ents.Destroy(obj.id)
-		     end
-		     ents.Destroy(ent.id)
-		     break
-		  end
-	       elseif obj.type == "Mastodonte" then
-		  local distance = ((ent.x - obj.x) ^ 2.5 + (ent.y - obj.y) ^ 2) ^ 0.5
-		  if distance < (obj.image:getWidth() / 2 + ent.image:getWidth() / 2) * Reso.Scale then
-		     obj.health = obj.health - Tank.Dammage
-		     local impact = love.audio.newSource("Sounds/impact.mp3", "stream")
-		     impact:setVolume(0.75)
-		     love.audio.play(impact)
-		     ents.Create("Explosion", obj.x, obj.y)
-		     if obj.health < 0 then
-			ents.Destroy(obj.id)
-			EtatJeu = "EnJeu"
-			creerMastodonte = 0
-		     end
-		     ents.Destroy(ent.id)
-		     break
-		  end
-	       end
-	    end
-	 end
-      end
-   end
+	for i, ent in pairs(ents.objects) do
+		if ent.update then
+			ent:update(dt)
+			if ent.type == "Missile" then
+				for j, obj in pairs(ents.objects) do
+					if obj.type == "Walker" then
+						local distance = ((ent.x - obj.x) ^ 2.5 + (ent.y - obj.y) ^ 2) ^ 0.5
+							if distance < (obj.image:getWidth() / 2 + ent.image:getWidth() / 2) * Reso.Scale then
+								ents.Destroy(obj.id)
+								ents.Destroy(ent.id)
+								break
+							end
+					elseif obj.type == "TankEnnemie" then
+						local distance = ((ent.x - obj.x) ^ 2.5 + (ent.y - obj.y) ^ 2) ^ 0.5
+							if distance < (obj.image:getWidth() / 2 + ent.image:getWidth() / 2) * Reso.Scale then
+								obj.health = obj.health - Tank.Dammage
+								local impact = love.audio.newSource("Sounds/impact.mp3", "stream")
+								impact:setVolume(0.75)
+								love.audio.play(impact)
+								ents.Create("Explosion", obj.x, obj.y)
+								if obj.health < 0 then
+									ents.Destroy(obj.id)
+								end
+								ents.Destroy(ent.id)
+								break
+							end
+					elseif obj.type == "HeavyTank" then
+						local distance = ((ent.x - obj.x) ^ 2.5 + (ent.y - obj.y) ^ 2) ^ 0.5
+						if distance < (obj.image:getWidth() / 2 + ent.image:getWidth() / 2) * Reso.Scale then
+							obj.health = obj.health - Tank.Dammage
+							local impact = love.audio.newSource("Sounds/impact.mp3", "stream")
+							impact:setVolume(0.75)
+							love.audio.play(impact)
+							ents.Create("Explosion", obj.x, obj.y)
+							if obj.health < 0 then
+								ents.Destroy(obj.id)
+							end
+							ents.Destroy(ent.id)
+							break
+						end
+					elseif obj.type == "Mastodonte" then
+						local distance = ((ent.x - obj.x) ^ 2.5 + (ent.y - obj.y) ^ 2) ^ 0.5
+						if distance < (obj.image:getWidth() / 2 + ent.image:getWidth() / 2) * Reso.Scale then
+							obj.health = obj.health - Tank.Dammage
+							local impact = love.audio.newSource("Sounds/impact.mp3", "stream")
+							impact:setVolume(0.75)
+							love.audio.play(impact)
+							ents.Create("Explosion", obj.x, obj.y)
+							if obj.health < 0 then
+								ents.Destroy(obj.id)
+								EtatJeu = "EnJeu"
+								creerMastodonte = 0
+							end
+							ents.Destroy(ent.id)
+							break
+						end
+					end
+				end
+			end
+			if ent.type == "Blast" then
+				for j, obj in pairs(ents.objects) do
+					if obj.type == "Walker" then
+						local distance = ((ent.x - obj.x) ^ 2.5 + (ent.y - obj.y) ^ 2) ^ 0.5
+							if distance < (obj.image:getWidth() / 2 + ent.image:getWidth() / 2) * Reso.Scale then
+								ents.Destroy(obj.id)
+								ents.Destroy(ent.id)
+								break
+							end
+					elseif obj.type == "TankEnnemie" then
+						local distance = ((ent.x - obj.x) ^ 2.5 + (ent.y - obj.y) ^ 2) ^ 0.5
+							if distance < (obj.image:getWidth() / 2 + ent.image:getWidth() / 2) * Reso.Scale then
+								obj.health = obj.health - 200
+								local impact = love.audio.newSource("Sounds/impact.mp3", "stream")
+								impact:setVolume(0.75)
+								love.audio.play(impact)
+								ents.Create("Explosion", obj.x, obj.y)
+								if obj.health < 0 then
+									ents.Destroy(obj.id)
+								end
+								ents.Destroy(ent.id)
+								break
+							end
+					elseif obj.type == "HeavyTank" then
+						local distance = ((ent.x - obj.x) ^ 2.5 + (ent.y - obj.y) ^ 2) ^ 0.5
+						if distance < (obj.image:getWidth() / 2 + ent.image:getWidth() / 2) * Reso.Scale then
+							obj.health = obj.health - 200
+							local impact = love.audio.newSource("Sounds/impact.mp3", "stream")
+							impact:setVolume(0.75)
+							love.audio.play(impact)
+							ents.Create("Explosion", obj.x, obj.y)
+							if obj.health < 0 then
+								ents.Destroy(obj.id)
+							end
+							ents.Destroy(ent.id)
+							break
+						end
+					elseif obj.type == "Mastodonte" then
+						local distance = ((ent.x - obj.x) ^ 2.5 + (ent.y - obj.y) ^ 2) ^ 0.5
+						if distance < (obj.image:getWidth() / 2 + ent.image:getWidth() / 2) * Reso.Scale then
+							obj.health = obj.health - 200
+							local impact = love.audio.newSource("Sounds/impact.mp3", "stream")
+							impact:setVolume(0.75)
+							love.audio.play(impact)
+							ents.Create("Explosion", obj.x, obj.y)
+							if obj.health < 0 then
+								ents.Destroy(obj.id)
+								EtatJeu = "EnJeu"
+								creerMastodonte = 0
+							end
+							ents.Destroy(ent.id)
+							break
+						end
+					end
+				end
+			end
+		end
+	end
 end
 
 --- Affichage des entites.
 -- Parcours le tableau d'entites et les affiche.
 function ents:draw()
-   for i, ent in pairs(ents.objects) do
-      if ent.draw then
-	 ent:draw()
-      end
-   end
+	for i, ent in pairs(ents.objects) do
+		if ent.draw then
+			ent:draw()
+		end
+	end
 end

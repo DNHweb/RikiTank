@@ -44,6 +44,7 @@ function ent:Die()
    ents.Create("Explosion", self.x, self.y)
    Tank.Score = Tank.Score + 20
    Tank.PopBoss = Tank.PopBoss + 20
+   Tank.PourcentagePassif = Tank.PourcentagePassif + 2
    
    if (math.random(10) <= 2) then
       ents.Create("Vitesse", self.x, self.y)
