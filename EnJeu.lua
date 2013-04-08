@@ -63,9 +63,14 @@ function		EnJeu()
 		bombTime = love.timer.getTime()
 		ents.Create("Bomb", 400, 400)
 		end]]--
+<<<<<<< HEAD
+=======
+		
+>>>>>>> 2bdac1c... Introduction de la barre ... d'exp
 		TankDraw()
 		ents:draw()
 		ATH_Life()
+		ents:draw()
 	else
 		ents.objects = {}
 		if Tank.Score > Tank.Old_Score then
@@ -79,7 +84,6 @@ end
 function 		Boss()
    love.audio.stop(musicMenu)
    GroundDraw()
-   ents:draw()
    
    if Tank.Health > 0 then
       TankDraw()
@@ -94,4 +98,9 @@ function 		Boss()
       ents.objects = {}
       EtatJeu = "GameOver"
    end
+<<<<<<< HEAD
+=======
+   	  ATH_Life()
+	  ents:draw()
+>>>>>>> 2bdac1c... Introduction de la barre ... d'exp
 end
