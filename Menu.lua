@@ -470,13 +470,10 @@ function ChargerTank1()
    Tank.Angle.Base = 0
    Tank.Score = 0
    Tank.PopBoss = 0
-<<<<<<< HEAD
    Tank.PourcentagePassif = 0
-=======
    Tank.PourcentagePouvoir = 0
    Tank.Niveau = 1
    Tank.Exp = 0
->>>>>>> 2bdac1c... Introduction de la barre ... d'exp
 end
 
 --- Charge le tank 2.
@@ -494,13 +491,10 @@ function ChargerTank2()
    Tank.Angle.Base = 0
    Tank.Score = 0
    Tank.PopBoss = 0
-<<<<<<< HEAD
    Tank.PourcentagePassif = 0
-=======
    Tank.PourcentagePouvoir = 0
    Tank.Niveau = 1
    Tank.Exp = 0
->>>>>>> 2bdac1c... Introduction de la barre ... d'exp
 end
 
 --- Charge le tank 3.
@@ -518,11 +512,8 @@ function ChargerTank3()
    Tank.Angle.Base = 0
    Tank.Score = 0
    Tank.PopBoss = 0
-<<<<<<< HEAD
    Tank.PourcentagePassif = 0
-=======
    Tank.PourcentagePouvoir = 0
    Tank.Niveau = 1
    Tank.Exp = 0
->>>>>>> 2bdac1c... Introduction de la barre ... d'exp
 end

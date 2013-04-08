@@ -58,11 +58,8 @@ Tank = {
    PopBoss = 0,
    Old_Score = 0,
    PourcentagePassif = 0,
-<<<<<<< HEAD
-=======
    Niveau = 0,
    Exp = 0
->>>>>>> 2bdac1c... Introduction de la barre ... d'exp
 }
 
 Countdown = 3

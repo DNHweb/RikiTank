@@ -48,12 +48,8 @@ function ent:Die()
    ents.Create("Explosion", self.x, self.y)
    Tank.Score = Tank.Score + 100
    Tank.PopBoss = Tank.PopBoss + 100
-<<<<<<< HEAD
-   Tank.PourcentagePassif = Tank.PourcentagePassif + 10
-=======
    Tank.PourcentagePouvoir = Tank.PourcentagePouvoir + 10
    Tank.Exp = Tank.Exp + 45
->>>>>>> 2bdac1c... Introduction de la barre ... d'exp
    -- Pop du bonus de resistance
    if (math.random(10) <= 2) then
       ents.Create("Resistance", self.x, self.y)
