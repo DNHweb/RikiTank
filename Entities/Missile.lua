@@ -62,9 +62,4 @@ function ent:draw()
    love.graphics.draw(self.image, self.x, self.y, self.ang, Reso.Scale, Reso.Scale, self.image:getWidth() / 2, self.image:getHeight() / 2)
 end
 
---- Code a executer avant la destruction de l'entite.
-function ent:Die()
-   print("Missile " .. self.id .. " detruit.")
-end
-
 return ent;

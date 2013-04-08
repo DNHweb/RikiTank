@@ -30,9 +30,6 @@ function TourelleDraw(Image, x, y, Angle, Width)
    local Width2 = Image:getWidth()/2 - width
    local Height = Image:getHeight()/2
    love.graphics.draw(Image, x, y, Angle, Reso.Scale, Reso.Scale, Width2, Height)
-   love.graphics.setColor(255, 0, 0, 255)
-   love.graphics.draw(Viseur, love.mouse.getX(), love.mouse.getY(), 0, 0.33, 0.33, Viseur:getWidth() / 2, Viseur:getHeight() / 2)
-   love.graphics.reset()
 end
 
 --- Mise-a-jour de l'angle de la tourelle.

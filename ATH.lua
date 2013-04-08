@@ -99,4 +99,7 @@ function		ATH_Life()
       love.graphics.reset()
       love.graphics.setFont(normalFont)
       end
+	  
+	  -- Viseur
+	  love.graphics.draw(Viseur, love.mouse.getX(), love.mouse.getY(), 0, 0.33, 0.33, Viseur:getWidth() / 2, Viseur:getHeight() / 2)
 end
