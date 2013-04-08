@@ -424,11 +424,11 @@ end
 -- @param key La touche tape sur le clavier.
 function love.keypressed(key)
 	if EtatJeu == "EnJeu" or EtatJeu == "Boss" then
-		if ChoixSort == 1 and key == "t" then
+		if ChoixSort == 1 and key == " " then
 			Blast(CountdownSort)
-		elseif ChoixSort == 2 and key == "t" then
+		elseif ChoixSort == 2 and key == " " then
 			Flash(CountdownSort)
-		elseif ChoixSort == 3 and key == "t" then
+		elseif ChoixSort == 3 and key == " " then
 			Soin(CountdownSort)
 		end
 		if ChoixTank == 1 and key == "f" then

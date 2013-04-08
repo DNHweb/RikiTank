@@ -21,7 +21,8 @@
 -- Un ATH est une interface qui permet au joueur d'avoir des informations sur sa partie (vie, munitions par exemple).
 -- Ici : barre de vie, score, radar.
 function		ATH_Life()
--- Exp
+	
+   -- Exp
    love.graphics.setColor(0, 0, 0, 255)
    love.graphics.rectangle("fill", 100, 12, 165, 18)
    love.graphics.reset()
@@ -82,19 +83,19 @@ function		ATH_Life()
 
    -- Sort
    if ChoixSort == 1 then
-      love.graphics.draw(BlastOn, 10, 80)
+      love.graphics.draw(BlastOn, 34, 11, 0, 0.65, 0.652)
    elseif ChoixSort == 2 then
-      love.graphics.draw(FlashOn, 10, 80)
+      love.graphics.draw(FlashOn, 34, 11, 0, 0.65, 0.652)
    elseif ChoixSort == 3 then
-      love.graphics.draw(SoinOn, 10, 80)
+      love.graphics.draw(SoinOn, 34, 11, 0, 0.65, 0.652)
    end
    if CountdownSort ~= 0 then
       love.graphics.setColor(50, 50, 50, 190)
-      love.graphics.rectangle("fill", 12, 148 - 100 * CountdownSort / 180, 90, 25 + (100 * CountdownSort / 180))
+      love.graphics.rectangle("fill", 35, 80 - 100 * CountdownSort / 180, 58, (100 * CountdownSort / 180) - 10)
       love.graphics.reset()
       love.graphics.setColor(255, 0, 0, 255)
       love.graphics.setFont(CDSortFont)
-      love.graphics.printf(CountdownSort, 53, 118, 10, "center")
+      love.graphics.printf(CountdownSort, 58, 35, 10, "center")
       love.graphics.reset()
       love.graphics.setFont(normalFont)
       end

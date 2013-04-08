@@ -53,6 +53,7 @@ function ChoixTankLoad()
 	LogoRT = love.graphics.newImage("Images/LogoRT.png")
 	ImageTankMenu = love.graphics.newImage("Images/ImageTankMenu.png")
 	ImageTankPause = love.graphics.newImage("Images/ImageTankPause.png")
+	Viseur = love.graphics.newImage("Images/Viseur.png")
 	
    JouerOn = love.graphics.newImage("Images/Menu/JouerOn.png")
    JouerOff = love.graphics.newImage("Images/Menu/JouerOff.png")
@@ -143,7 +144,7 @@ function FontLoad()
 	normalFont = love.graphics.newFont("Fonts/ActionMan.ttf", 18)
 	menuFont = love.graphics.newFont("Fonts/old_stamper.ttf", 50)
 	countdownFont = love.graphics.newFont("Fonts/ActionMan.ttf", 100)
-	HealthFont = love.graphics.newFont("Fonts/ActionMan.ttf", 25)
+	HealthFont = love.graphics.newFont("Fonts/ActionMan.ttf", 15)
 	CDSortFont = love.graphics.newFont("Fonts/ActionMan.ttf", 25)
 end
 

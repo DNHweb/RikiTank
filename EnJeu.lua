@@ -63,10 +63,9 @@ function		EnJeu()
 	 bombTime = love.timer.getTime()
 	 ents.Create("Bomb", 400, 400)
       end]]--
-TankDraw()
+	  TankDraw()
 ents:draw()
 ATH_Life()
-ents:draw()
 else
    ents.objects = {}
    if Tank.Score > Tank.Old_Score then
@@ -94,6 +93,6 @@ function 		Boss()
       ents.objects = {}
       EtatJeu = "GameOver"
    end
-   ATH_Life()
    ents:draw()
+      ATH_Life()
 end
