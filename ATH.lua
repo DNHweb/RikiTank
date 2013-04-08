@@ -21,33 +21,7 @@
 -- Un ATH est une interface qui permet au joueur d'avoir des informations sur sa partie (vie, munitions par exemple).
 -- Ici : barre de vie, score, radar.
 function		ATH_Life()
-   -- Point de vie
-   love.graphics.setColor(0, 0, 0, 255)
-   love.graphics.setFont(HealthFont)
-   love.graphics.print("VIE : ", 10, 15)
-   love.graphics.setFont(normalFont)
-   love.graphics.reset()
-   love.graphics.setColor(255, 0, 0, 100)
-   love.graphics.rectangle("fill", 80, 10, 200 * Reso.Width / Reso.Height, 30)
-   love.graphics.reset()
-   love.graphics.setColor(52, 255, 52, 100)
-   love.graphics.rectangle("fill", 80, 10, Tank.Health / Tank.HealthBase * 200 * Reso.Width / Reso.Height, 30)
-   love.graphics.reset()
-   love.graphics.setColor(0, 0, 0, 255)
-   love.graphics.setFont(HealthFont)
-   love.graphics.printf(Tank.Health .. " / " .. Tank.HealthBase, 80, 17, 200 * Reso.Width / Reso.Height, "center")
-   love.graphics.reset()
-   
-   -- Score
-   love.graphics.setColor(0, 0, 0, 255)
-   love.graphics.setFont(HealthFont)
-   love.graphics.print("Score : " .. Tank.Score, 10, 50)
-   love.graphics.setFont(normalFont)
-   love.graphics.reset()
-   
-   -- Sort
-   
-   -- Exp
+-- Exp
    love.graphics.setColor(0, 0, 0, 255)
    love.graphics.rectangle("fill", 100, 12, 165, 18)
    love.graphics.reset()
@@ -59,15 +33,15 @@ function		ATH_Life()
       love.graphics.setColor(8, 97, 186, 200)
       love.graphics.rectangle("fill", 100, 12, Tank.Exp / 250 * 93 * Reso.Width / Reso.Height, 18)
       love.graphics.reset()
-   else	
+   else
       love.graphics.setColor(8, 97, 186, 200)
       love.graphics.rectangle("fill", 100, 12, 93 * Reso.Width / Reso.Height, 18)
       love.graphics.reset()
    end
-   
+
    -- Interface
    love.graphics.draw(Interface, 10, 10)
-   
+
    -- Point de vie
    love.graphics.setFont(HealthFont)
    love.graphics.setColor(100, 100, 100, 100)
@@ -95,17 +69,17 @@ function		ATH_Life()
    love.graphics.printf(Tank.PourcentagePouvoir .. "/100",103, 57, 73 * Reso.Width / Reso.Height, "center")
    love.graphics.printf(Tank.PourcentagePouvoir .. "%", 180, 57, 75 * Reso.Width / Reso.Height, "center")
    love.graphics.reset()
-   
+
    -- Score
    love.graphics.setColor(255, 255, 255, 255)
    love.graphics.printf("Score : " .. Tank.Score, 95, 16, 93 * Reso.Width / Reso.Height, "center")
    love.graphics.reset()
-   
+
    -- Niveau
    love.graphics.setColor(255, 255, 255, 255)
    love.graphics.printf(Tank.Niveau, 10, 15, 20, "center")
    love.graphics.reset()
-   
+
    -- Sort
    if ChoixSort == 1 then
       love.graphics.draw(BlastOn, 10, 80)
@@ -123,27 +97,5 @@ function		ATH_Life()
       love.graphics.printf(CountdownSort, 53, 118, 10, "center")
       love.graphics.reset()
       love.graphics.setFont(normalFont)
-   end
-   
-   -- Barre de Passif
-   love.graphics.setColor(0, 0, 0, 255)
-   love.graphics.setFont(HealthFont)
-   love.graphics.print("PASSIF : ", Reso.Width/2 - 110, 15)
-   love.graphics.setFont(normalFont)
-   love.graphics.reset()
-   love.graphics.setColor(0, 0, 0, 100)
-   love.graphics.rectangle("fill", Reso.Width/2, 10, 200 * Reso.Width / Reso.Height, 30)
-   love.graphics.reset()
-   if Tank.PourcentagePassif > 100 then
-      Tank.PourcentagePassif = 100
-   end
-   love.graphics.setColor(0, 0, 255, 100)
-   love.graphics.rectangle("fill", Reso.Width/2, 10, Tank.PourcentagePassif / 100 * 200 * Reso.Width / Reso.Height, 30)
-   love.graphics.reset()
-   love.graphics.setColor(0, 0, 0, 255)
-   love.graphics.setFont(HealthFont)
-   love.graphics.printf(Tank.PourcentagePassif .. " %", Reso.Width/2, 17, 200 * Reso.Width / Reso.Height, "center")
-   love.graphics.reset()
-   love.graphics.setFont(normalFont)
+      end
 end
-
