@@ -207,4 +207,5 @@ function GroundLoad()
    Explosion = love.graphics.newImage("Images/explosion.png")
    ExplosionBomb = love.graphics.newImage("Images/explosionBomb.png")
    AnimationSoin = love.graphics.newImage("Images/AnimationSoin.png")
+   ExplosionEnnemi = love.graphics.newImage("Images/ExplosionEnnemi.png")
 end

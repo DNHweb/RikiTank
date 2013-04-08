@@ -432,7 +432,7 @@ function love.keypressed(key)
 			Soin(CountdownSort)
 		end
 		if ChoixTank == 1 and key == "f" then
-			PassifTank1(Tank.PourcentagePassif)
+			PassifTank1(Tank.PourcentagePouvoir)
 		elseif ChoixTank == 2 and key == "f" then
 			--todo
 		elseif ChoixTank == 3 and key == "f" then
@@ -461,16 +461,15 @@ function ChargerTank1()
    Tank.TourelleImage = love.graphics.newImage("Images/TourelleTank1.png")
    Tank.RotTourelleWidth = 89
    Tank.Vitesse = (Speed * 5)/7
-   Tank.Dammage = 40
+   Tank.Dammage = 40 + 40 * 0.02
    Tank.Health = 225
    Tank.HealthBase = 225
-   Tank.CadenceTir = 1.7
+   Tank.CadenceTir = 1.7 + 1.7 * 0.03
    Tank.Position.x = Reso.Width/2
    Tank.Position.y = Reso.Height/2
    Tank.Angle.Base = 0
    Tank.Score = 0
    Tank.PopBoss = 0
-   Tank.PourcentagePassif = 0
    Tank.PourcentagePouvoir = 0
    Tank.Niveau = 1
    Tank.Exp = 0
@@ -481,17 +480,16 @@ function ChargerTank2()
    Tank.BaseImage = love.graphics.newImage("Images/BaseTank2.png")
    Tank.TourelleImage = love.graphics.newImage("Images/TourelleTank2.png")
    Tank.RotTourelleWidth = 103
-   Tank.Vitesse = (Speed * 4)/7
+   Tank.Vitesse = (Speed * 4)/7 + (Speed * 4)/7 * 0.03
    Tank.Dammage = 48
    Tank.Health = 315
    Tank.HealthBase = 315
-   Tank.CadenceTir = 1.02
+   Tank.CadenceTir = 1.02 + 1.02 * 0.02
    Tank.Position.x = Reso.Width/2
    Tank.Position.y = Reso.Height/2 
    Tank.Angle.Base = 0
    Tank.Score = 0
    Tank.PopBoss = 0
-   Tank.PourcentagePassif = 0
    Tank.PourcentagePouvoir = 0
    Tank.Niveau = 1
    Tank.Exp = 0
@@ -503,16 +501,15 @@ function ChargerTank3()
    Tank.TourelleImage = love.graphics.newImage("Images/TourelleTank3.png")
    Tank.RotTourelleWidth = 50
    Tank.Vitesse = (Speed * 6) / 7
-   Tank.Dammage = 24
-   Tank.Health = 180
-   Tank.HealthBase = 180
+   Tank.Dammage = 24 + 24 * 0.03
+   Tank.Health = 180 + 180 * 0.02
+   Tank.HealthBase = 180 + 180 * 0.02
    Tank.CadenceTir = 2.38
    Tank.Position.x = Reso.Width/2
    Tank.Position.y = Reso.Height/2
    Tank.Angle.Base = 0
    Tank.Score = 0
    Tank.PopBoss = 0
-   Tank.PourcentagePassif = 0
    Tank.PourcentagePouvoir = 0
    Tank.Niveau = 1
    Tank.Exp = 0

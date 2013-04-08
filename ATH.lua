@@ -22,23 +22,24 @@
 -- Ici : barre de vie, score, radar.
 function		ATH_Life()
 	
-   -- Exp
-   love.graphics.setColor(0, 0, 0, 255)
-   love.graphics.rectangle("fill", 100, 12, 165, 18)
-   love.graphics.reset()
-   if Tank.Niveau ~= 5 then
-      if Tank.Exp > 250 then
-	 Tank.Exp = Tank.Exp - 250
-	 Tank.Niveau = Tank.Niveau + 1
-      end
-      love.graphics.setColor(8, 97, 186, 200)
-      love.graphics.rectangle("fill", 100, 12, Tank.Exp / 250 * 93 * Reso.Width / Reso.Height, 18)
-      love.graphics.reset()
-   else
-      love.graphics.setColor(8, 97, 186, 200)
-      love.graphics.rectangle("fill", 100, 12, 93 * Reso.Width / Reso.Height, 18)
-      love.graphics.reset()
-   end
+	-- Exp
+	love.graphics.setColor(0, 0, 0, 255)
+	love.graphics.rectangle("fill", 100, 12, 165, 18)
+	love.graphics.reset()
+	if Tank.Niveau ~= 5 then
+		if Tank.Exp >= 250 then
+			Caracteristique()
+			Tank.Exp = Tank.Exp - 250
+			Tank.Niveau = Tank.Niveau + 1
+		end
+		love.graphics.setColor(8, 97, 186, 200)
+		love.graphics.rectangle("fill", 100, 12, Tank.Exp / 250 * 93 * Reso.Width / Reso.Height, 18)
+		love.graphics.reset()
+	else
+		love.graphics.setColor(8, 97, 186, 200)
+		love.graphics.rectangle("fill", 100, 12, 93 * Reso.Width / Reso.Height, 18)
+		love.graphics.reset()
+	end
 
    -- Interface
    love.graphics.draw(Interface, 10, 10)
@@ -52,7 +53,7 @@ function		ATH_Life()
    love.graphics.rectangle("fill", 103, 38, Tank.Health / Tank.HealthBase * 73 * Reso.Width / Reso.Height, 14)
    love.graphics.reset()
    love.graphics.setColor(255, 255, 255, 255)
-   love.graphics.printf(Tank.Health .. "/" .. Tank.HealthBase, 103, 40, 73 * Reso.Width / Reso.Height, "center")
+   love.graphics.printf(math.floor(Tank.Health) .. "/" .. math.floor(Tank.HealthBase), 103, 40, 73 * Reso.Width / Reso.Height, "center")
    love.graphics.printf(math.floor(Tank.Health * 100 / Tank.HealthBase) .. "%", 180, 40, 75 * Reso.Width / Reso.Height, "center")
    love.graphics.reset()
    

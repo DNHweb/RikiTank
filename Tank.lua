@@ -27,6 +27,20 @@ function TankDraw()
    TourelleDraw(Tank.TourelleImage , Tank.Position.x, Tank.Position.y, Tank.Angle.Tourelle, Tank.RotTourelleWidth)
 end
 
+function Caracteristique()
+	if ChoixTank == 1 then
+		Tank.Dammage = Tank.Dammage + Tank.Dammage * 0.02
+		Tank.CadenceTir = Tank.CadenceTir + Tank.CadenceTir * 0.03
+	elseif ChoixTank == 2 then
+		Tank.CadenceTir = Tank.CadenceTir + Tank.CadenceTir * 0.02
+		Tank.Vitesse = Tank.Vitesse + Tank.Vitesse * 0.03
+	elseif ChoixTank == 3 then
+		Tank.HealthBase = Tank.HealthBase + Tank.HealthBase * 0.02
+		Tank.Health = Tank.Health + Tank.Health * 0.02
+		Tank.Dammage = Tank.Dammage + Tank.Dammage * 0.03
+	end
+end
+
 --- Mise-a-jour du tank et tourelle.
 -- On met a jour les coordonnes (x, y), l'angle de la base du tank et de la tourelle.
 -- @param dt Delta Temps.

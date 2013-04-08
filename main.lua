@@ -57,7 +57,7 @@ Tank = {
    Score = 0,
    PopBoss = 0,
    Old_Score = 0,
-   PourcentagePassif = 0,
+   PourcentagePouvoir = 0,
    Niveau = 0,
    Exp = 0
 }
