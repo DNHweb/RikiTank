@@ -50,7 +50,19 @@ function		ATH_Life()
    love.graphics.rectangle("fill", 103, 38, 73 * Reso.Width / Reso.Height, 14)
    love.graphics.reset()
    love.graphics.setColor(0, 174, 5, 200)
-   love.graphics.rectangle("fill", 103, 38, Tank.Health / Tank.HealthBase * 73 * Reso.Width / Reso.Height, 14)
+   local pourcent = Tank.Health / Tank.HealthBase
+   if (pourcent > 0.5) then
+      color = math.floor((1 - pourcent) * 500) 
+      love.graphics.setColor(color, 255, 0, 200)
+      love.graphics.rectangle("fill", 103, 38, pourcent * 73 * Reso.Width / Reso.Height, 14)
+      love.graphics.reset()
+   else
+      color = math.floor((0.5 - pourcent) * 500)
+      color = 250 - color
+      love.graphics.setColor(255, color, 0, 200)
+      love.graphics.rectangle("fill", 103, 38, pourcent * 73 * Reso.Width / Reso.Height, 14)
+      love.graphics.reset()
+   end
    love.graphics.reset()
    love.graphics.setColor(255, 255, 255, 255)
    love.graphics.printf(math.floor(Tank.Health) .. "/" .. math.floor(Tank.HealthBase), 103, 40, 73 * Reso.Width / Reso.Height, "center")
