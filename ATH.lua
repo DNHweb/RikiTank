@@ -53,13 +53,16 @@ function		ATH_Life()
    local pourcent = Tank.Health / Tank.HealthBase
    if (pourcent > 0.5) then
       color = math.floor((1 - pourcent) * 500) 
-      love.graphics.setColor(color, 255, 0, 200)
+      love.graphics.setColor(color, 255, 0, 235)
       love.graphics.rectangle("fill", 103, 38, pourcent * 73 * Reso.Width / Reso.Height, 14)
       love.graphics.reset()
    else
-      color = math.floor((0.5 - pourcent) * 500)
+      color = math.floor((0.5 - pourcent) * 530)
       color = 250 - color
-      love.graphics.setColor(255, color, 0, 200)
+      if (color < 0) then
+	 color = 0
+      end
+      love.graphics.setColor(255, color, 0, 235)
       love.graphics.rectangle("fill", 103, 38, pourcent * 73 * Reso.Width / Reso.Height, 14)
       love.graphics.reset()
    end
