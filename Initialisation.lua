@@ -53,7 +53,7 @@ function ChoixTankLoad()
 	LogoRT = love.graphics.newImage("Images/LogoRT.png")
 	ImageTankMenu = love.graphics.newImage("Images/ImageTankMenu.png")
 	ImageTankPause = love.graphics.newImage("Images/ImageTankPause.png")
-	Viseur = love.graphics.newImage("Images/Viseur.png")
+	Viseur = love.graphics.newImage("Images/viseur.png")
 	
    JouerOn = love.graphics.newImage("Images/Menu/JouerOn.png")
    JouerOff = love.graphics.newImage("Images/Menu/JouerOff.png")
