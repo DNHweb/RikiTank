@@ -69,7 +69,6 @@ CountdownTimer = 0
 CountdownSpeedSort = 1
 CountdownTimerSort = 0
 
-
 --[[ ---------------------
 -- | Fonctions principales
 ]]-----------------------

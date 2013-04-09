@@ -181,7 +181,6 @@ function ents:update(dt)
 						local distance = ((ent.x - obj.x) ^ 2.5 + (ent.y - obj.y) ^ 2) ^ 0.5
 							if distance < (obj.image:getWidth() / 2 + ent.image:getWidth() / 2) * Reso.Scale then
 								ents.Destroy(obj.id)
-								ents.Destroy(ent.id)
 								break
 							end
 					elseif obj.type == "TankEnnemie" then
@@ -195,7 +194,6 @@ function ents:update(dt)
 								if obj.health < 0 then
 									ents.Destroy(obj.id)
 								end
-								ents.Destroy(ent.id)
 								break
 							end
 					elseif obj.type == "HeavyTank" then
@@ -209,7 +207,6 @@ function ents:update(dt)
 							if obj.health < 0 then
 								ents.Destroy(obj.id)
 							end
-							ents.Destroy(ent.id)
 							break
 						end
 					elseif obj.type == "Mastodonte" then
@@ -225,7 +222,6 @@ function ents:update(dt)
 								EtatJeu = "EnJeu"
 								creerMastodonte = 0
 							end
-							ents.Destroy(ent.id)
 							break
 						end
 					end

@@ -18,11 +18,12 @@
 -- 
 
 function Blast(CdSort)
+	
 	if CdSort == 0 then
 		xBlast = Tank.Position.x + (Tank.TourelleImage:getWidth() - Tank.RotTourelleWidth) * math.cos(Tank.Angle.Tourelle)
 		yBlast = Tank.Position.y + (Tank.TourelleImage:getWidth() - Tank.RotTourelleWidth) * math.sin(Tank.Angle.Tourelle)
 		ents.Create("Blast", xBlast, yBlast)
-		CountdownSort = 120
+		CountdownSort = 90
 	else
 		love.audio.play(SonMenu1)
 	end
@@ -30,8 +31,8 @@ end
 
 function Flash(CdSort)
 	if CdSort == 0 then
-		-- todo
-		CountdownSort = 120
+		--todo
+		CountdownSort = 90
 	else
 		love.audio.play(SonMenu1)
 	end
@@ -45,10 +46,10 @@ function Soin(CdSort)
 		ents.Create("AnimationSoin", xSoin, ySoin)
 		if (Tank.Health + (Tank.HealthBase * 35)/100 > Tank.HealthBase ) then
 			Tank.Health = Tank.HealthBase
-			CountdownSort = 120
+			CountdownSort = 90
 		else
 			Tank.Health = Tank.Health + (Tank.HealthBase * 35)/100
-			CountdownSort = 120
+			CountdownSort = 90
 		end
 	else
 		love.audio.play(SonMenu1)

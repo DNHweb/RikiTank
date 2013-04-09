@@ -82,7 +82,7 @@ function EtatJeuDraw()
 		love.graphics.setFont(menuFont)
 		love.graphics.setColor(224, 157, 40, 200)
 		love.graphics.printf("selectionnez votre tank", (Reso.Width/2)-400, 15, 800, "center")
-		love.graphics.printf("selectionnez votre sort", (Reso.Width/2)-400, (Reso.Height/2)+63, 800, "center")
+		love.graphics.printf("selectionnez votre soutien", (Reso.Width/2)-500, (Reso.Height/2)+63, 1000, "center")
 		love.graphics.reset()
 		love.graphics.draw(InfoTankVide, (Reso.Width/2)-50, (Reso.Height/4)-100)
 		for k, v in pairs(Bouton.Choix) do
@@ -191,8 +191,9 @@ function EtatJeuDraw()
 		love.graphics.setFont(menuFont)
 		love.graphics.setColor(224, 157, 40, 200)
 		love.graphics.printf("selectionnez votre tank", (Reso.Width/2)-400, 15, 800, "center")
-		love.graphics.printf("selectionnez votre sort", (Reso.Width/2)-400, (Reso.Height/2)+63, 800, "center")
+		love.graphics.printf("selectionnez votre soutien", (Reso.Width/2)-500, (Reso.Height/2)+63, 1000, "center")
 		love.graphics.reset()
+		love.graphics.draw(InfoTankVide, (Reso.Width/2)-50, (Reso.Height/4)-100)
 		love.graphics.setFont(normalFont)
 		for k, v in pairs(Bouton.Choix) do
 			drawButton( v.Off, v.On, v.x, v.y, v.Width, v.Height, x, y )
@@ -204,6 +205,7 @@ function EtatJeuDraw()
 		for k, v in pairs(Bouton.Ok) do
 			drawButton( v.Off, v.On, v.x, v.y, v.Width, v.Height, x, y )
 		end
+		
 		love.graphics.printf("Vous devez selectionner un tank et un sort pour pouvoir commencer la partie", (Reso.Width/2)-175, (Reso.Height/2)-50, 350, "center")
 	end
    
