@@ -25,7 +25,7 @@ local ent = ents.Derive("Base")
 function ent:setPos( x, y )
    self.x = x
    self.y = y
-   self.vitesse = 0.70
+   self.vitesse = 0.75
 end
 
 --- Charge les parametres en memoire.

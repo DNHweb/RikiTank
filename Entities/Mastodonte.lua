@@ -25,6 +25,7 @@ local ent = ents.Derive("Base")
 function ent:setPos( x, y )
    self.x = x
    self.y = y
+   cote = 0
 end
 
 --- Charge les parametres en memoire.
@@ -87,13 +88,18 @@ function	ent:update(dt)
 	  self:pivoter(dt)
    else
       self.angleT = math.atan2(self.x - Tank.Position.x, Tank.Position.y - self.y) + math.pi / 2
-      if etime - self.stime > 0.33 then
-	 ax = self.x + 9 * math.cos(self.angleT - (math.pi/2))
-	 ay = self.y + 9 * math.sin(self.angleT - (math.pi/2))
-	 bx = self.x + 9 * math.cos(self.angleT + (math.pi/2))
-	 by = self.y + 9 * math.sin(self.angleT + (math.pi/2))
-	 ents.Create("MissileM", ax, ay, self.angleT)
-	 ents.Create("MissileM", bx, by, self.angleT)
+      if etime - self.stime > 0.27 then
+	 if (cote == 0) then
+	    ax = self.x + 9 * math.cos(self.angleT - (math.pi/2)) + math.cos(self.angleT) * 1.2 * Reso.Scale * dt / 0.002
+	    ay = self.y + 9 * math.sin(self.angleT - (math.pi/2)) + math.sin(self.angleT) * 1.2 * Reso.Scale * dt / 0.002
+	    ents.Create("MissileM", ax, ay, self.angleT)
+	    cote = 1
+	 else
+	    bx = self.x + 9 * math.cos(self.angleT + (math.pi/2)) + math.cos(self.angleT) * 1.2 * Reso.Scale * dt / 0.002
+	    by = self.y + 9 * math.sin(self.angleT + (math.pi/2)) + math.sin(self.angleT) * 1.2 * Reso.Scale * dt / 0.002
+	    ents.Create("MissileM", bx, by, self.angleT)
+	    cote = 0
+	 end
 	 self.stime = love.timer.getTime()
       end
    end

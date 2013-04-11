@@ -27,7 +27,7 @@ function ent:setPos( x, y )
    self.y = y
    self.xb = x
    self.yb = y
-   self.vitesse = 0.60
+   self.vitesse = 0.70
 end
 
 --- Charge les parametres en memoire.

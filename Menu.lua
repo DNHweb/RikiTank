@@ -313,7 +313,7 @@ function love.mousepressed(x, y, button)
 			CountdownSort = 0
 		     elseif ChoixTank == 3 then
 			ChargerTank3()
-			EtatJeu = "Countdown"
+			EtatJeu = "Boss"
 			CountdownSort = 0
 		     end
 		  end

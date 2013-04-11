@@ -18,40 +18,41 @@
 -- 
 
 function Blast(CdSort)
-	
-	if CdSort == 0 then
-		xBlast = Tank.Position.x + (Tank.TourelleImage:getWidth() - Tank.RotTourelleWidth) * math.cos(Tank.Angle.Tourelle)
-		yBlast = Tank.Position.y + (Tank.TourelleImage:getWidth() - Tank.RotTourelleWidth) * math.sin(Tank.Angle.Tourelle)
-		ents.Create("Blast", xBlast, yBlast)
-		CountdownSort = 90
-	else
-		love.audio.play(SonMenu1)
-	end
+   
+   if CdSort == 0 then
+      xBlast = Tank.Position.x + (Tank.TourelleImage:getWidth() - Tank.RotTourelleWidth) * math.cos(Tank.Angle.Tourelle)
+      yBlast = Tank.Position.y + (Tank.TourelleImage:getWidth() - Tank.RotTourelleWidth) * math.sin(Tank.Angle.Tourelle)
+      ents.Create("Blast", xBlast, yBlast)
+      CountdownSort = 90
+   else
+      love.audio.play(SonMenu1)
+   end
 end
 
 function Flash(CdSort)
-	if CdSort == 0 then
-		--todo
-		CountdownSort = 90
-	else
-		love.audio.play(SonMenu1)
-	end
+   if CdSort == 0 then
+      Tank.Position.x = Tank.Position.x + math.cos(Tank.Angle.Base) * 300
+      Tank.Position.y = Tank.Position.y + math.sin(Tank.Angle.Base) * 300
+      CountdownSort = 90
+   else
+      love.audio.play(SonMenu1)
+   end
 end
 
 function Soin(CdSort)
-	if CdSort == 0 then
-		love.audio.play(SonSoin)
-		xSoin = Tank.Position.x - (Tank.BaseImage:getWidth()/2)
-		ySoin = Tank.Position.y - (Tank.TourelleImage:getHeight()/2)
-		ents.Create("AnimationSoin", xSoin, ySoin)
-		if (Tank.Health + (Tank.HealthBase * 35)/100 > Tank.HealthBase ) then
-			Tank.Health = Tank.HealthBase
-			CountdownSort = 90
-		else
-			Tank.Health = Tank.Health + (Tank.HealthBase * 35)/100
-			CountdownSort = 90
-		end
-	else
-		love.audio.play(SonMenu1)
-	end
+   if CdSort == 0 then
+      love.audio.play(SonSoin)
+      xSoin = Tank.Position.x - (Tank.BaseImage:getWidth()/2)
+      ySoin = Tank.Position.y - (Tank.TourelleImage:getHeight()/2)
+      ents.Create("AnimationSoin", xSoin, ySoin)
+      if (Tank.Health + (Tank.HealthBase * 35)/100 > Tank.HealthBase ) then
+	 Tank.Health = Tank.HealthBase
+	 CountdownSort = 90
+      else
+	 Tank.Health = Tank.Health + (Tank.HealthBase * 35)/100
+	 CountdownSort = 90
+      end
+   else
+      love.audio.play(SonMenu1)
+   end
 end
