@@ -107,7 +107,7 @@ function		ATH_Life()
    end
    if CountdownSort ~= 0 then
       love.graphics.setColor(50, 50, 50, 190)
-      love.graphics.rectangle("fill", 35, 80 - 100 * CountdownSort / 180, 58, (100 * CountdownSort / 180) - 10)
+      love.graphics.rectangle("fill", 35, 80 - 100 * CountdownSort / 135, 58, (100 * CountdownSort / 135) - 10)
       love.graphics.reset()
       love.graphics.setColor(255, 0, 0, 255)
       love.graphics.setFont(CDSortFont)

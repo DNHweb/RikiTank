@@ -25,6 +25,7 @@ local ent = ents.Derive("Base")
 function ent:setPos( x, y )
    self.x = x
    self.y = y
+   self.Scalex = Reso.Scale - 0.1
    self.ang = Tank.Angle.Tourelle
    self.vitesse = 2
 end
@@ -45,7 +46,7 @@ function ent:update(dt)
    end
    self.x = self.x + math.cos(self.ang) * self.vitesse * dt / 0.002
    self.y = self.y + math.sin(self.ang) * self.vitesse * dt / 0.002
-   
+   self.Scalex = self.Scalex + 2.1
    if (self.x > Reso.Width) then
       ents.Destroy( self.id )
    elseif (self.x < 0) then
@@ -59,7 +60,7 @@ end
 
 --- Affiche l'entite.
 function ent:draw()
-   love.graphics.draw(self.image, self.x, self.y, self.ang, Reso.Scale, Reso.Scale, self.image:getWidth() / 2, self.image:getHeight() / 2)
+   love.graphics.draw(self.image, self.x, self.y, self.ang, self.Scalex, Reso.Scale, self.image:getWidth() / 2, self.image:getHeight() / 2)
 end
 
 --- Code a executer avant la destruction de l'entite.

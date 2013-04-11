@@ -25,6 +25,8 @@ local ent = ents.Derive("Base")
 function ent:setPos( x, y )
    self.x = x
    self.y = y
+   self.xb = x
+   self.yb = y
    self.vitesse = 0.60
 end
 

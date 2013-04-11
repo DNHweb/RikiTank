@@ -76,7 +76,6 @@ end
 -- du joueur puis le Mastodonte se met a faire feu ( creation de Missile Mastodonte ).
 -- Si collision le tank est detruit.
 -- @param dt Delta Temps
-local cote = 0
 function	ent:update(dt)
    distance = ((self.x - Tank.Position.x) ^ 2 + (self.y - Tank.Position.y) ^ 2) ^ 0.5
    local etime = love.timer.getTime()
@@ -87,13 +86,12 @@ function	ent:update(dt)
    else
       self.angleT = math.atan2(self.x - Tank.Position.x, Tank.Position.y - self.y) + math.pi / 2
       if etime - self.stime > 0.33 then
-	 if cote == 0 then
-	    ents.Create("MissileM", self.x, self.y, self.angleT)
-	    cote = 1
-	 else 
-	    ents.Create("MissileM", self.x, self.y, self.angleT)
-	    cote = 0
-	 end
+	 ax = self.x + 9 * math.cos(self.angleT - (math.pi/2))
+	 ay = self.y + 9 * math.sin(self.angleT - (math.pi/2))
+	 bx = self.x + 9 * math.cos(self.angleT + (math.pi/2))
+	 by = self.y + 9 * math.sin(self.angleT + (math.pi/2))
+	 ents.Create("MissileM", ax, ay, self.angleT)
+	 ents.Create("MissileM", bx, by, self.angleT)
 	 self.stime = love.timer.getTime()
       end
    end
