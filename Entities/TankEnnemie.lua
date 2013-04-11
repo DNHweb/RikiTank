@@ -77,8 +77,12 @@ end
 function	ent:update(dt)
    distance = ((self.x - Tank.Position.x) ^ 2 + (self.y - Tank.Position.y) ^ 2) ^ 0.5
    local etime = love.timer.getTime()
-   
-   if distance > (Reso.Width / 3.2) then
+
+   if self.x < Reso.Width * 0.1 or self.x > Reso.Width - Reso.Width * 0.1 or
+      self.y < Reso.Height * 0.1 or self.y > Reso.Height - Reso.Height * 0.1 then
+      self:pivoter(dt)
+      self:avancer(dt)
+   elseif (distance > (Reso.Width / 3.2)) then
       self:pivoter(dt)
       self:avancer(dt)
    else

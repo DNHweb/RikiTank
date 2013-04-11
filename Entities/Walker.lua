@@ -36,6 +36,8 @@ function ent:load( x, y )
    self.image = picWalker
    self.xx = Reso.Width / 6
    self.yy = Reso.Height / 6
+   self.stime = love.timer.getTime()
+   self.oldangle = 0
 end
 
 --- Code a executer avant la destruction de l'entite.
@@ -53,9 +55,39 @@ end
 
 --- Fait pivoter le Walker.
 -- Calcul le nouvel angle du walker.
+-- Utilisation d'un algorithme Brownien pour essayer d'avoir une trajectoire un peu aleatoire
+-- jusqu'au tank du joueur.
 -- @param dt Delta Temps.
 function	ent:pivoter(dt)
-   self.angle = math.atan2(self.x - Tank.Position.x, Tank.Position.y - self.y) + math.pi / 2
+   local etime = love.timer.getTime()
+   math.randomseed(os.time())
+   
+   if etime - stime >= 0.5 then
+      math.random()
+      math.random()
+      math.random()
+      local aleatoire = math.random(12)
+
+      if aleatoire <= 7 then
+	 self.angle = math.atan2(self.x - Tank.Position.x, Tank.Position.y - self.y) + math.pi / 2
+	 self.oldangle = 0
+      elseif aleatoire <= 9 then
+	 self.angle = ent:TourneDroite(self.angle, dt)
+	 self.oldangle = 1
+      else
+	 self.angle = ent:TourneGauche(self.angle, dt)
+	 self.oldangle = 2
+      end
+      stime = love.timer.getTime()
+   else
+      if self.oldangle == 0 then
+	 self.angle = math.atan2(self.x - Tank.Position.x, Tank.Position.y - self.y) + math.pi / 2
+      elseif self.oldangle == 1 then
+	 self.angle = ent:TourneDroite(self.angle, dt)
+      else
+	 self.angle = ent:TourneGauche(self.angle, dt)
+      end
+   end
 end
 
 --- Fait avancer le Walker.
@@ -66,13 +98,32 @@ function	ent:avancer(dt)
    self.y = self.y + math.sin(self.angle) * self.vitesse * dt / 0.002
 end
 
+--- Tourner a droite.
+-- @param Angle Angle du walker.
+-- @param dt Delta Temps.
+-- @return Le nouvel angle du walker.
+function	ent:TourneDroite(Angle, dt)
+   Angle = Angle + dt * math.pi / 2
+   Angle = Angle % (2 * math.pi)
+   return Angle
+end
+
+--- Tourner a gauche.
+-- @param Angle Angle du walker.
+-- @param dt Delta Temps.
+-- @return Le nouvel angle du walker.
+function	ent:TourneGauche(Angle, dt)
+   Angle = Angle - dt * math.pi / 2
+   Angle = Angle % (2 * math.pi)
+   return Angle
+end
+
 --- Mise-a-jour de l'entite.
 -- On calcul la distance entre le Walker et le tank.
 -- Si collision, le joueur perd de la vie et le Walker est detruit.
 -- Sinon on dirige le Walker vers le joueur.
 -- @param dt Delta Temps
 function	ent:update(dt)
-   
    -- IA
    distance = ((self.x - Tank.Position.x) ^ 2 + (self.y - Tank.Position.y) ^ 2) ^ 0.5
    -- si collision
@@ -82,18 +133,11 @@ function	ent:update(dt)
    end
    self:pivoter(dt)
    self:avancer(dt)
-   
-   self.xx = self.xx + self.xx / distance
-   self.yy = self.yy + self.yy / distance
 end
 
 --- Affiche l'entite.
-function ent:draw()
+function	ent:draw()
    love.graphics.draw(self.image, self.x, self.y, self.angle, Reso.Scale, Reso.Scale, self.image:getWidth() / 2, self.image:getHeight() / 2)
-   --[[ Apparition sur le radar
-   love.graphics.setColor(255, 0, 0)
-   love.graphics.circle("fill", Reso.Width - self.xx / 2, self.yy / 2, 5, 5)
-   love.graphics.reset()]]
 end
 
 return ent
