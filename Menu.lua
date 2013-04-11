@@ -504,8 +504,8 @@ function ChargerTank3()
    Tank.RotTourelleWidth = 50
    Tank.Vitesse = (Speed * 6) / 7
    Tank.Dammage = 24 + 24 * 0.03
-   Tank.Health = 180 + 180 * 0.02 + 10000
-   Tank.HealthBase = 180 + 180 * 0.02 + 10000
+   Tank.Health = 180 + 180 * 0.02
+   Tank.HealthBase = 180 + 180 * 0.02
    Tank.CadenceTir = 2.38
    Tank.Position.x = Reso.Width/2
    Tank.Position.y = Reso.Height/2

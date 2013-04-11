@@ -34,7 +34,9 @@ function ent:load( x, y )
    self.vitesse = 0.1
    self.health = 1000
    self:setPos( x, y )
-   self.image = picMastodonte
+   self.image = picBaseMastodonte
+   self.imageT = picTourelleMastodonte
+   self.angleT = self.angle
    self.xx = Reso.Width / 6
    self.yy = Reso.Height / 6
    self.stime = love.timer.getTime()
@@ -80,9 +82,9 @@ function	ent:update(dt)
    distance = ((self.x - Tank.Position.x) ^ 2 + (self.y - Tank.Position.y) ^ 2) ^ 0.5
    local etime = love.timer.getTime()
    
-   self:pivoter(dt)
    if distance > (Reso.Width / 2) then
       self:avancer(dt)
+	  self:pivoter(dt)
    else
       self.angleT = math.atan2(self.x - Tank.Position.x, Tank.Position.y - self.y) + math.pi / 2
       if etime - self.stime > 0.33 then
@@ -118,6 +120,7 @@ end
 --- Affiche l'entite.
 function ent:draw()
    love.graphics.draw(self.image, self.x, self.y, self.angle, Reso.Scale, Reso.Scale, self.image:getWidth() / 2, self.image:getHeight() / 2)
+   love.graphics.draw(self.imageT, self.x, self.y, self.angleT, Reso.Scale, Reso.Scale, self.imageT:getWidth() / 2, self.imageT:getHeight() / 2)
 end
 
 return ent;
