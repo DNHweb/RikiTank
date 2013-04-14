@@ -33,7 +33,12 @@ end
 function ent:load( x, y )
    self.vitesse = 0.40
    self:setPos( x, y )
-   self.image = picWalker
+   local randW = math.random(10)
+   if randW <= 5 then
+	self.image = picWalker
+   else
+	self.image = picWalkerRouge
+   end
    self.xx = Reso.Width / 6
    self.yy = Reso.Height / 6
    self.stime = love.timer.getTime()

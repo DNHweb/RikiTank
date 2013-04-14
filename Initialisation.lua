@@ -25,20 +25,20 @@
 -- Cette fonction va rechercher les differentes resolutions disponible,
 -- les classer dans un tableau, puis choisira la plus grande resoltion pour le jeu.
 function resolution()
-   --> Met l'écran dans la résolution optimale <--
-   modes = love.graphics.getModes()
-   table.sort(modes, function(a, b) return a.width*a.height > b.width*b.height end)
-   Reso.Height = modes[1].height
-   Reso.Width = modes[1].width
-   love.graphics.setMode(Reso.Width , Reso.Height, true, false, 0 )
+	--> Met l'écran dans la résolution optimale <--
+	modes = love.graphics.getModes()
+	table.sort(modes, function(a, b) return a.width*a.height > b.width*b.height end)
+	Reso.Height = modes[1].height
+	Reso.Width = modes[1].width
+	love.graphics.setMode(Reso.Width , Reso.Height, true, false, 0 )
+	
+	diag = math.sqrt(Reso.Height*Reso.Height + Reso.Width*Reso.Width)
+	defaut = math.sqrt(1366*1366 + 768*768)
+	--> Calcule la vitesse en fonction de la résolution <--
+	Speed = (diag * 0.35)/defaut
    
-   diag = math.sqrt(Reso.Height*Reso.Height + Reso.Width*Reso.Width)
-   defaut = math.sqrt(1366*1366 + 768*768)
-   --> Calcule la vitesse en fonction de la résolution <--
-   Speed = (diag * 0.35)/defaut
-   
-   --> calcule de la taille des images en fonction de la résolution <--
-   Reso.Scale = (diag * 0.77) / defaut
+	--> calcule de la taille des images en fonction de la résolution <--
+	Reso.Scale = (diag * 0.77) / defaut
 end
 
 --[[ ----------------------
@@ -55,47 +55,47 @@ function ChoixTankLoad()
 	ImageTankPause = love.graphics.newImage("Images/ImageTankPause.png")
 	Viseur = love.graphics.newImage("Images/viseur.png")
 	
-   JouerOn = love.graphics.newImage("Images/Menu/JouerOn.png")
-   JouerOff = love.graphics.newImage("Images/Menu/JouerOff.png")
-   MenuOn = love.graphics.newImage("Images/Menu/MenuOn.png")
-   MenuOff = love.graphics.newImage("Images/Menu/MenuOff.png")
-   RegleOn = love.graphics.newImage("Images/Menu/ReglesOn.png")
-   RegleOff = love.graphics.newImage("Images/Menu/ReglesOff.png")
-   RetourOn = love.graphics.newImage("Images/Menu/RetourOn.png")
-   RetourOff = love.graphics.newImage("Images/Menu/RetourOff.png")
-   ValiderOn = love.graphics.newImage("Images/Menu/ValiderOn.png")
-   ValiderOff = love.graphics.newImage("Images/Menu/ValiderOff.png")
-   AnnulerOn = love.graphics.newImage("Images/Menu/AnnulerOn.png")
-   AnnulerOff = love.graphics.newImage("Images/Menu/AnnulerOff.png")
-   ReprendreOn = love.graphics.newImage("Images/Menu/ReprendreOn.png")
-   ReprendreOff = love.graphics.newImage("Images/Menu/ReprendreOff.png")
-   QuitterOn = love.graphics.newImage("Images/Menu/QuitterOn.png")
-   QuitterOff = love.graphics.newImage("Images/Menu/QuitterOff.png")
-   DemarrerOn = love.graphics.newImage("Images/Menu/DemarrerOn.png")
-   DemarrerOff = love.graphics.newImage("Images/Menu/DemarrerOff.png")
+	JouerOn = love.graphics.newImage("Images/Menu/JouerOn.png")
+	JouerOff = love.graphics.newImage("Images/Menu/JouerOff.png")
+	MenuOn = love.graphics.newImage("Images/Menu/MenuOn.png")
+	MenuOff = love.graphics.newImage("Images/Menu/MenuOff.png")
+	RegleOn = love.graphics.newImage("Images/Menu/ReglesOn.png")
+	RegleOff = love.graphics.newImage("Images/Menu/ReglesOff.png")
+	RetourOn = love.graphics.newImage("Images/Menu/RetourOn.png")
+	RetourOff = love.graphics.newImage("Images/Menu/RetourOff.png")
+	ValiderOn = love.graphics.newImage("Images/Menu/ValiderOn.png")
+	ValiderOff = love.graphics.newImage("Images/Menu/ValiderOff.png")
+	AnnulerOn = love.graphics.newImage("Images/Menu/AnnulerOn.png")
+	AnnulerOff = love.graphics.newImage("Images/Menu/AnnulerOff.png")
+	ReprendreOn = love.graphics.newImage("Images/Menu/ReprendreOn.png")
+	ReprendreOff = love.graphics.newImage("Images/Menu/ReprendreOff.png")
+	QuitterOn = love.graphics.newImage("Images/Menu/QuitterOn.png")
+	QuitterOff = love.graphics.newImage("Images/Menu/QuitterOff.png")
+	DemarrerOn = love.graphics.newImage("Images/Menu/DemarrerOn.png")
+	DemarrerOff = love.graphics.newImage("Images/Menu/DemarrerOff.png")
    
-   Tank1On = love.graphics.newImage("Images/Menu/Tank1On.png")
-   Tank1Off = love.graphics.newImage("Images/Menu/Tank1Off.png")
-   Tank2On = love.graphics.newImage("Images/Menu/Tank2On.png")
-   Tank2Off = love.graphics.newImage("Images/Menu/Tank2Off.png")
-   Tank3On = love.graphics.newImage("Images/Menu/Tank3On.png")
-   Tank3Off = love.graphics.newImage("Images/Menu/Tank3Off.png")
-   Tank4On = love.graphics.newImage("Images/Menu/Tank4On.png")
-   Tank4Off = love.graphics.newImage("Images/Menu/Tank4Off.png")
-   InfoTankVide = love.graphics.newImage("Images/Menu/InfoTankVide.png")
-   InfoTank1 = love.graphics.newImage("Images/Menu/InfoTank1.png")
-   InfoTank2 = love.graphics.newImage("Images/Menu/InfoTank2.png")
-   InfoTank3 = love.graphics.newImage("Images/Menu/InfoTank3.png")
+	Tank1On = love.graphics.newImage("Images/Menu/Tank1On.png")
+	Tank1Off = love.graphics.newImage("Images/Menu/Tank1Off.png")
+	Tank2On = love.graphics.newImage("Images/Menu/Tank2On.png")
+	Tank2Off = love.graphics.newImage("Images/Menu/Tank2Off.png")
+	Tank3On = love.graphics.newImage("Images/Menu/Tank3On.png")
+	Tank3Off = love.graphics.newImage("Images/Menu/Tank3Off.png")
+	Tank4On = love.graphics.newImage("Images/Menu/Tank4On.png")
+	Tank4Off = love.graphics.newImage("Images/Menu/Tank4Off.png")
+	InfoTankVide = love.graphics.newImage("Images/Menu/InfoTankVide.png")
+	InfoTank1 = love.graphics.newImage("Images/Menu/InfoTank1.png")
+	InfoTank2 = love.graphics.newImage("Images/Menu/InfoTank2.png")
+	InfoTank3 = love.graphics.newImage("Images/Menu/InfoTank3.png")
    
-   BlastOn = love.graphics.newImage("Images/Menu/BlastOn.png")
-   BlastOff = love.graphics.newImage("Images/Menu/BlastOff.png")
-   FlashOn = love.graphics.newImage("Images/Menu/FlashOn.png")
-   FlashOff = love.graphics.newImage("Images/Menu/FlashOff.png")
-   SoinOn = love.graphics.newImage("Images/Menu/SoinOn.png")
-   SoinOff = love.graphics.newImage("Images/Menu/SoinOff.png")
-   Interface = love.graphics.newImage("Images/Interface.png")
-   Transparent = love.graphics.newImage("Images/Transparent.png")
-   GameOver = love.graphics.newImage("Images/GameOver.png")
+	BlastOn = love.graphics.newImage("Images/Menu/BlastOn.png")
+	BlastOff = love.graphics.newImage("Images/Menu/BlastOff.png")
+	FlashOn = love.graphics.newImage("Images/Menu/FlashOn.png")
+	FlashOff = love.graphics.newImage("Images/Menu/FlashOff.png")
+	SoinOn = love.graphics.newImage("Images/Menu/SoinOn.png")
+	SoinOff = love.graphics.newImage("Images/Menu/SoinOff.png")
+	Interface = love.graphics.newImage("Images/Interface.png")
+	Transparent = love.graphics.newImage("Images/Transparent.png")
+	GameOver = love.graphics.newImage("Images/GameOver.png")
    
 	Bouton = {
 		Main = {
@@ -183,30 +183,50 @@ end
 --- Chargement du decor
 -- Charge en memoire les images composant le decor.
 function GroundLoad()
-   Ground1 = love.graphics.newImage("Images/Ground.jpg")
-   Mur1 = love.graphics.newImage("Images/Murs/Horizontal.png")
+	Ground1 = love.graphics.newImage("Images/Ground.jpg")
+	Mur1 = love.graphics.newImage("Images/Murs/Horizontal.png")
    
-   picWalker = love.graphics.newImage("Images/Walker.png")
-   picTankEB = love.graphics.newImage("Images/BaseTank4.png")
-   picTankET = love.graphics.newImage("Images/TourelleTank4.png")
-   picTankHB = love.graphics.newImage("Images/BaseHeavyTank.png")
-   picTankHT = love.graphics.newImage("Images/TourelleHeavyTank.png")
-   picBaseMastodonte = love.graphics.newImage("Images/BaseMastodonte.png")
-   picTourelleMastodonte = love.graphics.newImage("Images/TourelleMastodonte.png")
+	picWalker = love.graphics.newImage("Images/Walker.png")
+	picWalkerRouge = love.graphics.newImage("Images/WalkerRouge.png")
+	picTankEBGris = love.graphics.newImage("Images/BaseTank4Gris.png")
+	picTankETGris = love.graphics.newImage("Images/TourelleTank4Gris.png")
+	picTankEB = love.graphics.newImage("Images/BaseTank4.png")
+	picTankET = love.graphics.newImage("Images/TourelleTank4.png")
+	picTankHB = love.graphics.newImage("Images/BaseHeavyTank.png")
+	picTankHT = love.graphics.newImage("Images/TourelleHeavyTank.png")
+	picBaseMastodonte = love.graphics.newImage("Images/BaseMastodonte.png")
+	picTourelleMastodonte = love.graphics.newImage("Images/TourelleMastodonte.png")
    
+<<<<<<< HEAD
    picMissile = love.graphics.newImage("Images/Missile.png")
    picMissileE = love.graphics.newImage("Images/MissileE.png")
    picMissileM = love.graphics.newImage("Images/MissileM.png")
    picSpecialM = love.graphics.newImage("Images/SpecialM.png")
    BaseBlast = love.graphics.newImage("Images/BlastOld.png")
    picBlast = love.graphics.newImage("Images/Blast.png")
+=======
+	picMissile = love.graphics.newImage("Images/Missile.png")
+	picMissileE = love.graphics.newImage("Images/MissileE.png")
+	picMissileM = love.graphics.newImage("Images/MissileM.png")
+	picSpecialM = love.graphics.newImage("Images/SpecialM.png")
+	BaseBlast = love.graphics.newImage("Images/BlastOld.png")
+	picBlast = love.graphics.newImage("Images/Blast.png")
+	picBulle = love.graphics.newImage("Images/Bulle.png")
+>>>>>>> d113eae... Encore des modifs...
    
-   picMedikit = love.graphics.newImage("Images/medikit.png")
-   picVitesse = love.graphics.newImage("Images/BonusVitesse.png")
-   picResistance = love.graphics.newImage("Images/BonusResistance.png")
+	picMedikit = love.graphics.newImage("Images/medikit.png")
+	picVitesse = love.graphics.newImage("Images/BonusVitesse.png")
+	picResistance = love.graphics.newImage("Images/BonusResistance.png")
    
+<<<<<<< HEAD
    Explosion = love.graphics.newImage("Images/explosion.png")
    ExplosionBomb = love.graphics.newImage("Images/explosionBomb.png")
    AnimationSoin = love.graphics.newImage("Images/AnimationSoin.png")
    ExplosionEnnemi = love.graphics.newImage("Images/ExplosionEnnemi.png")
+=======
+	Explosion = love.graphics.newImage("Images/explosion.png")
+	ExplosionBomb = love.graphics.newImage("Images/explosionBomb.png")
+	AnimationSoin = love.graphics.newImage("Images/AnimationSoin.png")
+	ExplosionEnnemie = love.graphics.newImage("Images/ExplosionEnnemie.png")
+>>>>>>> d113eae... Encore des modifs...
 end

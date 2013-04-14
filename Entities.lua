@@ -32,6 +32,7 @@ local id = 0
 -- Une sorte de catalogue qui dit quels objets on peut creer
 -- et les charge en memoire.
 function ents.Startup()
+<<<<<<< HEAD
 	register["Missile"] = love.filesystem.load(ents.objectpath .. "Missile.lua")
 	register["MissileE"] = love.filesystem.load(ents.objectpath .. "MissileE.lua")
 	register["MissileM"] = love.filesystem.load(ents.objectpath .. "MissileM.lua")
@@ -52,6 +53,30 @@ function ents.Startup()
 	register["Vitesse"] = love.filesystem.load(ents.objectpath .. "Vitesse.lua")
 	register["Resistance"] = love.filesystem.load(ents.objectpath .. "Resistance.lua")
 	register["SpeedOn"] = love.filesystem.load(ents.objectpath .. "SpeedOn.lua")
+=======
+	register["Missile"] = love.filesystem.load(ents.objectpath .. "Tirs/Missile.lua")
+	register["MissileE"] = love.filesystem.load(ents.objectpath .. "Tirs/MissileE.lua")
+	register["MissileM"] = love.filesystem.load(ents.objectpath .. "Tirs/MissileM.lua")
+	register["SpecialM"] = love.filesystem.load(ents.objectpath .. "Tirs/SpecialM.lua")
+	register["Bomb"] = love.filesystem.load(ents.objectpath .. "Tirs/Bomb.lua")
+
+	register["Walker"] = love.filesystem.load(ents.objectpath .. "Ennemies/Walker.lua")
+	register["Mastodonte"] = love.filesystem.load(ents.objectpath .. "Ennemies/Mastodonte.lua")
+	register["HeavyTank"] = love.filesystem.load(ents.objectpath .. "Ennemies/HeavyTank.lua")
+	register["TankEnnemie"] = love.filesystem.load(ents.objectpath .. "Ennemies/TankEnnemie.lua")
+
+	register["Explosion"] = love.filesystem.load(ents.objectpath .. "Animations/Explosion.lua")
+	register["ExplosionBomb"] = love.filesystem.load(ents.objectpath .. "Animations/ExplosionBomb.lua")
+	register["AnimationSoin"] = love.filesystem.load(ents.objectpath .. "Animations/AnimationSoin.lua")
+	register["ExplosionEnnemie"] = love.filesystem.load(ents.objectpath .. "Animations/ExplosionEnnemie.lua")
+	
+	register["Medikit"] = love.filesystem.load(ents.objectpath .. "Bonus/Medikit.lua")
+	register["Vitesse"] = love.filesystem.load(ents.objectpath .. "Bonus/Vitesse.lua")
+	register["Resistance"] = love.filesystem.load(ents.objectpath .. "Bonus/Resistance.lua")
+	register["SpeedOn"] = love.filesystem.load(ents.objectpath .. "Bonus/SpeedOn.lua")
+	register["Blast"] = love.filesystem.load(ents.objectpath .. "Bonus/Blast.lua")
+	register["Bulle"] = love.filesystem.load(ents.objectpath .. "Bonus/Bulle.lua")
+>>>>>>> d113eae... Encore des modifs...
 
 end
 

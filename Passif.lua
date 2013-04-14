@@ -17,8 +17,34 @@
 -- along with this program.  If not, see <http://www.gnu.org/licenses/>.
 --
 
+<<<<<<< HEAD:Passif.lua
 function PassifTank1(PourcentageP)
 	if PourcentageP > 100 then
 		PourcentageP = 100
+=======
+function PouvoirTank1(PourcentageP)
+	if PourcentageP >= 30 then
+		--todo
+		Tank.PourcentagePouvoir = Tank.PourcentagePouvoir - 30
+	end
+end
+
+function PouvoirTank2(PourcentageP)
+	if PourcentageP >= 30 then
+		xBulle = Tank.Position.x - (Tank.BaseImage:getWidth()/2)
+		yBulle = Tank.Position.y - (Tank.TourelleImage:getHeight()/2)
+		if CreateBulle == 0 then
+			ents.Create("Bulle", xBulle, yBulle)
+			Tank.PourcentagePouvoir = Tank.PourcentagePouvoir - 30
+			CreateBulle = 1
+		end
+	end
+end
+
+function PouvoirTank3(PourcentageP)
+	if PourcentageP >= 30 then
+		--todo
+		Tank.PourcentagePouvoir = Tank.PourcentagePouvoir - 30
+>>>>>>> d113eae... Encore des modifs...:Pouvoir.lua
 	end
 end

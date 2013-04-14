@@ -32,8 +32,14 @@ end
 -- @param y Position en y.
 function ent:load( x, y )
    self:setPos( x, y )
-   self.image = picTankEB
-   self.imageT = picTankET
+   local randT = math.random(10)
+   if randT <= 5 then
+	self.image = picTankEB
+	self.imageT = picTankET
+   else
+	self.image = picTankEBGris
+	self.imageT = picTankETGris
+   end
    self.angleT = self.angle
    self.stime = love.timer.getTime()
 end

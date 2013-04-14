@@ -495,6 +495,7 @@ function ChargerTank2()
    Tank.PourcentagePouvoir = 0
    Tank.Niveau = 1
    Tank.Exp = 0
+   CreateBulle = 0
 end
 
 --- Charge le tank 3.
