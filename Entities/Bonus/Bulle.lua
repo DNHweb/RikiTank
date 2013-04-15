@@ -41,8 +41,8 @@ end
 -- Si le temps d'apparition de la bulle depasse les 5 secondes alors elle est detruite.
 -- @param dt Delta Temps
 function ent:update(dt)
-	self.x = Tank.Position.x - 75
-	self.y = Tank.Position.y - 75
+	self.x = Tank.Position.x - 56
+	self.y = Tank.Position.y - 56
 	local etime = love.timer.getTime()
    
 	if etime - self.stime >= 5 then

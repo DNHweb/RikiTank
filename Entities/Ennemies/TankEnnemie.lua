@@ -49,7 +49,7 @@ end
 -- il y a 1 chance sur 10 pour qu'un medikit apparaisse.
 function ent:Die()
    love.audio.play(SonExplosion)
-   ents.Create("Explosion", self.x, self.y)
+   ents.Create("ExplosionEnnemie", self.x, self.y)
    Tank.Score = Tank.Score + 50
    Tank.PopBoss = Tank.PopBoss + 50
    Tank.PourcentagePouvoir = Tank.PourcentagePouvoir + 5

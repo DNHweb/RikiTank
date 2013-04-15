@@ -197,14 +197,13 @@ function GroundLoad()
 	picBaseMastodonte = love.graphics.newImage("Images/BaseMastodonte.png")
 	picTourelleMastodonte = love.graphics.newImage("Images/TourelleMastodonte.png")
    
-<<<<<<< HEAD
    picMissile = love.graphics.newImage("Images/Missile.png")
    picMissileE = love.graphics.newImage("Images/MissileE.png")
    picMissileM = love.graphics.newImage("Images/MissileM.png")
    picSpecialM = love.graphics.newImage("Images/SpecialM.png")
    BaseBlast = love.graphics.newImage("Images/BlastOld.png")
    picBlast = love.graphics.newImage("Images/Blast.png")
-=======
+
 	picMissile = love.graphics.newImage("Images/Missile.png")
 	picMissileE = love.graphics.newImage("Images/MissileE.png")
 	picMissileM = love.graphics.newImage("Images/MissileM.png")
@@ -212,21 +211,18 @@ function GroundLoad()
 	BaseBlast = love.graphics.newImage("Images/BlastOld.png")
 	picBlast = love.graphics.newImage("Images/Blast.png")
 	picBulle = love.graphics.newImage("Images/Bulle.png")
->>>>>>> d113eae... Encore des modifs...
    
 	picMedikit = love.graphics.newImage("Images/medikit.png")
 	picVitesse = love.graphics.newImage("Images/BonusVitesse.png")
 	picResistance = love.graphics.newImage("Images/BonusResistance.png")
    
-<<<<<<< HEAD
    Explosion = love.graphics.newImage("Images/explosion.png")
    ExplosionBomb = love.graphics.newImage("Images/explosionBomb.png")
    AnimationSoin = love.graphics.newImage("Images/AnimationSoin.png")
    ExplosionEnnemi = love.graphics.newImage("Images/ExplosionEnnemi.png")
-=======
+   
 	Explosion = love.graphics.newImage("Images/explosion.png")
 	ExplosionBomb = love.graphics.newImage("Images/explosionBomb.png")
 	AnimationSoin = love.graphics.newImage("Images/AnimationSoin.png")
 	ExplosionEnnemie = love.graphics.newImage("Images/ExplosionEnnemie.png")
->>>>>>> d113eae... Encore des modifs...
 end

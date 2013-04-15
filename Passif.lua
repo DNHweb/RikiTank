@@ -17,11 +17,12 @@
 -- along with this program.  If not, see <http://www.gnu.org/licenses/>.
 --
 
-<<<<<<< HEAD:Passif.lua
-function PassifTank1(PourcentageP)
+function PouvoirTank1(PourcentageP)
 	if PourcentageP > 100 then
 		PourcentageP = 100
-=======
+	end
+end
+
 function PouvoirTank1(PourcentageP)
 	if PourcentageP >= 30 then
 		--todo
@@ -45,6 +46,5 @@ function PouvoirTank3(PourcentageP)
 	if PourcentageP >= 30 then
 		--todo
 		Tank.PourcentagePouvoir = Tank.PourcentagePouvoir - 30
->>>>>>> d113eae... Encore des modifs...:Pouvoir.lua
 	end
 end

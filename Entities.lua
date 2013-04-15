@@ -32,28 +32,6 @@ local id = 0
 -- Une sorte de catalogue qui dit quels objets on peut creer
 -- et les charge en memoire.
 function ents.Startup()
-<<<<<<< HEAD
-	register["Missile"] = love.filesystem.load(ents.objectpath .. "Missile.lua")
-	register["MissileE"] = love.filesystem.load(ents.objectpath .. "MissileE.lua")
-	register["MissileM"] = love.filesystem.load(ents.objectpath .. "MissileM.lua")
-	register["SpecialM"] = love.filesystem.load(ents.objectpath .. "SpecialM.lua")
-	register["Blast"] = love.filesystem.load(ents.objectpath .. "Blast.lua")
-	
-	register["Walker"] = love.filesystem.load(ents.objectpath .. "Walker.lua")
-	register["Mastodonte"] = love.filesystem.load(ents.objectpath .. "Mastodonte.lua")
-	register["HeavyTank"] = love.filesystem.load(ents.objectpath .. "HeavyTank.lua")
-	register["TankEnnemie"] = love.filesystem.load(ents.objectpath .. "TankEnnemie.lua")
-	  
-	register["Explosion"] = love.filesystem.load(ents.objectpath .. "Explosion.lua")
-	register["ExplosionBomb"] = love.filesystem.load(ents.objectpath .. "ExplosionBomb.lua")
-	register["AnimationSoin"] = love.filesystem.load(ents.objectpath .. "AnimationSoin.lua")
-
-	register["Bomb"] = love.filesystem.load(ents.objectpath .. "Bomb.lua")
-	register["Medikit"] = love.filesystem.load(ents.objectpath .. "Medikit.lua")
-	register["Vitesse"] = love.filesystem.load(ents.objectpath .. "Vitesse.lua")
-	register["Resistance"] = love.filesystem.load(ents.objectpath .. "Resistance.lua")
-	register["SpeedOn"] = love.filesystem.load(ents.objectpath .. "SpeedOn.lua")
-=======
 	register["Missile"] = love.filesystem.load(ents.objectpath .. "Tirs/Missile.lua")
 	register["MissileE"] = love.filesystem.load(ents.objectpath .. "Tirs/MissileE.lua")
 	register["MissileM"] = love.filesystem.load(ents.objectpath .. "Tirs/MissileM.lua")
@@ -76,8 +54,6 @@ function ents.Startup()
 	register["SpeedOn"] = love.filesystem.load(ents.objectpath .. "Bonus/SpeedOn.lua")
 	register["Blast"] = love.filesystem.load(ents.objectpath .. "Bonus/Blast.lua")
 	register["Bulle"] = love.filesystem.load(ents.objectpath .. "Bonus/Bulle.lua")
->>>>>>> d113eae... Encore des modifs...
-
 end
 
 --- Une fonction d'heritage.

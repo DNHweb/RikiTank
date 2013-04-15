@@ -425,36 +425,36 @@ end
 -- Si on clique sur Echappe dans le menu pause, le jeu reprend.
 -- @param key La touche tape sur le clavier.
 function love.keypressed(key)
-   if EtatJeu == "EnJeu" or EtatJeu == "Boss" then
-      if ChoixSort == 1 and key == " " then
-	 Blast(CountdownSort)
-      elseif ChoixSort == 2 and key == " " then
-	 Flash(CountdownSort)
-      elseif ChoixSort == 3 and key == " " then
-	 Soin(CountdownSort)
-      end
-      if ChoixTank == 1 and key == "f" then
-	 PassifTank1(Tank.PourcentagePouvoir)
-      elseif ChoixTank == 2 and key == "f" then
-	 --todo
-      elseif ChoixTank == 3 and key == "f" then
-	 --todo
-      end
-      if key == "escape" then
-	 if EtatJeu == "Boss" then
-	    oldEJ = 1
-	 else
-	    oldEJ = 0
-	 end
-	 EtatJeu = "Pause"
-      elseif key == "escape" and EtatJeu=="Pause" then
-	 if oldEJ == 1 then
-	    EtatJeu = "Boss"
-	 elseif oldEJ == 0 then
-	    EtatJeu = "EnJeu"
-	 end
-      end
-   end
+	if EtatJeu == "EnJeu" or EtatJeu == "Boss" then
+		if ChoixSort == 1 and key == " " then
+			Blast(CountdownSort)
+		elseif ChoixSort == 2 and key == " " then
+			Flash(CountdownSort)
+		elseif ChoixSort == 3 and key == " " then
+			Soin(CountdownSort)
+		end
+		if ChoixTank == 1 and key == "f" then
+			PouvoirTank1(Tank.PourcentagePouvoir)
+		elseif ChoixTank == 2 and key == "f" then
+			PouvoirTank2(Tank.PourcentagePouvoir)
+		elseif ChoixTank == 3 and key == "f" then
+			PouvoirTank3(Tank.PourcentagePouvoir)
+		end
+		if key == "escape" then
+			if EtatJeu == "Boss" then
+				oldEJ = 1
+			else
+				oldEJ = 0
+			end
+			EtatJeu = "Pause"
+		elseif key == "escape" and EtatJeu=="Pause" then
+			if oldEJ == 1 then
+				EtatJeu = "Boss"
+			elseif oldEJ == 0 then
+				EtatJeu = "EnJeu"
+			end
+		end
+	end
 end
 
 --- Charge le tank 1.

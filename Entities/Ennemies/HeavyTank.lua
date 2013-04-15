@@ -45,7 +45,7 @@ end
 -- il y a 1 chance sur 10 pour qu'un bonus apparaisse.
 function ent:Die()
    love.audio.play(SonExplosion)
-   ents.Create("Explosion", self.x, self.y)
+   ents.Create("ExplosionEnnemie", self.x, self.y)
    Tank.Score = Tank.Score + 100
    Tank.PopBoss = Tank.PopBoss + 100
    Tank.PourcentagePouvoir = Tank.PourcentagePouvoir + 10

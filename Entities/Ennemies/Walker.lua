@@ -48,7 +48,7 @@ end
 --- Code a executer avant la destruction de l'entite.
 function ent:Die()
    love.audio.play(SonExplosion)
-   ents.Create("Explosion", self.x, self.y)
+   ents.Create("ExplosionEnnemie", self.x, self.y)
    Tank.Score = Tank.Score + 20
    Tank.PopBoss = Tank.PopBoss + 20
    Tank.PourcentagePouvoir = Tank.PourcentagePouvoir + 2
